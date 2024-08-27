@@ -14,8 +14,11 @@ jobs:
     steps:
     - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
       with:
-        - php-version: '8.3'
-        - node-version: '20.x'
+        php-version: '8.3'
+    - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
     - uses: actions/checkout@v4
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
