@@ -20,7 +20,8 @@
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.0",
         "pestphp/pest": "^2.0",
-        "pestphp/pest-plugin-laravel": "^2.0"
+        "pestphp/pest-plugin-laravel": "^2.0",
+        "rector/rector": "^1.2"
     },
     "autoload": {
         "psr-4": {
@@ -49,7 +50,17 @@
             "@php artisan key:generate --ansi",
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
-        ]
+        ],
+        "cs-fix": "pint",
+        "rector-fix": "rector",
+        "rector-preview": "rector --dry-run",
+        "rector-ci": "rector --dry-run --no-progress-bar"
+    },
+    "scripts-descriptions": {
+        "cs-fix": "Fixing the Code Style according to PER standards",
+        "rector-fix": "Fixing the code according to the Rector Rules",
+        "rector-preview": "Showing the suggested changes from Rector",
+        "rector-ci": "Executing Rector in a CI workflow"
     },
     "extra": {
         "laravel": {

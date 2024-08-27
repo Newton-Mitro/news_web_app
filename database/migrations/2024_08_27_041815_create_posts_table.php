@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-
     public function up(): void
     {
         Schema::create('posts', function (Blueprint $table) {
@@ -15,8 +14,8 @@ return new class extends Migration
             $table->string('slug');
             $table->longText('body');
             $table->text('summary')->nullable();
-            $table->string('image_url',1024)->nullable();
-            $table->string('video_url',1024)->nullable();
+            $table->string('image_url', 1024)->nullable();
+            $table->string('video_url', 1024)->nullable();
             $table->enum('status', ['draft', 'published'])->default('published');
             $table->enum('post_type', ['image', 'video'])->default('image');
             $table->boolean('featured')->default(false);
