@@ -1,44 +1,27 @@
-import { Link, Head } from '@inertiajs/react';
-import { PageProps } from '@/types';
+import { Head } from "@inertiajs/react";
 
-export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVersion: string, phpVersion: string }>) {
-    const handleImageError = () => {
-        document.getElementById('screenshot-container')?.classList.add('!hidden');
-        document.getElementById('docs-card')?.classList.add('!row-span-1');
-        document.getElementById('docs-card-content')?.classList.add('!flex-row');
-        document.getElementById('background')?.classList.add('!hidden');
-    };
-
+import {PropsWithChildren, useState} from "react";
+import {User} from "@/types";
+import PublicTemplateLayout from "@/Layouts/PublicLayout";
+export default function Welcome({ auth, children }: PropsWithChildren<{ auth: User }>) {
+    const [donateSectionVisibility, setDonateSectionVisibility] = useState(false);
     return (
         <>
-            <Head title="Welcome"/>
-            <header className="">
-                <nav className="text-red-400 flex gap-4">
-                    {auth.user ? (
-                        <Link
-                            href={route('dashboard')}
-                            className=""
-                        >
-                            Dashboard
-                        </Link>
-                    ) : (
-                        <>
-                            <Link
-                                href={route('login')}
-                                className=""
-                            >
-                                Log in
-                            </Link>
-                            <Link
-                                href={route('register')}
-                                className=""
-                            >
-                                Register
-                            </Link>
-                        </>
-                    )}
-                </nav>
-            </header>
+
+            <Head title="Fr. Charles J. Young Foundation" />
+            <PublicTemplateLayout auth={auth}>
+                <div className="flex flex-col gap-10">
+                    <div className="container mx-auto">
+                        <div className="border border-dashed border-secondary bg-surface text-onSurface">
+                            <div className="px-4 py-10 md:px-6 lg:py-20 lg:px-10">
+                                <div className="container mx-auto">
+                                    home content
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </PublicTemplateLayout>
         </>
     );
 }

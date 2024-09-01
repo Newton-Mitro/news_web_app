@@ -1,128 +1,212 @@
-import { useState, PropsWithChildren, ReactNode } from 'react';
-import ApplicationLogo from '@/Components/ApplicationLogo';
-import Dropdown from '@/Components/Dropdown';
-import NavLink from '@/Components/NavLink';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
-import { Link } from '@inertiajs/react';
-import { User } from '@/types';
+import { Link, useRemember } from "@inertiajs/react";
+import {PropsWithChildren, ReactNode, useEffect} from "react";
+import uuid from "react-uuid";
+import SidebarComponent from "@/Layouts/Parts/SidebarComponent";
+import {Outlet} from "react-router-dom";
+import {User} from "@/types";
+
+
+const adminAndSuperAdminMenus: {  Id: string, MenuTitle: string, Icon: string, Route: string }[]= [
+    {
+        Id: uuid(),
+        MenuTitle: "Home",
+        Icon: "fa-brands fa-fort-awesome",
+        Route: "auth.home"
+    },
+    {
+        Id: uuid(),
+        MenuTitle: "Pages",
+        Icon: "fa-brands fa-page4",
+        Route: "pages.index",
+    },
+    {
+        Id: uuid(),
+        MenuTitle: "Services",
+        Icon: "fa-solid fa-hands-holding-child",
+        Route: "auth.our-services",
+    },
+    {
+        Id: uuid(),
+        MenuTitle: "Deposit Products",
+        Icon: "fa-solid fa-piggy-bank",
+        Route: "auth.deposit-products",
+    },
+    {
+        Id: uuid(),
+        MenuTitle: "Publication",
+        Icon: "fa-solid fa-sack-dollar",
+        Route: "auth.publication",
+    },
+    {
+        Id: uuid(),
+        MenuTitle: "Downloads",
+        Icon: "fa-solid fa-file-pdf",
+        Route: "auth.downloads",
+    },
+    {
+        Id: uuid(),
+        MenuTitle: "Notices",
+        Icon: "fa-solid fa-bullhorn",
+        Route: "auth.notices",
+    },
+    {
+        Id: uuid(),
+        MenuTitle: "Slider Images",
+        Icon: "fa-solid fa-panorama",
+        Route: "auth.slider-images",
+    },
+    {
+        Id: uuid(),
+        MenuTitle: "Gallery Images",
+        Icon: "fa-regular fa-images",
+        Route: "auth.gallery-images",
+    },
+    {
+        Id: uuid(),
+        MenuTitle: "Leaders",
+        Icon: "fa-solid fa-user-tie",
+        Route: "auth.leaders",
+    },
+    {
+        Id: uuid(),
+        MenuTitle: "Job Circulars",
+        Icon: "fa-solid fa-helmet-safety",
+        Route: "auth.job-circulars",
+    },
+    // {
+    //   Id: uuid(),
+    //   MenuTitle: 'Users',
+    //   Icon: 'fa-solid fa-users',
+    //   Route: '/auth/users',
+    // },
+    {
+        Id: uuid(),
+        MenuTitle: "Settings",
+        Icon: "fa-solid fa-gear",
+        Route: "auth.settings",
+    },
+    // {
+    //   Id: uuid(),
+    //   MenuTitle: 'Account Settings',
+    //   Icon: 'fa-solid fa-user-gear',
+    //   Route: 'auth/account-settings',
+    // },
+];
 
 export default function Authenticated({ user, header, children }: PropsWithChildren<{ user: User, header?: ReactNode }>) {
-    const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
+    const [sidebarOpen, setSidebarOpen] = useRemember(false);
+    const [menus, setMenus] = useRemember(adminAndSuperAdminMenus);
+
+    const toggleSidebar = () => {
+        setSidebarOpen(!sidebarOpen);
+    };
+
+    useEffect(() => {
+        setMenus(adminAndSuperAdminMenus);
+    }, [user, menus]);
 
     return (
-        <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
-            <nav className="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex justify-between h-16">
-                        <div className="flex">
-                            <div className="shrink-0 flex items-center">
-                                <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+        <>
+            <div className="relative w-full h-screen bg-background">
+                <section className={`ml-14 h-full`}>
+                    <header className="w-full h-16">
+                        {/* <Header /> */}
+                        <header className="flex items-center justify-between w-full h-full px-6 shadow bg-surface text-onSurface">
+                            <div className="flex items-center gap-2 cursor-pointer">
+                                <Link
+                                    href={route("home")}
+                                    className="flex items-center justify-center p-2 text-xl transition-all duration-300 rounded-full h-9 w-9 bg-primary text-onPrimary hover:scale-110 md:hidden"
+                                >
+                                    <i className="fa-solid fa-repeat"></i>
+
+                                    <span className="sr-only ">Switch To Front</span>
+                                </Link>
+                                <Link
+                                    href={route("home")}
+                                    className="hidden transition-all duration-300 text-onSurface hover:underline md:block"
+                                >
+                                    <span className="">Switch To Front</span>
                                 </Link>
                             </div>
+                            <div className="flex items-center h-full gap-2">
+                                {/* <ThemeSwitch /> */}
 
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                    Dashboard
-                                </NavLink>
+                                {/* <div className="relative h-full group">
+                      <button className="flex items-center h-full gap-2">
+                        <span className="flex items-center h-full">
+                          <button className="relative flex items-center justify-center p-2 text-xl transition-all duration-300 rounded-full h-9 w-9 bg-primary text-onPrimary hover:scale-110">
+                            <i className="fa-brands fa-pagelines" />
+                          </button>
+                        </span>
+                        <div className="hidden md:flex md:flex-col md:items-end md:leading-tight">
+                          <div className="text-left">
+                            <div className="">Head Office</div>
+                            <div className="text-[9px]">Branch</div>
+                          </div>
+                        </div>
+                      </button>
+                    </div> */}
+
+                                <div className="relative h-full group">
+                                    <button className="flex items-center h-full gap-2">
+                    <span className="flex items-center h-full">
+                      {/*<img*/}
+                      {/*    src={user?.photo}*/}
+                      {/*    // src={*/}
+                      {/*    //   authUser?.user.photo*/}
+                      {/*    //     ? authUser?.user.photo*/}
+                      {/*    //     : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH_mjW-rvOfpg1q3Lum1d4HbvOIFhrSidaaA&usqp=CAU'*/}
+                      {/*    // }*/}
+                      {/*    alt="user profile"*/}
+                      {/*    className="rounded-full h-9 w-9"*/}
+                      {/*/>*/}
+                    </span>
+                                        <div className="hidden md:flex md:flex-col md:items-end md:leading-tight">
+                                            <div className="text-left">
+                                                <div className="">{user?.name}</div>
+                                                <div className="text-[9px]">
+                                                    {/*{user?.role ? user?.role : "Visitor"}*/}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                </div>
+
+                                <div className="">
+                                    <Link
+                                        className="flex items-center justify-center p-2 text-xl transition-all duration-300 rounded-full h-9 w-9 bg-primary text-onPrimary hover:scale-110"
+                                        href={route("logout")}
+                                        method="post"
+                                    >
+                                        <span className="sr-only">Log out</span>
+                                        <i className="fa-solid fa-right-from-bracket"></i>
+                                    </Link>
+                                </div>
                             </div>
-                        </div>
-
-                        <div className="hidden sm:flex sm:items-center sm:ms-6">
-                            <div className="ms-3 relative">
-                                <Dropdown>
-                                    <Dropdown.Trigger>
-                                        <span className="inline-flex rounded-md">
-                                            <button
-                                                type="button"
-                                                className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150"
-                                            >
-                                                {user.name}
-
-                                                <svg
-                                                    className="ms-2 -me-0.5 h-4 w-4"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 20 20"
-                                                    fill="currentColor"
-                                                >
-                                                    <path
-                                                        fillRule="evenodd"
-                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                        clipRule="evenodd"
-                                                    />
-                                                </svg>
-                                            </button>
-                                        </span>
-                                    </Dropdown.Trigger>
-
-                                    <Dropdown.Content>
-                                        <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
-                                        <Dropdown.Link href={route('logout')} method="post" as="button">
-                                            Log Out
-                                        </Dropdown.Link>
-                                    </Dropdown.Content>
-                                </Dropdown>
-                            </div>
-                        </div>
-
-                        <div className="-me-2 flex items-center sm:hidden">
-                            <button
-                                onClick={() => setShowingNavigationDropdown((previousState) => !previousState)}
-                                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out"
-                            >
-                                <svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                                    <path
-                                        className={!showingNavigationDropdown ? 'inline-flex' : 'hidden'}
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M4 6h16M4 12h16M4 18h16"
-                                    />
-                                    <path
-                                        className={showingNavigationDropdown ? 'inline-flex' : 'hidden'}
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M6 18L18 6M6 6l12 12"
-                                    />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
-                    <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
-                            Dashboard
-                        </ResponsiveNavLink>
-                    </div>
-
-                    <div className="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
-                        <div className="px-4">
-                            <div className="font-medium text-base text-gray-800 dark:text-gray-200">
-                                {user.name}
-                            </div>
-                            <div className="font-medium text-sm text-gray-500">{user.email}</div>
-                        </div>
-
-                        <div className="mt-3 space-y-1">
-                            <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
-                            <ResponsiveNavLink method="post" href={route('logout')} as="button">
-                                Log Out
-                            </ResponsiveNavLink>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-
-            {header && (
-                <header className="bg-white dark:bg-gray-800 shadow">
-                    <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">{header}</div>
-                </header>
-            )}
-
-            <main>{children}</main>
-        </div>
+                        </header>
+                    </header>
+                    <section className="h-[calc(100vh-112px)] overflow-auto">
+                        <Outlet />
+                        {children}
+                    </section>
+                    <section id="footer" className="w-full h-12 mt-auto">
+                        {/* <Footer /> */}
+                        <footer className="flex items-center justify-center w-full h-full border-l shadow bg-surface text-onSurface">
+                            <p className="text-sm font-light text-center">
+                                Developed by DC Quantum Labs
+                            </p>
+                        </footer>
+                    </section>
+                </section>
+                <section className="fixed top-0 left-0 h-full">
+                    <SidebarComponent
+                        menus={menus}
+                        sidebarOpen={sidebarOpen}
+                        setSidebarOpen={setSidebarOpen}
+                        toggleSidebar={toggleSidebar}
+                    />
+                </section>
+            </div>
+        </>
     );
 }
