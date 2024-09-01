@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import whiteLogo from "../../../assets/brand/logo_white.png";
-import MySearchInput from "../../Components/MySearchInput";
+import whiteLogo from "../../../assets/brand/logo.png";
 import { adminAndSuperAdminMenus } from "./data/adminAndSuperAdminMenus";
 import MenusView from "./MenusView";
 
@@ -48,7 +47,7 @@ function SidebarComponent({
 
   return (
     <aside
-      className={`relative z-[10000000] h-full bg-surface shadow
+      className={`relative z-[10000000] h-full bg-surface
          ${sidebarOpen ? "w-80" : "w-14"}
   transition-all duration-300 ease-in-out`}
     >
@@ -65,43 +64,26 @@ function SidebarComponent({
         )}
       </button>
       <div>
-        <div className="flex items-center justify-center w-full h-16 py-2 bg-primaryVariant">
+        <div className="flex items-center justify-center w-full h-16 py-1 border-b border-t">
           <img
             src={whiteLogo}
             alt=""
             className={`${
-              sidebarOpen ? "h-16 w-16" : "h-14 w-14"
-            } o transform p-2 transition-all duration-700`}
+              sidebarOpen ? "h-14 w-14" : "h-12 w-12"
+            } o transform transition-all duration-700`}
           />
         </div>
 
-        {sidebarOpen && (
-          <div className="p-2">
-            <MySearchInput
-              label={"Search"}
-              name={"Search"}
-              value={searchText}
-              fullWidth={true}
-              leftIcon={<i className="fa-solid fa-magnifying-glass fa-lg"></i>}
-              onChangeHandler={(event) => setSearchText(event.target.value)}
-              onSubmit={(event) => {
-                event.preventDefault();
-              }}
-              onResetClick={(event) => setSearchText("")}
-            />
-          </div>
-        )}
         <div className="flex h-[calc(100vh-122px)] flex-grow flex-col justify-between overflow-auto text-onSurface">
           <ul className="flex flex-col justify-center cursor-pointer text-onSurface">
-           {Array.isArray(menus) && menus.map((menu) => (
-              <MenusView
-                key={menu?.Id}
-                sidebarOpen={sidebarOpen}
-                menu={menu}
-                childMenus={menu.Menus}
-                toggleSidebar={toggleSidebar}
-              />
-            ))}
+           {/*{Array.isArray(menus) && menus.map((menu) => (*/}
+           {/*   <MenusView*/}
+           {/*     key={menu?.Id}*/}
+           {/*     sidebarOpen={sidebarOpen}*/}
+           {/*     menu={menu}*/}
+           {/*     toggleSidebar={toggleSidebar}*/}
+           {/*   />*/}
+           {/* ))}*/}
           </ul>
         </div>
       </div>

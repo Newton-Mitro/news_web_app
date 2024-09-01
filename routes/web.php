@@ -10,7 +10,7 @@ Route::get('/', fn () => Inertia::render('Welcome', [
     'canRegister' => Route::has('register'),
     'laravelVersion' => Application::VERSION,
     'phpVersion' => PHP_VERSION,
-]));
+]))->name('home');
 
 Route::get('/dashboard', fn () => Inertia::render('Dashboard'))->middleware(['auth', 'verified'])->name('dashboard');
 

@@ -109,12 +109,13 @@ export default function Authenticated({ user, header, children }: PropsWithChild
         <>
             <div className="relative w-full h-screen bg-background">
                 <section className={`ml-14 h-full`}>
-                    <header className="w-full h-16">
+                    <header className="w-full h-16 border">
                         {/* <Header /> */}
-                        <header className="flex items-center justify-between w-full h-full px-6 shadow bg-surface text-onSurface">
+                        <header className="flex items-center justify-between w-full h-full px-6 bg-surface text-onSurface">
                             <div className="flex items-center gap-2 cursor-pointer">
                                 <Link
                                     href={route("home")}
+                                    // href="/"
                                     className="flex items-center justify-center p-2 text-xl transition-all duration-300 rounded-full h-9 w-9 bg-primary text-onPrimary hover:scale-110 md:hidden"
                                 >
                                     <i className="fa-solid fa-repeat"></i>
@@ -123,6 +124,7 @@ export default function Authenticated({ user, header, children }: PropsWithChild
                                 </Link>
                                 <Link
                                     href={route("home")}
+                                    // href="#"
                                     className="hidden transition-all duration-300 text-onSurface hover:underline md:block"
                                 >
                                     <span className="">Switch To Front</span>
@@ -189,16 +191,16 @@ export default function Authenticated({ user, header, children }: PropsWithChild
                         <Outlet />
                         {children}
                     </section>
-                    <section id="footer" className="w-full h-12 mt-auto">
+                    <section id="footer" className="w-full h-12 mt-auto border">
                         {/* <Footer /> */}
-                        <footer className="flex items-center justify-center w-full h-full border-l shadow bg-surface text-onSurface">
+                        <footer className="flex items-center justify-center w-full h-full bg-surface text-onSurface">
                             <p className="text-sm font-light text-center">
                                 Developed by DC Quantum Labs
                             </p>
                         </footer>
                     </section>
                 </section>
-                <section className="fixed top-0 left-0 h-full">
+                <section className="fixed top-0 left-0 h-full border">
                     <SidebarComponent
                         menus={menus}
                         sidebarOpen={sidebarOpen}
