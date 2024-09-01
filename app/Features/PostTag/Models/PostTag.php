@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Features\PostCategory\Models;
+namespace App\Features\PostTag\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PostCategory extends Model
+class PostTag extends Model
 {
     use HasFactory;
 }
