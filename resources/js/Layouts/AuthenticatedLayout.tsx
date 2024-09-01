@@ -1,17 +1,34 @@
-import { Link, useRemember } from "@inertiajs/react";
-import {PropsWithChildren, ReactNode, useEffect} from "react";
-import uuid from "react-uuid";
 import SidebarComponent from "@/Layouts/Parts/SidebarComponent";
-import {Outlet} from "react-router-dom";
-import {User} from "@/types";
+import { User } from "@/types";
+import "@fortawesome/fontawesome-free/css/all.css";
+import { Link, useRemember } from "@inertiajs/react";
+import { PropsWithChildren, ReactNode, useEffect } from "react";
+import { Outlet } from "react-router-dom";
+import uuid from "react-uuid";
 
-
-const adminAndSuperAdminMenus: {  Id: string, MenuTitle: string, Icon: string, Route: string }[]= [
+const adminAndSuperAdminMenus: {
+    Id: string;
+    MenuTitle: string;
+    Icon: string;
+    Route: string;
+}[] = [
     {
         Id: uuid(),
         MenuTitle: "Home",
         Icon: "fa-brands fa-fort-awesome",
-        Route: "auth.home"
+        Route: "auth.home",
+    },
+    {
+        Id: uuid(),
+        MenuTitle: "Categories",
+        Icon: "fa-brands fa-page4",
+        Route: "categories.index",
+    },
+    {
+        Id: uuid(),
+        MenuTitle: "Tags",
+        Icon: "fa-brands fa-page4",
+        Route: "tags.index",
     },
     {
         Id: uuid(),
@@ -20,80 +37,24 @@ const adminAndSuperAdminMenus: {  Id: string, MenuTitle: string, Icon: string, R
         Route: "pages.index",
     },
     {
-        Id: uuid(),
-        MenuTitle: "Services",
-        Icon: "fa-solid fa-hands-holding-child",
-        Route: "auth.our-services",
+      Id: uuid(),
+      MenuTitle: 'Users',
+      Icon: 'fa-solid fa-users',
+      Route: '/auth/users',
     },
-    {
-        Id: uuid(),
-        MenuTitle: "Deposit Products",
-        Icon: "fa-solid fa-piggy-bank",
-        Route: "auth.deposit-products",
-    },
-    {
-        Id: uuid(),
-        MenuTitle: "Publication",
-        Icon: "fa-solid fa-sack-dollar",
-        Route: "auth.publication",
-    },
-    {
-        Id: uuid(),
-        MenuTitle: "Downloads",
-        Icon: "fa-solid fa-file-pdf",
-        Route: "auth.downloads",
-    },
-    {
-        Id: uuid(),
-        MenuTitle: "Notices",
-        Icon: "fa-solid fa-bullhorn",
-        Route: "auth.notices",
-    },
-    {
-        Id: uuid(),
-        MenuTitle: "Slider Images",
-        Icon: "fa-solid fa-panorama",
-        Route: "auth.slider-images",
-    },
-    {
-        Id: uuid(),
-        MenuTitle: "Gallery Images",
-        Icon: "fa-regular fa-images",
-        Route: "auth.gallery-images",
-    },
-    {
-        Id: uuid(),
-        MenuTitle: "Leaders",
-        Icon: "fa-solid fa-user-tie",
-        Route: "auth.leaders",
-    },
-    {
-        Id: uuid(),
-        MenuTitle: "Job Circulars",
-        Icon: "fa-solid fa-helmet-safety",
-        Route: "auth.job-circulars",
-    },
-    // {
-    //   Id: uuid(),
-    //   MenuTitle: 'Users',
-    //   Icon: 'fa-solid fa-users',
-    //   Route: '/auth/users',
-    // },
     {
         Id: uuid(),
         MenuTitle: "Settings",
         Icon: "fa-solid fa-gear",
         Route: "auth.settings",
-    },
-    // {
-    //   Id: uuid(),
-    //   MenuTitle: 'Account Settings',
-    //   Icon: 'fa-solid fa-user-gear',
-    //   Route: 'auth/account-settings',
-    // },
+    }
 ];
 
-export default function Authenticated({ user, header, children }: PropsWithChildren<{ user: User, header?: ReactNode }>) {
+export default function Authenticated({
+    user,
+    header,
+    children,
+}: PropsWithChildren<{ user: User; header?: ReactNode }>) {
     const [sidebarOpen, setSidebarOpen] = useRemember(false);
     const [menus, setMenus] = useRemember(adminAndSuperAdminMenus);
 
@@ -120,7 +81,9 @@ export default function Authenticated({ user, header, children }: PropsWithChild
                                 >
                                     <i className="fa-solid fa-repeat"></i>
 
-                                    <span className="sr-only ">Switch To Front</span>
+                                    <span className="sr-only ">
+                                        Switch To Front
+                                    </span>
                                 </Link>
                                 <Link
                                     href={route("home")}
@@ -151,21 +114,23 @@ export default function Authenticated({ user, header, children }: PropsWithChild
 
                                 <div className="relative h-full group">
                                     <button className="flex items-center h-full gap-2">
-                    <span className="flex items-center h-full">
-                      {/*<img*/}
-                      {/*    src={user?.photo}*/}
-                      {/*    // src={*/}
-                      {/*    //   authUser?.user.photo*/}
-                      {/*    //     ? authUser?.user.photo*/}
-                      {/*    //     : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH_mjW-rvOfpg1q3Lum1d4HbvOIFhrSidaaA&usqp=CAU'*/}
-                      {/*    // }*/}
-                      {/*    alt="user profile"*/}
-                      {/*    className="rounded-full h-9 w-9"*/}
-                      {/*/>*/}
-                    </span>
+                                        <span className="flex items-center h-full">
+                                            {/*<img*/}
+                                            {/*    src={user?.photo}*/}
+                                            {/*    // src={*/}
+                                            {/*    //   authUser?.user.photo*/}
+                                            {/*    //     ? authUser?.user.photo*/}
+                                            {/*    //     : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH_mjW-rvOfpg1q3Lum1d4HbvOIFhrSidaaA&usqp=CAU'*/}
+                                            {/*    // }*/}
+                                            {/*    alt="user profile"*/}
+                                            {/*    className="rounded-full h-9 w-9"*/}
+                                            {/*/>*/}
+                                        </span>
                                         <div className="hidden md:flex md:flex-col md:items-end md:leading-tight">
                                             <div className="text-left">
-                                                <div className="">{user?.name}</div>
+                                                <div className="">
+                                                    {user?.name}
+                                                </div>
                                                 <div className="text-[9px]">
                                                     {/*{user?.role ? user?.role : "Visitor"}*/}
                                                 </div>

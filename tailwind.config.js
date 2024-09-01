@@ -10,6 +10,14 @@ export default {
         "./resources/js/**/*.tsx",
         "./resources/js/**/*.ts",
     ],
+    theme: {
+        screens: {
+            'sm': '640px',
+            'md': '768px',
+            'lg': '1024px',
+            'xl': '1124px',
+        }
+    },
     plugins: [
         forms,
         createThemes(
@@ -23,7 +31,7 @@ export default {
                     onSecondary: "#fdf1ed",
                     secondaryVariant: "#2b2b2b",
                     onSecondaryVariant: "#777c79",
-                    background: "#eeeee8",
+                    background: "#f4f4f1",
                     onBackground: "#3f3f3f",
                     surface: "#ffffff",
                     onSurface: "#3b3b3b",

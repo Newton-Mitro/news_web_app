@@ -1,7 +1,6 @@
 import { Link } from "@inertiajs/react";
 import myLogo from "../../../assets/brand/logo.png";
 import {PropsWithChildren} from "react";
-import {User} from "@/types";
 
 function Footer({ auth }: PropsWithChildren<{ auth: any }>) {
     return (
@@ -10,9 +9,9 @@ function Footer({ auth }: PropsWithChildren<{ auth: any }>) {
                 <div className="container flex flex-col items-center justify-center p-3 py-6 mx-auto">
                     <Link
                         className="flex flex-col items-center justify-center " href={""}                    >
-                        {/*<img className="h-20" src={originalLogo} alt="header logo"/>*/}
+                        <img className="h-20" src={myLogo} alt="header logo"/>
                         <p className={`mt-2 font-extrabold`}>
-                            Fr. Charles J. Young Foundation
+                            Dhaka Credit News
                         </p>
                         <p className="text-sm font-light">
                             Fr. Charles J. Young Bhaban, 173/1/A East Tejturi
@@ -21,7 +20,7 @@ function Footer({ auth }: PropsWithChildren<{ auth: any }>) {
                     </Link>
 
                     <p className="mb-4 text-sm font-light">
-                        {`©${new Date().getFullYear()} Fr. Charles J. Young Foundation.. All Rights Reserved.`}
+                        {`©${new Date().getFullYear()} DC News.. All Rights Reserved.`}
                     </p>
 
                     <div className="flex flex-col items-center justify-center gap-2">
