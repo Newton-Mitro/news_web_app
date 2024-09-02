@@ -43,7 +43,7 @@ export default function Modal({
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                 >
-                    <div className="absolute inset-0 bg-gray-500/75 dark:bg-gray-900/75" />
+                    <div className="absolute inset-0 bg-gray-500/75 /75" />
                 </TransitionChild>
 
                 <TransitionChild
