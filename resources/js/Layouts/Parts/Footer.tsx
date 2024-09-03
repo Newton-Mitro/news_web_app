@@ -40,7 +40,7 @@ function Footer({auth}: PropsWithChildren<{ auth: any }>) {
                             href={route("login")}
                             className="px-4 text-xs hover:font-bold hover:underline "
                         >
-                            <span className="">Webmaster Login</span>
+                            <span className="">Webmaster</span>
                         </Link>
                     </>
                 )}

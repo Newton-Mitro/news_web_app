@@ -25,12 +25,12 @@ export default function PublicTemplateLayout({auth, children}: PropsWithChildren
     };
 
     return (
-        <>
+        <section className="font-roboto relative min-h-screen flex flex-col bg-background text-onBackground">
             <Header
                 scrollFromTop={scrollFromTop}
             />
 
-            <div className="py-10">
+            <div className="py-10 text-justify antialiased">
                 {children}
             </div>
 
@@ -44,6 +44,6 @@ export default function PublicTemplateLayout({auth, children}: PropsWithChildren
                 </div>)
             }
 
-        </>
+        </section>
     );
 }

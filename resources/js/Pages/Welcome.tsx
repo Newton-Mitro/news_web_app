@@ -1,12 +1,11 @@
 import {Head, Link} from "@inertiajs/react";
 import {
-    FacebookShareButton,
-    TwitterShareButton,
-    LinkedinShareButton,
     FacebookIcon,
-    TwitterIcon,
+    FacebookShareButton,
+    FacebookShareCount,
     LinkedinIcon,
-    FacebookShareCount
+    LinkedinShareButton,
+    TwitterShareButton
 } from 'react-share';
 import {PropsWithChildren} from "react";
 import {User} from "@/types";
@@ -22,25 +21,25 @@ export default function Welcome({auth}: PropsWithChildren<{ auth: User }>) {
                     <div className="container flex flex-col md:flex-row gap-4 ">
                         <div className="w-full md:w-3/12 flex flex-col gap-3">
                             <div className="py-6 px-4 shadow-sm bg-surface text-onSurface">
-                                <Link href={""} className="text-xl font-bold text-gray-900 mb-4 hover:text-error">News
+                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
                                     Headline</Link>
-                                <p className="text-gray-700">
+                                <p className="">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet
                                     imperdiet odio. Sed vel magna nec nunc vehicula varius. Nulla facilisi.
                                 </p>
                             </div>
                             <div className="py-6 px-4 shadow-sm bg-surface text-onSurface">
-                                <Link href={""} className="text-xl font-bold text-gray-900 mb-4 hover:text-error">News
+                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
                                     Headline</Link>
-                                <p className="text-gray-700">
+                                <p className="">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet
                                     imperdiet odio.
                                 </p>
                             </div>
                             <div className="py-6 px-4 shadow-sm bg-surface text-onSurface">
-                                <Link href={""} className="text-xl font-bold text-gray-900 mb-4 hover:text-error">News
+                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
                                     Headline</Link>
-                                <p className="text-gray-700">
+                                <p className="">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                                 </p>
                             </div>
@@ -52,9 +51,9 @@ export default function Welcome({auth}: PropsWithChildren<{ auth: User }>) {
                                     alt="Post Image"
                                     className="w-full max-h-72 object-cover"/>
                                 <div className="py-6 px-4">
-                                    <Link href={""} className="text-xl font-bold text-gray-900 mb-4 hover:text-error">News
+                                    <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
                                         Headline</Link>
-                                    <p className="text-gray-700">
+                                    <p className="">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet
                                         imperdiet odio. Sed vel magna nec nunc vehicula varius. Nulla facilisi.
                                     </p>
@@ -63,9 +62,9 @@ export default function Welcome({auth}: PropsWithChildren<{ auth: User }>) {
                         </div>
                         <div className="w-full md:w-3/12 flex flex-col gap-3">
                             <div className="py-6 px-4 shadow-sm bg-surface text-onSurface">
-                                <Link href={""} className="text-xl font-bold text-gray-900 mb-4 hover:text-error">News
+                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
                                     Headline</Link>
-                                <p className="text-gray-700">
+                                <p className="">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet
                                     imperdiet odio. Sed vel magna nec nunc vehicula varius. Nulla facilisi. Lorem ipsum
                                     dolor sit amet, consectetur adipisicing elit. Ab cumque dolorem doloribus impedit
@@ -73,17 +72,17 @@ export default function Welcome({auth}: PropsWithChildren<{ auth: User }>) {
                                 </p>
                             </div>
                             <div className="py-6 px-4 shadow-sm bg-surface text-onSurface">
-                                <Link href={""} className="text-xl font-bold text-gray-900 mb-4 hover:text-error">News
+                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
                                     Headline</Link>
-                                <p className="text-gray-700">
+                                <p className="">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet
                                     imperdiet odio.
                                 </p>
                             </div>
                             <div className="py-6 px-4 shadow-sm bg-surface text-onSurface">
-                                <Link href={""} className="text-xl font-bold text-gray-900 mb-4 hover:text-error">News
+                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
                                     Headline</Link>
-                                <p className="text-gray-700">
+                                <p className="">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                                 </p>
                             </div>
@@ -110,9 +109,9 @@ export default function Welcome({auth}: PropsWithChildren<{ auth: User }>) {
                                     alt="Post Image"
                                     className="w-full max-h-72 object-cover"/>
                                 <div className="py-6 px-4">
-                                    <Link href={""} className="text-xl font-bold text-gray-900 mb-4 hover:text-error">News
+                                    <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
                                         Headline</Link>
-                                    <p className="text-gray-700">
+                                    <p className="">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet
                                         imperdiet odio. Sed vel magna nec nunc vehicula varius. Nulla facilisi.
                                     </p>
@@ -126,9 +125,9 @@ export default function Welcome({auth}: PropsWithChildren<{ auth: User }>) {
                                     alt="Post Image"
                                     className="w-36 object-cover"/>
                                 <div className="">
-                                    <Link href={""} className="text-xl font-bold text-gray-900 mb-4 hover:text-error">News
+                                    <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
                                         Headline</Link>
-                                    <p className="text-gray-700">
+                                    <p className="">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet
                                         imperdiet odio. Sed vel magna nec nunc vehicula varius. Nulla facilisi.
                                     </p>
@@ -140,9 +139,9 @@ export default function Welcome({auth}: PropsWithChildren<{ auth: User }>) {
                                     alt="Post Image"
                                     className="w-36 object-cover"/>
                                 <div className="">
-                                    <Link href={""} className="text-xl font-bold text-gray-900 mb-4 hover:text-error">News
+                                    <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
                                         Headline</Link>
-                                    <p className="text-gray-700">
+                                    <p className="">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet
                                         imperdiet odio. Sed vel magna nec nunc vehicula varius. Nulla facilisi.
                                     </p>
@@ -154,9 +153,9 @@ export default function Welcome({auth}: PropsWithChildren<{ auth: User }>) {
                                     alt="Post Image"
                                     className="w-36 object-cover"/>
                                 <div className="">
-                                    <Link href={""} className="text-xl font-bold text-gray-900 mb-4 hover:text-error">News
+                                    <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
                                         Headline</Link>
-                                    <p className="text-gray-700">
+                                    <p className="">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet
                                         imperdiet odio. Sed vel magna nec nunc vehicula varius. Nulla facilisi.
                                     </p>
@@ -186,9 +185,9 @@ export default function Welcome({auth}: PropsWithChildren<{ auth: User }>) {
                                     alt="Post Image"
                                     className="w-36 object-cover"/>
                                 <div className="">
-                                    <Link href={""} className="text-xl font-bold text-gray-900 mb-4 hover:text-error">News
+                                    <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
                                         Headline</Link>
-                                    <p className="text-gray-700">
+                                    <p className="">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet
                                         imperdiet odio. Sed vel magna nec nunc vehicula varius. Nulla facilisi.
                                     </p>
@@ -200,9 +199,9 @@ export default function Welcome({auth}: PropsWithChildren<{ auth: User }>) {
                                     alt="Post Image"
                                     className="w-36 object-cover"/>
                                 <div className="">
-                                    <Link href={""} className="text-xl font-bold text-gray-900 mb-4 hover:text-error">News
+                                    <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
                                         Headline</Link>
-                                    <p className="text-gray-700">
+                                    <p className="">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet
                                         imperdiet odio. Sed vel magna nec nunc vehicula varius. Nulla facilisi.
                                     </p>
@@ -214,9 +213,9 @@ export default function Welcome({auth}: PropsWithChildren<{ auth: User }>) {
                                     alt="Post Image"
                                     className="w-36 object-cover"/>
                                 <div className="">
-                                    <Link href={""} className="text-xl font-bold text-gray-900 mb-4 hover:text-error">News
+                                    <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
                                         Headline</Link>
-                                    <p className="text-gray-700">
+                                    <p className="">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet
                                         imperdiet odio. Sed vel magna nec nunc vehicula varius. Nulla facilisi.
                                     </p>
@@ -230,9 +229,9 @@ export default function Welcome({auth}: PropsWithChildren<{ auth: User }>) {
                                     alt="Post Image"
                                     className="w-full max-h-72 object-cover"/>
                                 <div className="py-6 px-4">
-                                    <Link href={""} className="text-xl font-bold text-gray-900 mb-4 hover:text-error">News
+                                    <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
                                         Headline</Link>
-                                    <p className="text-gray-700">
+                                    <p className="">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet
                                         imperdiet odio. Sed vel magna nec nunc vehicula varius. Nulla facilisi.
                                     </p>
