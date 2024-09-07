@@ -1,16 +1,8 @@
 import {Head, Link} from "@inertiajs/react";
-import {
-    FacebookIcon,
-    FacebookShareButton,
-    FacebookShareCount,
-    LinkedinIcon,
-    LinkedinShareButton,
-    TwitterShareButton
-} from 'react-share';
 import {PropsWithChildren} from "react";
 import {User} from "@/types";
 import PublicTemplateLayout from "@/Layouts/PublicLayout";
-import XIcon from "../../assets/svg/x_twitter.png";
+// import XIcon from "../../assets/svg/x_twitter.png";
 
 export default function Welcome({auth}: PropsWithChildren<{ auth: User }>) {
     return (
@@ -247,7 +239,7 @@ export default function Welcome({auth}: PropsWithChildren<{ auth: User }>) {
                     </div>
                 </section>
                 <hr className="my-4 border-gray-200"/>
-                <section className="flex items-center gap-2 container">
+                {/* <section className="flex items-center gap-2 container">
                     <FacebookShareButton url={"http://10.77.77.22:8000/"} title={"title"}>
                         <FacebookIcon size={32} round={true}/>
                     </FacebookShareButton>
@@ -265,7 +257,7 @@ export default function Welcome({auth}: PropsWithChildren<{ auth: User }>) {
                         {(shareCount) => <span className="myShareCountWrapper">{shareCount}</span>}
                     </FacebookShareCount>
 
-                </section>
+                </section> */}
             </PublicTemplateLayout>
         </>
     );
