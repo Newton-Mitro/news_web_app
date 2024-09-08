@@ -6,6 +6,11 @@ function Footer({auth}: PropsWithChildren<{ auth: any }>) {
     return (
         <footer className="mt-auto text-center bg-surface text-onSurface">
             <div className="container flex flex-col items-center justify-center p-3 py-6 mx-auto">
+                <ul className="flex gap-4 text-primary my-6 text-sm">
+                    <li>Policy</li>
+                    <li>About</li>
+                    <li>Contact</li>
+                </ul>
                 <Link
                     className="flex flex-col items-center justify-center " href={""}>
                     <img className="h-20" src={myLogo} alt="header logo"/>

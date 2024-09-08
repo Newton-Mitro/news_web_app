@@ -23,26 +23,26 @@ function Header({scrollFromTop}: PropsWithChildren<{
                             <li><Link className="hover:text-error" href={""}>Entertainment</Link></li>
                         </ul>
                     </div>
-                    <div className="flex gap-4">
-                        <Link className="" href={""}>
+                    <div className="flex gap-2">
+                        <Link className="flex items-center rounded-full bg-primary justify-center w-7 h-7 text-white" href={""}>
                             <i className="fab fa-facebook-f"></i>
                         </Link>
 
-                        <Link className="items-center flex" href={""}>
+                        <Link className="flex items-center rounded-full bg-primary justify-center w-7 h-7 text-white" href={""}>
                             <a href="https://x.com" target="_blank">
-                                <img src={XIcon} alt="" className="w-4"/>
+                                <img src={XIcon} alt="" className="w-4 invert"/>
                             </a>
                         </Link>
 
-                        <Link className="" href={""}>
+                        <Link className="flex items-center rounded-full bg-primary justify-center w-7 h-7 text-white" href={""}>
                             <i className="fab fa-instagram"></i>
                         </Link>
 
-                        <Link className="" href={""}>
+                        <Link className="flex items-center rounded-full bg-primary justify-center w-7 h-7 text-white" href={""}>
                             <i className="fab fa-linkedin-in"></i>
                         </Link>
 
-                        <Link className="" href={""}>
+                        <Link className="flex items-center rounded-full bg-primary justify-center w-7 h-7 text-white" href={""}>
                             <i className="fab fa-github"></i>
                         </Link>
                     </div>
@@ -69,7 +69,7 @@ function Header({scrollFromTop}: PropsWithChildren<{
                                 <i className="fas fa-bars"></i>
                             </Link>
 
-                            <Link className="" href={""}>
+                            <Link className="" href={route('home')}>
                                 <i className="fas fa-home"></i>
                             </Link>
 
@@ -79,12 +79,13 @@ function Header({scrollFromTop}: PropsWithChildren<{
 
                         </div>
                         <ul className="flex gap-6 w-10.5/12 h-full overflow-auto items-center">
-                            <li><Link className="hover:text-error" href={""}>Budget</Link></li>
-                            <li><Link className="hover:text-error" href={""}>World</Link></li>
-                            <li><Link className="hover:text-error" href={""}>Economy</Link></li>
-                            <li><Link className="hover:text-error" href={""}>Lifestyle</Link></li>
-                            <li><Link className="hover:text-error" href={""}>Business</Link></li>
-                            <li><Link className="hover:text-error" href={""}>Sports</Link></li>
+                            <li><Link className="hover:text-error" href={route('pages.byCategory','Budget')}>Budget</Link></li>
+                            <li><Link className="hover:text-error" href={route('pages.byCategory','World')}>World</Link></li>
+                            <li><Link className="hover:text-error" href={route('pages.byCategory','Economy')}>Economy</Link></li>
+                            <li><Link className="hover:text-error" href={route('pages.byCategory','Lifestyle')}>Lifestyle</Link></li>
+                            <li><Link className="hover:text-error" href={route('pages.byCategory','Business')}>Business</Link></li>
+                            <li><Link className="hover:text-error" href={route('pages.byCategory','Sports')}>Sports</Link></li>
+                            <li><Link className="hover:text-error" href={route('pages.archive')}>Archive</Link></li>
                         </ul>
                     </div>
                     {

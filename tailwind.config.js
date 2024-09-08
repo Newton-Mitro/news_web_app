@@ -79,7 +79,7 @@ export default {
                     onSecondary: "#fdf1ed",
                     secondaryVariant: "#2b2b2b",
                     onSecondaryVariant: "#777c79",
-                    background: "#f8f8f8",
+                    background: "#f5f7f8",
                     onBackground: "#3f3f3f",
                     surface: "#ffffff",
                     onSurface: "#3b3b3b",

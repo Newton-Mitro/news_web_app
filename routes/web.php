@@ -5,7 +5,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', fn () => Inertia::render('Welcome', [
+Route::get('/', fn () => Inertia::render('Public/Home', [
     'canLogin' => Route::has('login'),
     'canRegister' => Route::has('register'),
     'laravelVersion' => Application::VERSION,
@@ -21,3 +21,4 @@ Route::middleware('auth')->group(function (): void {
 });
 
 require __DIR__ . '/../app/Features/Auth/Routes/auth.php';
+require __DIR__.'/../app/Features/Page/Routes/page.php';

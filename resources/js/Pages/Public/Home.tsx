@@ -4,23 +4,25 @@ import {User} from "@/types";
 import PublicTemplateLayout from "@/Layouts/PublicLayout";
 // import XIcon from "../../assets/svg/x_twitter.png";
 
-export default function Welcome({auth}: PropsWithChildren<{ auth: User }>) {
+export default function Home({auth}: PropsWithChildren<{ auth: User }>) {
     return (
         <>
             <Head title="Home"/>
             <PublicTemplateLayout auth={auth}>
                 <section className="flex flex-col gap-4">
-                    <div className="container flex flex-col md:flex-row gap-4 ">
-                        <div className="w-full md:w-3/12 flex flex-col gap-3">
-                            <div className="py-6 px-4 shadow-sm bg-surface text-onSurface">
+                    <div className="container flex flex-col lg:flex-row gap-6">
+                        <div
+                            className="w-full lg:w-3/12 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 md:gap-6 lg:gap-3 lg:divide-y divide-dashed">
+                            <div className="first:pt-0 pt-3">
                                 <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
                                     Headline</Link>
                                 <p className="">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet
-                                    imperdiet odio. Sed vel magna nec nunc vehicula varius. Nulla facilisi.
+                                    imperdiet odio. Sed vel magna nec nunc vehicula varius. Nulla facilisi. Lorem ipsum
+                                    dolor sit amet.
                                 </p>
                             </div>
-                            <div className="py-6 px-4 shadow-sm bg-surface text-onSurface">
+                            <div className="first:pt-0 pt-3">
                                 <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
                                     Headline</Link>
                                 <p className="">
@@ -28,7 +30,7 @@ export default function Welcome({auth}: PropsWithChildren<{ auth: User }>) {
                                     imperdiet odio.
                                 </p>
                             </div>
-                            <div className="py-6 px-4 shadow-sm bg-surface text-onSurface">
+                            <div className="first:pt-0 pt-3">
                                 <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
                                     Headline</Link>
                                 <p className="">
@@ -36,13 +38,13 @@ export default function Welcome({auth}: PropsWithChildren<{ auth: User }>) {
                                 </p>
                             </div>
                         </div>
-                        <div className="w-full md:w-6/12 order-first md:order-none">
-                            <div className="w-full overflow-hidden shadow-sm bg-surface text-onSurface ">
+                        <div className="w-full lg:w-6/12 order-first lg:order-none md:order-first">
+                            <div className="w-full overflow-hidden">
                                 <img
                                     src="https://cdn.bdnews24.com/bdnews24/media/english/imgAll/2024August/wood-250824-01-1724592621.jpg"
                                     alt="Post Image"
                                     className="w-full max-h-72 object-cover"/>
-                                <div className="py-6 px-4">
+                                <div className="pt-2">
                                     <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
                                         Headline</Link>
                                     <p className="">
@@ -52,8 +54,9 @@ export default function Welcome({auth}: PropsWithChildren<{ auth: User }>) {
                                 </div>
                             </div>
                         </div>
-                        <div className="w-full md:w-3/12 flex flex-col gap-3">
-                            <div className="py-6 px-4 shadow-sm bg-surface text-onSurface">
+                        <div
+                            className="w-full lg:w-3/12 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 md:gap-6 lg:gap-3 lg:divide-y divide-dashed">
+                            <div className="first:pt-0 pt-3">
                                 <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
                                     Headline</Link>
                                 <p className="">
@@ -63,7 +66,7 @@ export default function Welcome({auth}: PropsWithChildren<{ auth: User }>) {
                                     laboriosam maxime.
                                 </p>
                             </div>
-                            <div className="py-6 px-4 shadow-sm bg-surface text-onSurface">
+                            <div className="first:pt-0 pt-3">
                                 <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
                                     Headline</Link>
                                 <p className="">
@@ -71,7 +74,7 @@ export default function Welcome({auth}: PropsWithChildren<{ auth: User }>) {
                                     imperdiet odio.
                                 </p>
                             </div>
-                            <div className="py-6 px-4 shadow-sm bg-surface text-onSurface">
+                            <div className="first:pt-0 pt-3">
                                 <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
                                     Headline</Link>
                                 <p className="">
@@ -87,20 +90,20 @@ export default function Welcome({auth}: PropsWithChildren<{ auth: User }>) {
                         </button>
                     </div>
                 </section>
-                <hr className="my-4 border-gray-200"/>
+                <hr className="my-6 border border-dashed container"/>
                 <section className="flex flex-col gap-4">
                     <div className="container">
                         <h2 className="font-extrabold text-2xl">ECONOMY</h2>
                         <span className="border-t-4 border-error">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                     </div>
-                    <div className="container flex flex-col md:flex-row gap-6">
-                        <div className="w-full md:w-6/12 order-first md:order-none">
-                            <div className="w-full overflow-hidden shadow-sm bg-surface text-onSurface ">
+                    <div className="container flex flex-col lg:flex-row gap-6">
+                        <div className="w-full lg:w-6/12 order-first md:order-none">
+                            <div className="w-full overflow-hidden">
                                 <img
                                     src="https://cdn.bdnews24.com/bdnews24/media/english/imgAll/2024August/wood-250824-01-1724592621.jpg"
                                     alt="Post Image"
                                     className="w-full max-h-72 object-cover"/>
-                                <div className="py-6 px-4">
+                                <div className="pt-2">
                                     <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
                                         Headline</Link>
                                     <p className="">
@@ -110,8 +113,8 @@ export default function Welcome({auth}: PropsWithChildren<{ auth: User }>) {
                                 </div>
                             </div>
                         </div>
-                        <div className="w-full md:w-6/12 flex flex-col gap-3">
-                            <div className="py-6 px-4 shadow-sm bg-surface text-onSurface flex gap-4">
+                        <div className="w-full lg:w-6/12 flex flex-col gap-3 divide-y divide-dashed">
+                            <div className="flex gap-4 first:pt-0 pt-3">
                                 <img
                                     src="https://cdn.bdnews24.com/bdnews24/media/english/imgAll/2024August/wood-250824-01-1724592621.jpg"
                                     alt="Post Image"
@@ -125,7 +128,7 @@ export default function Welcome({auth}: PropsWithChildren<{ auth: User }>) {
                                     </p>
                                 </div>
                             </div>
-                            <div className="py-6 px-4 shadow-sm bg-surface text-onSurface flex gap-4">
+                            <div className="flex gap-4 first:pt-0 pt-3">
                                 <img
                                     src="https://cdn.bdnews24.com/bdnews24/media/english/imgAll/2024August/wood-250824-01-1724592621.jpg"
                                     alt="Post Image"
@@ -139,7 +142,7 @@ export default function Welcome({auth}: PropsWithChildren<{ auth: User }>) {
                                     </p>
                                 </div>
                             </div>
-                            <div className="py-6 px-4 shadow-sm bg-surface text-onSurface flex gap-4">
+                            <div className="flex gap-4 first:pt-0 pt-3">
                                 <img
                                     src="https://cdn.bdnews24.com/bdnews24/media/english/imgAll/2024August/wood-250824-01-1724592621.jpg"
                                     alt="Post Image"
@@ -158,20 +161,19 @@ export default function Welcome({auth}: PropsWithChildren<{ auth: User }>) {
                     </div>
                     <div className="flex items-center justify-center">
                         <button
-                            className="rounded bg-secondary hover:bg-secondaryVariant text-onSecondary px-4 py-2">All
-                            News
+                            className="rounded bg-secondary hover:bg-secondaryVariant text-onSecondary px-4 py-2">Read More
                         </button>
                     </div>
                 </section>
-                <hr className="my-4 border-gray-200"/>
+                <hr className="my-6 border border-dashed container"/>
                 <section className="flex flex-col gap-4">
                     <div className="container">
                         <h2 className="font-extrabold text-2xl">WORLD</h2>
                         <span className="border-t-4 border-error">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                     </div>
-                    <div className="container flex flex-col md:flex-row gap-6">
-                        <div className="w-full md:w-6/12 flex flex-col gap-3">
-                            <div className="py-6 px-4 shadow-sm bg-surface text-onSurface flex gap-4">
+                    <div className="container flex flex-col lg:flex-row gap-6">
+                        <div className="w-full lg:w-6/12 flex flex-col gap-3 divide-y divide-dashed">
+                            <div className="flex gap-4">
                                 <img
                                     src="https://cdn.bdnews24.com/bdnews24/media/english/imgAll/2024August/wood-250824-01-1724592621.jpg"
                                     alt="Post Image"
@@ -185,7 +187,7 @@ export default function Welcome({auth}: PropsWithChildren<{ auth: User }>) {
                                     </p>
                                 </div>
                             </div>
-                            <div className="py-6 px-4 shadow-sm bg-surface text-onSurface flex gap-4">
+                            <div className="flex gap-4 first:pt-0 pt-3">
                                 <img
                                     src="https://cdn.bdnews24.com/bdnews24/media/english/imgAll/2024August/wood-250824-01-1724592621.jpg"
                                     alt="Post Image"
@@ -199,7 +201,7 @@ export default function Welcome({auth}: PropsWithChildren<{ auth: User }>) {
                                     </p>
                                 </div>
                             </div>
-                            <div className="py-6 px-4 shadow-sm bg-surface text-onSurface flex gap-4">
+                            <div className="flex gap-4 first:pt-0 pt-3">
                                 <img
                                     src="https://cdn.bdnews24.com/bdnews24/media/english/imgAll/2024August/wood-250824-01-1724592621.jpg"
                                     alt="Post Image"
@@ -214,13 +216,13 @@ export default function Welcome({auth}: PropsWithChildren<{ auth: User }>) {
                                 </div>
                             </div>
                         </div>
-                        <div className="w-full md:w-6/12 order-first md:order-none">
-                            <div className="w-full overflow-hidden shadow-sm bg-surface text-onSurface ">
+                        <div className="w-full lg:w-6/12 order-first lg:order-none">
+                            <div className="w-full overflow-hidden">
                                 <img
                                     src="https://cdn.bdnews24.com/bdnews24/media/english/imgAll/2024August/wood-250824-01-1724592621.jpg"
                                     alt="Post Image"
                                     className="w-full max-h-72 object-cover"/>
-                                <div className="py-6 px-4">
+                                <div className="pt-2">
                                     <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
                                         Headline</Link>
                                     <p className="">
@@ -233,12 +235,10 @@ export default function Welcome({auth}: PropsWithChildren<{ auth: User }>) {
                     </div>
                     <div className="flex items-center justify-center">
                         <button
-                            className="rounded bg-secondary hover:bg-secondaryVariant text-onSecondary px-4 py-2">All
-                            News
+                            className="rounded bg-secondary hover:bg-secondaryVariant text-onSecondary px-4 py-2">Read More
                         </button>
                     </div>
                 </section>
-                <hr className="my-4 border-gray-200"/>
                 {/* <section className="flex items-center gap-2 container">
                     <FacebookShareButton url={"http://10.77.77.22:8000/"} title={"title"}>
                         <FacebookIcon size={32} round={true}/>
