@@ -1,13 +1,13 @@
-import { PropsWithChildren } from "react";
+import {PropsWithChildren} from "react";
 import whiteLogo from "../../../assets/brand/logo.png";
-import MenuView from "./MenuView";
+import {Link} from "@inertiajs/react";
 
 function SidebarComponent({
-    sidebarOpen,
-    setSidebarOpen,
-    toggleSidebar,
-    menus,
-}: PropsWithChildren<{
+                              sidebarOpen,
+                              setSidebarOpen,
+                              toggleSidebar,
+                              menus,
+                          }: PropsWithChildren<{
     sidebarOpen: any;
     setSidebarOpen: any;
     toggleSidebar: any;
@@ -42,16 +42,27 @@ function SidebarComponent({
                     />
                 </div>
 
-                <div className="flex h-[calc(100vh-122px)] flex-grow flex-col justify-between overflow-auto text-onSurface">
+                <div
+                    className="flex h-[calc(100vh-122px)] flex-grow flex-col justify-between overflow-auto text-onSurface">
                     <ul className="flex flex-col justify-center cursor-pointer text-onSurface">
-                        {Array.isArray(menus) &&
-                            menus.map((menu) => (
-                                <MenuView
-                                    sidebarOpen={sidebarOpen}
-                                    menu={menu}
-                                    toggleSidebar={toggleSidebar}
-                                />
-                            ))}
+                        <li className="flex items-center duration-300 border-b border-purple-100 border-dashed transition-color group bg-surface text-onSurface hover:bg-background hover:bg-blue-gray-900 hover:text-background">
+                            <Link
+                                href={route(`posts.index`)}
+                                className={`flex h-full w-full items-center bg-transparent px-4 py-2 text-onSurface transition-all duration-300
+        ${
+                                    sidebarOpen && "group-hover:scale-105"
+                                }  sidebar-menu text-primary group-hover:bg-background group-hover:text-onBackground`}
+                            >
+                <span className="text-xl">
+                    <i
+                        className={`fa-brands fa-page4 group-active:text-orange-900`}
+                    ></i>
+                </span>
+                                {sidebarOpen ? (
+                                    <span className="pl-4 ">News</span>
+                                ) : null}
+                            </Link>
+                        </li>
                     </ul>
                 </div>
             </div>

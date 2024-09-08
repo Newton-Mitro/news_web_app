@@ -9,8 +9,7 @@ const MenuView = ({
     return (
         <li className="flex items-center duration-300 border-b border-purple-100 border-dashed transition-color group bg-surface text-onSurface hover:bg-background hover:bg-blue-gray-900 hover:text-background">
             <Link
-                // href={route(`${menu?.Route}`)}
-                href="#"
+                href={route(`${menu?.Route}`)}
                 className={`flex h-full w-full items-center bg-transparent px-4 py-2 text-onSurface transition-all duration-300
         ${
             sidebarOpen && "group-hover:scale-105"
