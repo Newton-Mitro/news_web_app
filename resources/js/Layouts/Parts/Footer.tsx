@@ -7,9 +7,9 @@ function Footer({auth}: PropsWithChildren<{ auth: any }>) {
         <footer className="mt-auto text-center bg-surface text-onSurface">
             <div className="container flex flex-col items-center justify-center p-3 py-6 mx-auto">
                 <ul className="flex gap-4 text-primary my-6 text-sm">
-                    <li>Policy</li>
-                    <li>About</li>
-                    <li>Contact</li>
+                    <li>নীতি</li>
+                    <li>আমাদের সম্পর্কে</li>
+                    <li>যোগাযোগ</li>
                 </ul>
                 <Link
                     className="flex flex-col items-center justify-center " href={""}>
@@ -18,8 +18,8 @@ function Footer({auth}: PropsWithChildren<{ auth: any }>) {
                         Dhaka Credit News
                     </p>
                     <p className="text-sm font-light">
-                        Fr. Charles J. Young Bhaban, 173/1/A East Tejturi
-                        Bazar, Tejgaon Dhaka 1215
+                        Fr. চার্লস জে. ইয়াং ভবন, 173/1/A পূর্ব তেজতুরি
+                        বাজার, তেজগাঁও ঢাকা 1215
                     </p>
                 </Link>
 

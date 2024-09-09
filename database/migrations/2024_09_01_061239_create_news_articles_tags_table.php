@@ -8,9 +8,9 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('post_tags', function (Blueprint $table) {
+        Schema::create('news_articles_tags', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('post_id')->constrained()->onDelete('cascade');
+            $table->foreignUuid('news_article_id')->constrained()->onDelete('cascade');
             $table->foreignId('tag_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('news_articles', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('title');
             $table->string('slug')->unique();
@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('attachment_url', 1024)->nullable();
             $table->string('attachment_mime')->nullable();
             $table->enum('status', ['draft', 'published'])->default('draft');
-            $table->enum('post_type', ['image', 'video'])->default('image');
+            $table->enum('article_type', ['image', 'video'])->default('image');
             $table->boolean('featured')->default(false);
             $table->foreignId('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreignId('created_by')->references('id')->on('users')->onDelete('cascade');
@@ -28,6 +28,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('news_articles');
     }
 };

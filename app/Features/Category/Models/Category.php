@@ -2,7 +2,7 @@
 
 namespace App\Features\Category\Models;
 
-use App\Features\Post\Models\Post;
+use App\Features\NewsArticle\Models\NewsArticle;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,8 +13,8 @@ class Category extends Model
     protected $fillable = ['name'];
 
     // A category has many posts
-    public function posts()
+    public function newsArticles()
     {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(NewsArticle::class);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Features\Tag\Models;
 
-use App\Features\Post\Models\Post;
+use App\Features\NewsArticle\Models\NewsArticle;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,8 +13,8 @@ class Tag extends Model
     protected $fillable = ['name'];
 
     // A tag can belong to many posts
-    public function posts()
+    public function newsArticles()
     {
-        return $this->belongsToMany(Post::class);
+        return $this->belongsToMany(NewsArticle::class);
     }
 }

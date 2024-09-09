@@ -1,26 +1,29 @@
 import {PropsWithChildren} from "react";
 import myLogo from "../../../assets/brand/logo.png";
 import XIcon from "../../../assets/svg/x_twitter.png";
-import moment from "moment";
 import Marquee from "react-fast-marquee";
 import {Link} from "@inertiajs/react";
 
 function Header({scrollFromTop}: PropsWithChildren<{
     scrollFromTop: any,
 }>) {
-    console.log(scrollFromTop)
+
+    const formatter = new Intl.DateTimeFormat('bn-BD', {
+        dateStyle: 'full',
+    });
+
     return (
         <>
             <div className="container">
                 <div className="hidden md:flex h-10"></div>
                 <div className="hidden md:flex items-center justify-between ">
-                    <div className="">{`${moment().format('MMMM DD, YYYY')}`}</div>
-                    <div className="">
+                    <div className="font-bangla_uni">{formatter.format(new Date())}</div>
+                    <div className="font-bangla_uni">
                         <ul className="flex gap-4">
-                            <li><Link className="hover:text-error" href={""}>Bangladesh</Link></li>
-                            <li><Link className="hover:text-error" href={""}>International</Link></li>
-                            <li><Link className="hover:text-error" href={""}>Sports</Link></li>
-                            <li><Link className="hover:text-error" href={""}>Entertainment</Link></li>
+                            <li><Link className="hover:text-error" href={""}>বাংলাদেশ</Link></li>
+                            <li><Link className="hover:text-error" href={""}>আন্তর্জাতিক</Link></li>
+                            <li><Link className="hover:text-error" href={""}>খেলাধুলা</Link></li>
+                            <li><Link className="hover:text-error" href={""}>বিনোদন</Link></li>
                         </ul>
                     </div>
                     <div className="flex gap-2">
@@ -79,13 +82,13 @@ function Header({scrollFromTop}: PropsWithChildren<{
 
                         </div>
                         <ul className="flex gap-6 w-10.5/12 h-full overflow-auto items-center">
-                            <li><Link className="hover:text-error" href={route('pages.byCategory','Budget')}>Budget</Link></li>
-                            <li><Link className="hover:text-error" href={route('pages.byCategory','World')}>World</Link></li>
-                            <li><Link className="hover:text-error" href={route('pages.byCategory','Economy')}>Economy</Link></li>
-                            <li><Link className="hover:text-error" href={route('pages.byCategory','Lifestyle')}>Lifestyle</Link></li>
-                            <li><Link className="hover:text-error" href={route('pages.byCategory','Business')}>Business</Link></li>
-                            <li><Link className="hover:text-error" href={route('pages.byCategory','Sports')}>Sports</Link></li>
-                            <li><Link className="hover:text-error" href={route('pages.archive')}>Archive</Link></li>
+                            <li><Link className="hover:text-error" href={route('pages.byCategory','Bangladesh')}>সমগ্র বাংলাদেশ</Link></li>
+                            <li><Link className="hover:text-error" href={route('pages.byCategory','World')}>বিশ্ব</Link></li>
+                            <li><Link className="hover:text-error" href={route('pages.byCategory','Economy')}>অর্থনীতি</Link></li>
+                            <li><Link className="hover:text-error" href={route('pages.byCategory','Lifestyle')}>জীবনধারা</Link></li>
+                            <li><Link className="hover:text-error" href={route('pages.byCategory','Business')}>বাণিজ্য</Link></li>
+                            <li><Link className="hover:text-error" href={route('pages.byCategory','Sports')}>খেলাধুলা</Link></li>
+                            <li><Link className="hover:text-error" href={route('pages.archive')}>সংরক্ষণাগার</Link></li>
                         </ul>
                     </div>
                     {
@@ -99,11 +102,11 @@ function Header({scrollFromTop}: PropsWithChildren<{
             </div>
             <div className="">
                 <div className="md:container bg-primaryVariant text-onPrimaryVariant flex pr-2">
-                    <div className="bg-secondary py-2 px-4">Latest</div>
+                    <div className="bg-secondary py-2 px-4">সর্বশেষ</div>
                     <Marquee className="py-2">
                         <ul className="flex list-disc gap-16">
-                            <li>I can be a React component, multiple React components, or just some text.</li>
-                            <li>The quick brown busy fox jump over the lazy dog.</li>
+                            <li>সাগর-রুনি হত্যা: প্রতিবেদন জমার তারিখ পেছাল ১১১ বার</li>
+                            <li>তেজগাঁওয়ে কারিগরি শিক্ষার্থীদের অবরোধে তীব্র যানজট</li>
                         </ul>
                     </Marquee>
                 </div>

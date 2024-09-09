@@ -22,4 +22,4 @@ Route::middleware('auth')->group(function (): void {
 
 require __DIR__ . '/../app/Features/Auth/Routes/auth.php';
 require __DIR__.'/../app/Features/Page/Routes/page.php';
-require __DIR__.'/../app/Features/Post/Routes/post.php';
+require __DIR__ . '/../app/Features/NewsArticle/Routes/news_article.php';

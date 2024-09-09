@@ -1,29 +1,27 @@
 <?php
 
-namespace App\Features\Post\Controllers;
+namespace App\Features\NewsArticle\Controllers;
 
 use App\Core\Controllers\Controller;
-use App\Features\Post\Models\Post;
-use Illuminate\Foundation\Application;
+use App\Features\NewsArticle\Models\NewsArticle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
-class PostController extends Controller
+class NewsArticleController extends Controller
 {
     public function index(){
-        $posts = Post::all();
-        return Inertia::render('AdminPanel/Post/ListPosts', [
+        $posts = NewsArticle::all();
+        return Inertia::render('AdminPanel/NewsArticle/ListNewsArticles', [
             'posts' => $posts,
         ]);
     }
-    // Show the form to create a new post
+
     public function create()
     {
         return view('posts.create'); // Create this view
     }
 
-    // Store a newly created post in storage
     public function store(Request $request)
     {
         $request->validate([
@@ -31,29 +29,26 @@ class PostController extends Controller
             'body' => 'required|string',
         ]);
 
-        $post = new Post();
+        $post = new NewsArticle();
         $post->title = $request->title;
         $post->body = $request->body;
         $post->user_id = Auth::id(); // Assuming posts are associated with users
         $post->save();
 
-        return redirect()->route('posts.index')->with('status', 'Post created successfully!');
+        return redirect()->route('posts.index')->with('status', 'NewsArticle created successfully!');
     }
 
-    // Display the specified post
-    public function show(Post $post)
+    public function show(NewsArticle $post)
     {
         return view('posts.show', compact('post')); // Create this view
     }
 
-    // Show the form to edit the specified post
-    public function edit(Post $post)
+    public function edit(NewsArticle $post)
     {
         return view('posts.edit', compact('post')); // Create this view
     }
 
-    // Update the specified post in storage
-    public function update(Request $request, Post $post)
+    public function update(Request $request, NewsArticle $post)
     {
         $request->validate([
             'title' => 'required|string|max:255',
@@ -64,14 +59,13 @@ class PostController extends Controller
         $post->body = $request->body;
         $post->save();
 
-        return redirect()->route('posts.index')->with('status', 'Post updated successfully!');
+        return redirect()->route('posts.index')->with('status', 'NewsArticle updated successfully!');
     }
 
-    // Remove the specified post from storage
-    public function destroy(Post $post)
+    public function destroy(NewsArticle $post)
     {
         $post->delete();
 
-        return redirect()->route('posts.index')->with('status', 'Post deleted successfully!');
+        return redirect()->route('posts.index')->with('status', 'NewsArticle deleted successfully!');
     }
 }

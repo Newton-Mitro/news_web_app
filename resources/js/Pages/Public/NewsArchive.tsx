@@ -23,9 +23,8 @@ export default function ByCategory({auth}: PropsWithChildren<{ auth: User }>) {
                                 alt="Post Image"
                                 className="w-36 object-cover"/>
                             <div className="">
-                                <p className="font-bold text-secondary">Category</p>
-                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
-                                    Headline</Link>
+                                <p className="font-bold text-secondary">ক্যাটাগরি</p>
+                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা</Link>
                                 <p className="">
                                     Publish At
                                 </p>
@@ -37,9 +36,8 @@ export default function ByCategory({auth}: PropsWithChildren<{ auth: User }>) {
                                 alt="Post Image"
                                 className="w-36 object-cover"/>
                             <div className="">
-                                <p className="font-bold text-secondary">Category</p>
-                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
-                                    Headline</Link>
+                                <p className="font-bold text-secondary">ক্যাটাগরি</p>
+                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা</Link>
                                 <p className="">
                                     Publish At
                                 </p>
@@ -51,9 +49,8 @@ export default function ByCategory({auth}: PropsWithChildren<{ auth: User }>) {
                                 alt="Post Image"
                                 className="w-36 object-cover"/>
                             <div className="">
-                                <p className="font-bold text-secondary">Category</p>
-                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
-                                    Headline</Link>
+                                <p className="font-bold text-secondary">ক্যাটাগরি</p>
+                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা</Link>
                                 <p className="">
                                     Publish At
                                 </p>
@@ -65,9 +62,8 @@ export default function ByCategory({auth}: PropsWithChildren<{ auth: User }>) {
                                 alt="Post Image"
                                 className="w-36 object-cover"/>
                             <div className="">
-                                <p className="font-bold text-secondary">Category</p>
-                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
-                                    Headline</Link>
+                                <p className="font-bold text-secondary">ক্যাটাগরি</p>
+                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা</Link>
                                 <p className="">
                                     Publish At
                                 </p>
@@ -79,9 +75,8 @@ export default function ByCategory({auth}: PropsWithChildren<{ auth: User }>) {
                                 alt="Post Image"
                                 className="w-36 object-cover"/>
                             <div className="">
-                                <p className="font-bold text-secondary">Category</p>
-                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
-                                    Headline</Link>
+                                <p className="font-bold text-secondary">ক্যাটাগরি</p>
+                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা</Link>
                                 <p className="">
                                     Publish At
                                 </p>
@@ -93,9 +88,8 @@ export default function ByCategory({auth}: PropsWithChildren<{ auth: User }>) {
                                 alt="Post Image"
                                 className="w-36 object-cover"/>
                             <div className="">
-                                <p className="font-bold text-secondary">Category</p>
-                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
-                                    Headline</Link>
+                                <p className="font-bold text-secondary">ক্যাটাগরি</p>
+                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা</Link>
                                 <p className="">
                                     Publish At
                                 </p>
@@ -107,9 +101,8 @@ export default function ByCategory({auth}: PropsWithChildren<{ auth: User }>) {
                                 alt="Post Image"
                                 className="w-36 object-cover"/>
                             <div className="">
-                                <p className="font-bold text-secondary">Category</p>
-                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
-                                    Headline</Link>
+                                <p className="font-bold text-secondary">ক্যাটাগরি</p>
+                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা</Link>
                                 <p className="">
                                     Publish At
                                 </p>
@@ -121,9 +114,8 @@ export default function ByCategory({auth}: PropsWithChildren<{ auth: User }>) {
                                 alt="Post Image"
                                 className="w-36 object-cover"/>
                             <div className="">
-                                <p className="font-bold text-secondary">Category</p>
-                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
-                                    Headline</Link>
+                                <p className="font-bold text-secondary">ক্যাটাগরি</p>
+                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা</Link>
                                 <p className="">
                                     Publish At
                                 </p>
@@ -135,9 +127,8 @@ export default function ByCategory({auth}: PropsWithChildren<{ auth: User }>) {
                                 alt="Post Image"
                                 className="w-36 object-cover"/>
                             <div className="">
-                                <p className="font-bold text-secondary">Category</p>
-                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
-                                    Headline</Link>
+                                <p className="font-bold text-secondary">ক্যাটাগরি</p>
+                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা</Link>
                                 <p className="">
                                     Publish At
                                 </p>
@@ -149,9 +140,8 @@ export default function ByCategory({auth}: PropsWithChildren<{ auth: User }>) {
                                 alt="Post Image"
                                 className="w-36 object-cover"/>
                             <div className="">
-                                <p className="font-bold text-secondary">Category</p>
-                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
-                                    Headline</Link>
+                                <p className="font-bold text-secondary">ক্যাটাগরি</p>
+                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা</Link>
                                 <p className="">
                                     Publish At
                                 </p>
@@ -163,9 +153,8 @@ export default function ByCategory({auth}: PropsWithChildren<{ auth: User }>) {
                                 alt="Post Image"
                                 className="w-36 object-cover"/>
                             <div className="">
-                                <p className="font-bold text-secondary">Category</p>
-                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
-                                    Headline</Link>
+                                <p className="font-bold text-secondary">ক্যাটাগরি</p>
+                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা</Link>
                                 <p className="">
                                     Publish At
                                 </p>
@@ -177,9 +166,8 @@ export default function ByCategory({auth}: PropsWithChildren<{ auth: User }>) {
                                 alt="Post Image"
                                 className="w-36 object-cover"/>
                             <div className="">
-                                <p className="font-bold text-secondary">Category</p>
-                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
-                                    Headline</Link>
+                                <p className="font-bold text-secondary">ক্যাটাগরি</p>
+                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা</Link>
                                 <p className="">
                                     Publish At
                                 </p>

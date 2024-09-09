@@ -45,21 +45,110 @@ function SidebarComponent({
                 <div
                     className="flex h-[calc(100vh-122px)] flex-grow flex-col justify-between overflow-auto text-onSurface">
                     <ul className="flex flex-col justify-center cursor-pointer text-onSurface">
+
+
                         <li className="flex items-center duration-300 border-b border-purple-100 border-dashed transition-color group bg-surface text-onSurface hover:bg-background hover:bg-blue-gray-900 hover:text-background">
+
                             <Link
-                                href={route(`posts.index`)}
+                                href={route(`dashboard`)}
                                 className={`flex h-full w-full items-center bg-transparent px-4 py-2 text-onSurface transition-all duration-300
         ${
                                     sidebarOpen && "group-hover:scale-105"
                                 }  sidebar-menu text-primary group-hover:bg-background group-hover:text-onBackground`}
                             >
                 <span className="text-xl">
-                    <i
-                        className={`fa-brands fa-page4 group-active:text-orange-900`}
-                    ></i>
+                    <i className="fa-brands fa-buromobelexperte group-active:text-orange-900"></i>
+                </span>
+                                {sidebarOpen ? (
+                                    <span className="pl-4 ">Dashboard</span>
+                                ) : null}
+                            </Link>
+                        </li>
+                        <li className="flex items-center duration-300 border-b border-purple-100 border-dashed transition-color group bg-surface text-onSurface hover:bg-background hover:bg-blue-gray-900 hover:text-background">
+
+                            <Link
+                                href={route(`news-article.index`)}
+                                className={`flex h-full w-full items-center bg-transparent px-4 py-2 text-onSurface transition-all duration-300
+        ${
+                                    sidebarOpen && "group-hover:scale-105"
+                                }  sidebar-menu text-primary group-hover:bg-background group-hover:text-onBackground`}
+                            >
+                <span className="text-xl">
+                    <i className="fa-solid fa-tags group-active:text-orange-900"></i>
+                </span>
+                                {sidebarOpen ? (
+                                    <span className="pl-4 ">Tags</span>
+                                ) : null}
+                            </Link>
+                        </li>
+                        <li className="flex items-center duration-300 border-b border-purple-100 border-dashed transition-color group bg-surface text-onSurface hover:bg-background hover:bg-blue-gray-900 hover:text-background">
+
+                            <Link
+                                href={route(`news-article.index`)}
+                                className={`flex h-full w-full items-center bg-transparent px-4 py-2 text-onSurface transition-all duration-300
+        ${
+                                    sidebarOpen && "group-hover:scale-105"
+                                }  sidebar-menu text-primary group-hover:bg-background group-hover:text-onBackground`}
+                            >
+                <span className="text-xl">
+                   <i className="fa-solid fa-layer-group group-active:text-orange-900"></i>
+                </span>
+                                {sidebarOpen ? (
+                                    <span className="pl-4 ">Categories</span>
+                                ) : null}
+                            </Link>
+                        </li>
+
+                        <li className="flex items-center duration-300 border-b border-purple-100 border-dashed transition-color group bg-surface text-onSurface hover:bg-background hover:bg-blue-gray-900 hover:text-background">
+
+                            <Link
+                                href={route(`news-article.index`)}
+                                className={`flex h-full w-full items-center bg-transparent px-4 py-2 text-onSurface transition-all duration-300
+        ${
+                                    sidebarOpen && "group-hover:scale-105"
+                                }  sidebar-menu text-primary group-hover:bg-background group-hover:text-onBackground`}
+                            >
+                <span className="text-xl">
+                    <i className="fa-solid fa-file-circle-plus group-active:text-orange-900"></i>
                 </span>
                                 {sidebarOpen ? (
                                     <span className="pl-4 ">News</span>
+                                ) : null}
+                            </Link>
+                        </li>
+
+                        <li className="flex items-center duration-300 border-b border-purple-100 border-dashed transition-color group bg-surface text-onSurface hover:bg-background hover:bg-blue-gray-900 hover:text-background">
+
+                            <Link
+                                href={route(`news-article.index`)}
+                                className={`flex h-full w-full items-center bg-transparent px-4 py-2 text-onSurface transition-all duration-300
+        ${
+                                    sidebarOpen && "group-hover:scale-105"
+                                }  sidebar-menu text-primary group-hover:bg-background group-hover:text-onBackground`}
+                            >
+                <span className="text-xl">
+                    <i className="fa-solid fa-users-gear group-active:text-orange-900"></i>
+                </span>
+                                {sidebarOpen ? (
+                                    <span className="pl-4 ">Users</span>
+                                ) : null}
+                            </Link>
+                        </li>
+
+                        <li className="flex items-center duration-300 border-b border-purple-100 border-dashed transition-color group bg-surface text-onSurface hover:bg-background hover:bg-blue-gray-900 hover:text-background">
+
+                            <Link
+                                href={route(`news-article.index`)}
+                                className={`flex h-full w-full items-center bg-transparent px-4 py-2 text-onSurface transition-all duration-300
+        ${
+                                    sidebarOpen && "group-hover:scale-105"
+                                }  sidebar-menu text-primary group-hover:bg-background group-hover:text-onBackground`}
+                            >
+                <span className="text-xl">
+                    <i className="fa-solid fa-gear  group-active:text-orange-900"></i>
+                </span>
+                                {sidebarOpen ? (
+                                    <span className="pl-4 ">Settings</span>
                                 ) : null}
                             </Link>
                         </li>

@@ -14,27 +14,21 @@ export default function Home({auth}: PropsWithChildren<{ auth: User }>) {
                         <div
                             className="w-full lg:w-3/12 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 md:gap-6 lg:gap-3 lg:divide-y divide-dashed">
                             <div className="first:pt-0 pt-3">
-                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
-                                    Headline</Link>
+                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা</Link>
                                 <p className="">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet
-                                    imperdiet odio. Sed vel magna nec nunc vehicula varius. Nulla facilisi. Lorem ipsum
-                                    dolor sit amet.
+                                    দীর্ঘ সময় ধরে শিক্ষার্থীরা সড়ক অবরোধ করে রাখায় হাতিরঝিল, মগবাজার, কারওয়ানবাজার, ফার্মগেইট, বিজয় সরণি, মহাখালী এলাকায় তীব্র যানজটের খবর পাওয়া যাচ্ছে।
                                 </p>
                             </div>
                             <div className="first:pt-0 pt-3">
-                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
-                                    Headline</Link>
+                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা</Link>
                                 <p className="">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet
-                                    imperdiet odio.
+                                    দীর্ঘ সময় ধরে শিক্ষার্থীরা সড়ক অবরোধ করে রাখায় হাতিরঝিল, মগবাজার, কারওয়ানবাজার, ফার্মগেইট, বিজয় সরণি, মহাখালী এলাকায় তীব্র যানজটের খবর পাওয়া যাচ্ছে।
                                 </p>
                             </div>
                             <div className="first:pt-0 pt-3">
-                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
-                                    Headline</Link>
+                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা</Link>
                                 <p className="">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    দীর্ঘ সময় ধরে শিক্ষার্থীরা সড়ক অবরোধ করে রাখায় হাতিরঝিল, মগবাজার, কারওয়ানবাজার, ফার্মগেইট, বিজয় সরণি, মহাখালী এলাকায় তীব্র যানজটের খবর পাওয়া যাচ্ছে।
                                 </p>
                             </div>
                         </div>
@@ -45,11 +39,9 @@ export default function Home({auth}: PropsWithChildren<{ auth: User }>) {
                                     alt="Post Image"
                                     className="w-full max-h-72 object-cover"/>
                                 <div className="pt-2">
-                                    <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
-                                        Headline</Link>
+                                    <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা</Link>
                                     <p className="">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet
-                                        imperdiet odio. Sed vel magna nec nunc vehicula varius. Nulla facilisi.
+                                        দীর্ঘ সময় ধরে শিক্ষার্থীরা সড়ক অবরোধ করে রাখায় হাতিরঝিল, মগবাজার, কারওয়ানবাজার, ফার্মগেইট, বিজয় সরণি, মহাখালী এলাকায় তীব্র যানজটের খবর পাওয়া যাচ্ছে।
                                     </p>
                                 </div>
                             </div>
@@ -57,43 +49,33 @@ export default function Home({auth}: PropsWithChildren<{ auth: User }>) {
                         <div
                             className="w-full lg:w-3/12 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 md:gap-6 lg:gap-3 lg:divide-y divide-dashed">
                             <div className="first:pt-0 pt-3">
-                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
-                                    Headline</Link>
+                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা</Link>
                                 <p className="">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet
-                                    imperdiet odio. Sed vel magna nec nunc vehicula varius. Nulla facilisi. Lorem ipsum
-                                    dolor sit amet, consectetur adipisicing elit. Ab cumque dolorem doloribus impedit
-                                    laboriosam maxime.
+                                    দীর্ঘ সময় ধরে শিক্ষার্থীরা সড়ক অবরোধ করে রাখায় হাতিরঝিল, মগবাজার, কারওয়ানবাজার, ফার্মগেইট, বিজয় সরণি, মহাখালী এলাকায় তীব্র যানজটের খবর পাওয়া যাচ্ছে।
                                 </p>
                             </div>
                             <div className="first:pt-0 pt-3">
-                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
-                                    Headline</Link>
+                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা</Link>
                                 <p className="">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet
-                                    imperdiet odio.
+                                    দীর্ঘ সময় ধরে শিক্ষার্থীরা সড়ক অবরোধ করে রাখায় হাতিরঝিল, মগবাজার, কারওয়ানবাজার, ফার্মগেইট, বিজয় সরণি, মহাখালী এলাকায় তীব্র যানজটের খবর পাওয়া যাচ্ছে।
                                 </p>
                             </div>
                             <div className="first:pt-0 pt-3">
-                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
-                                    Headline</Link>
+                                <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা</Link>
                                 <p className="">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    দীর্ঘ সময় ধরে শিক্ষার্থীরা সড়ক অবরোধ করে রাখায় হাতিরঝিল, মগবাজার, কারওয়ানবাজার, ফার্মগেইট, বিজয় সরণি, মহাখালী এলাকায় তীব্র যানজটের খবর পাওয়া যাচ্ছে।
                                 </p>
                             </div>
                         </div>
                     </div>
                     <div className="flex items-center justify-center">
-                        <button
-                            className="rounded bg-secondary hover:bg-secondaryVariant text-onSecondary px-4 py-2">All
-                            News
-                        </button>
+                        <button className="rounded bg-secondary hover:bg-secondaryVariant text-onSecondary px-4 py-2">সব খবর</button>
                     </div>
                 </section>
                 <hr className="my-6 border border-dashed container"/>
                 <section className="flex flex-col gap-4">
                     <div className="container">
-                        <h2 className="font-extrabold text-2xl">ECONOMY</h2>
+                        <h2 className="font-extrabold text-2xl">অর্থনীতি</h2>
                         <span className="border-t-4 border-error">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                     </div>
                     <div className="container flex flex-col lg:flex-row gap-6">
@@ -104,11 +86,9 @@ export default function Home({auth}: PropsWithChildren<{ auth: User }>) {
                                     alt="Post Image"
                                     className="w-full max-h-72 object-cover"/>
                                 <div className="pt-2">
-                                    <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
-                                        Headline</Link>
+                                    <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা</Link>
                                     <p className="">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet
-                                        imperdiet odio. Sed vel magna nec nunc vehicula varius. Nulla facilisi.
+                                        দীর্ঘ সময় ধরে শিক্ষার্থীরা সড়ক অবরোধ করে রাখায় হাতিরঝিল, মগবাজার, কারওয়ানবাজার, ফার্মগেইট, বিজয় সরণি, মহাখালী এলাকায় তীব্র যানজটের খবর পাওয়া যাচ্ছে।
                                     </p>
                                 </div>
                             </div>
@@ -120,11 +100,9 @@ export default function Home({auth}: PropsWithChildren<{ auth: User }>) {
                                     alt="Post Image"
                                     className="w-36 object-cover"/>
                                 <div className="">
-                                    <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
-                                        Headline</Link>
+                                    <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা</Link>
                                     <p className="">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet
-                                        imperdiet odio. Sed vel magna nec nunc vehicula varius. Nulla facilisi.
+                                        দীর্ঘ সময় ধরে শিক্ষার্থীরা সড়ক অবরোধ করে রাখায় হাতিরঝিল, মগবাজার, কারওয়ানবাজার, ফার্মগেইট, বিজয় সরণি, মহাখালী এলাকায় তীব্র যানজটের খবর পাওয়া যাচ্ছে।
                                     </p>
                                 </div>
                             </div>
@@ -134,11 +112,9 @@ export default function Home({auth}: PropsWithChildren<{ auth: User }>) {
                                     alt="Post Image"
                                     className="w-36 object-cover"/>
                                 <div className="">
-                                    <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
-                                        Headline</Link>
+                                    <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা</Link>
                                     <p className="">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet
-                                        imperdiet odio. Sed vel magna nec nunc vehicula varius. Nulla facilisi.
+                                        দীর্ঘ সময় ধরে শিক্ষার্থীরা সড়ক অবরোধ করে রাখায় হাতিরঝিল, মগবাজার, কারওয়ানবাজার, ফার্মগেইট, বিজয় সরণি, মহাখালী এলাকায় তীব্র যানজটের খবর পাওয়া যাচ্ছে।
                                     </p>
                                 </div>
                             </div>
@@ -148,11 +124,9 @@ export default function Home({auth}: PropsWithChildren<{ auth: User }>) {
                                     alt="Post Image"
                                     className="w-36 object-cover"/>
                                 <div className="">
-                                    <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
-                                        Headline</Link>
+                                    <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা</Link>
                                     <p className="">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet
-                                        imperdiet odio. Sed vel magna nec nunc vehicula varius. Nulla facilisi.
+                                        দীর্ঘ সময় ধরে শিক্ষার্থীরা সড়ক অবরোধ করে রাখায় হাতিরঝিল, মগবাজার, কারওয়ানবাজার, ফার্মগেইট, বিজয় সরণি, মহাখালী এলাকায় তীব্র যানজটের খবর পাওয়া যাচ্ছে।
                                     </p>
                                 </div>
                             </div>
@@ -161,14 +135,14 @@ export default function Home({auth}: PropsWithChildren<{ auth: User }>) {
                     </div>
                     <div className="flex items-center justify-center">
                         <button
-                            className="rounded bg-secondary hover:bg-secondaryVariant text-onSecondary px-4 py-2">Read More
+                            className="rounded bg-secondary hover:bg-secondaryVariant text-onSecondary px-4 py-2">আরও পড়ুন
                         </button>
                     </div>
                 </section>
                 <hr className="my-6 border border-dashed container"/>
                 <section className="flex flex-col gap-4">
                     <div className="container">
-                        <h2 className="font-extrabold text-2xl">WORLD</h2>
+                        <h2 className="font-extrabold text-2xl">বিশ্ব</h2>
                         <span className="border-t-4 border-error">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                     </div>
                     <div className="container flex flex-col lg:flex-row gap-6">
@@ -179,11 +153,9 @@ export default function Home({auth}: PropsWithChildren<{ auth: User }>) {
                                     alt="Post Image"
                                     className="w-36 object-cover"/>
                                 <div className="">
-                                    <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
-                                        Headline</Link>
+                                    <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা</Link>
                                     <p className="">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet
-                                        imperdiet odio. Sed vel magna nec nunc vehicula varius. Nulla facilisi.
+                                        দীর্ঘ সময় ধরে শিক্ষার্থীরা সড়ক অবরোধ করে রাখায় হাতিরঝিল, মগবাজার, কারওয়ানবাজার, ফার্মগেইট, বিজয় সরণি, মহাখালী এলাকায় তীব্র যানজটের খবর পাওয়া যাচ্ছে।
                                     </p>
                                 </div>
                             </div>
@@ -193,11 +165,9 @@ export default function Home({auth}: PropsWithChildren<{ auth: User }>) {
                                     alt="Post Image"
                                     className="w-36 object-cover"/>
                                 <div className="">
-                                    <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
-                                        Headline</Link>
+                                    <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা</Link>
                                     <p className="">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet
-                                        imperdiet odio. Sed vel magna nec nunc vehicula varius. Nulla facilisi.
+                                        দীর্ঘ সময় ধরে শিক্ষার্থীরা সড়ক অবরোধ করে রাখায় হাতিরঝিল, মগবাজার, কারওয়ানবাজার, ফার্মগেইট, বিজয় সরণি, মহাখালী এলাকায় তীব্র যানজটের খবর পাওয়া যাচ্ছে।
                                     </p>
                                 </div>
                             </div>
@@ -207,11 +177,9 @@ export default function Home({auth}: PropsWithChildren<{ auth: User }>) {
                                     alt="Post Image"
                                     className="w-36 object-cover"/>
                                 <div className="">
-                                    <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
-                                        Headline</Link>
+                                    <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা</Link>
                                     <p className="">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet
-                                        imperdiet odio. Sed vel magna nec nunc vehicula varius. Nulla facilisi.
+                                        দীর্ঘ সময় ধরে শিক্ষার্থীরা সড়ক অবরোধ করে রাখায় হাতিরঝিল, মগবাজার, কারওয়ানবাজার, ফার্মগেইট, বিজয় সরণি, মহাখালী এলাকায় তীব্র যানজটের খবর পাওয়া যাচ্ছে।
                                     </p>
                                 </div>
                             </div>
@@ -223,11 +191,9 @@ export default function Home({auth}: PropsWithChildren<{ auth: User }>) {
                                     alt="Post Image"
                                     className="w-full max-h-72 object-cover"/>
                                 <div className="pt-2">
-                                    <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">News
-                                        Headline</Link>
+                                    <Link href={""} className="text-xl font-bold  mb-4 hover:text-error">বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা</Link>
                                     <p className="">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet
-                                        imperdiet odio. Sed vel magna nec nunc vehicula varius. Nulla facilisi.
+                                        দীর্ঘ সময় ধরে শিক্ষার্থীরা সড়ক অবরোধ করে রাখায় হাতিরঝিল, মগবাজার, কারওয়ানবাজার, ফার্মগেইট, বিজয় সরণি, মহাখালী এলাকায় তীব্র যানজটের খবর পাওয়া যাচ্ছে।
                                     </p>
                                 </div>
                             </div>
@@ -235,7 +201,7 @@ export default function Home({auth}: PropsWithChildren<{ auth: User }>) {
                     </div>
                     <div className="flex items-center justify-center">
                         <button
-                            className="rounded bg-secondary hover:bg-secondaryVariant text-onSecondary px-4 py-2">Read More
+                            className="rounded bg-secondary hover:bg-secondaryVariant text-onSecondary px-4 py-2">আরও পড়ুন
                         </button>
                     </div>
                 </section>

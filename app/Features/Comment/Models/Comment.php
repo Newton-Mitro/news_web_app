@@ -2,7 +2,7 @@
 
 namespace App\Features\Comment\Models;
 
-use App\Features\Post\Models\Post;
+use App\Features\NewsArticle\Models\NewsArticle;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,11 +10,11 @@ class Comment extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['post_id', 'content'];
+    protected $fillable = ['news_article_id', 'content'];
 
     // A comment belongs to a post
-    public function post()
+    public function newsArticle()
     {
-        return $this->belongsTo(Post::class);
+        return $this->belongsTo(NewsArticle::class);
     }
 }

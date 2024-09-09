@@ -87,6 +87,9 @@ export default {
                     onError: "#777c79",
                     brand: "#182372",
                     onBrand: "#777c79",
+                    disabled: "#777c79",
+                    onDisabled: "#131313",
+                    borderColor: "#777c79"
                 },
                 dark: {
                     primary: "#252359",
@@ -105,6 +108,9 @@ export default {
                     onError: "#777c79",
                     brand: "#182372",
                     onBrand: "#777c79",
+                    disabled: "#777c79",
+                    onDisabled: "#131313",
+                    borderColor: "#3b3b3b"
                 },
                 halloween: {
                     primary: "#252359",
@@ -123,6 +129,9 @@ export default {
                     onError: "#777c79",
                     brand: "#182372",
                     onBrand: "#777c79",
+                    disabled: "#777c79",
+                    onDisabled: "#131313",
+                    borderColor: "#3b3b3b"
                 },
                 summer: {
                     primary: "#252359",
@@ -141,6 +150,9 @@ export default {
                     onError: "#777c79",
                     brand: "#182372",
                     onBrand: "#777c79",
+                    disabled: "#777c79",
+                    onDisabled: "#131313",
+                    borderColor: "#3b3b3b"
                 },
                 winter: {
                     primary: "#252359",
@@ -159,6 +171,9 @@ export default {
                     onError: "#777c79",
                     brand: "#182372",
                     onBrand: "#777c79",
+                    disabled: "#777c79",
+                    onDisabled: "#131313",
+                    borderColor: "#3b3b3b"
                 },
                 party: {
                     primary: "#252359",
@@ -177,6 +192,9 @@ export default {
                     onError: "#777c79",
                     brand: "#182372",
                     onBrand: "#777c79",
+                    disabled: "#777c79",
+                    onDisabled: "#131313",
+                    borderColor: "#3b3b3b"
                 },
             },
             {
