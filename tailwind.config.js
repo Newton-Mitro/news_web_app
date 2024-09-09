@@ -12,18 +12,18 @@ export default {
     ],
     theme: {
         screens: {
-            'sm': '640px',
-            'md': '768px',
-            'lg': '1024px',
-            'xl': '1224px',
+            sm: "640px",
+            md: "768px",
+            lg: "1024px",
+            xl: "1224px",
         },
         container: {
             center: true,
             padding: {
-                DEFAULT: '1rem',
-                sm: '2rem',
-                lg: '4rem',
-                xl: '0px',
+                DEFAULT: "1rem",
+                sm: "2rem",
+                lg: "4rem",
+                xl: "0px",
             },
         },
         fontFamily: {
@@ -36,11 +36,7 @@ export default {
             anton: ["Anton"],
             archivo: ["Archivo"],
             epilogue: ["Epilogue"],
-            san: [
-                "Montserrat Alternates",
-                "Encode Sans",
-                "Work Sans",
-            ],
+            san: ["Montserrat Alternates", "Encode Sans", "Work Sans"],
             tiro_bangla: "Tiro Bangla",
             serif: [
                 "Lora",
@@ -89,7 +85,7 @@ export default {
                     onBrand: "#777c79",
                     disabled: "#777c79",
                     onDisabled: "#131313",
-                    borderColor: "#777c79"
+                    borderColor: "#777c79",
                 },
                 dark: {
                     primary: "#9c662a",
@@ -101,7 +97,7 @@ export default {
                     secondaryVariant: "yellow",
                     onSecondaryVariant: "#777c79",
                     background: "#29271e",
-                    onBackground: "#777c79",
+                    onBackground: "#eeeee2",
                     surface: "#313534",
                     onSurface: "#8b8c8b",
                     error: "orange",
@@ -110,7 +106,7 @@ export default {
                     onBrand: "#777c79",
                     disabled: "#777c79",
                     onDisabled: "#131313",
-                    borderColor: "#4a4a4a"
+                    borderColor: "#4a4a4a",
                 },
                 halloween: {
                     primary: "#252359",
@@ -131,7 +127,7 @@ export default {
                     onBrand: "#777c79",
                     disabled: "#777c79",
                     onDisabled: "#131313",
-                    borderColor: "#3b3b3b"
+                    borderColor: "#3b3b3b",
                 },
                 summer: {
                     primary: "#252359",
@@ -152,7 +148,7 @@ export default {
                     onBrand: "#777c79",
                     disabled: "#777c79",
                     onDisabled: "#131313",
-                    borderColor: "#3b3b3b"
+                    borderColor: "#3b3b3b",
                 },
                 winter: {
                     primary: "#252359",
@@ -173,7 +169,7 @@ export default {
                     onBrand: "#777c79",
                     disabled: "#777c79",
                     onDisabled: "#131313",
-                    borderColor: "#3b3b3b"
+                    borderColor: "#3b3b3b",
                 },
                 party: {
                     primary: "#252359",
@@ -194,7 +190,7 @@ export default {
                     onBrand: "#777c79",
                     disabled: "#777c79",
                     onDisabled: "#131313",
-                    borderColor: "#3b3b3b"
+                    borderColor: "#3b3b3b",
                 },
             },
             {

@@ -2,7 +2,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {Head, Link} from '@inertiajs/react';
 import {PageProps} from '@/types';
 
-export default function ListNewsArticles({auth}: PageProps) {
+export default function ListArticles({auth}: PageProps) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -23,7 +23,7 @@ export default function ListNewsArticles({auth}: PageProps) {
                                         <div className="flex gap-2">
                                             <Link
                                                 className="bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabled hover:shadow-md transition-all duration-300 shadow-sm rounded py-1.5 px-1.5 md:px-4 hover:cursor-pointer"
-                                                href={route('news-article.create')}                                            >
+                                                href={route('articles.create')}                                            >
                                                 <span className="md:block hidden">Create Page</span>
                                                 <span className="md:hidden inline-block"><i
                                                     className="fa-solid fa-file-circle-plus"></i></span>
@@ -152,7 +152,7 @@ export default function ListNewsArticles({auth}: PageProps) {
                                                     <div className="flex gap-1">
                                                         <Link
                                                             className="rounded hover:text-secondary hover:scale-110 p-1 group"
-                                                            href={route('news-article.show',1)}
+                                                            href={route('articles.show',1)}
                                                         >
                               <span
                                   className="group-hover:block absolute top-0 right-0 hidden rounded shadow-lg px-1 -mt-6  bg-neutral-700 text-orange-100">
@@ -164,7 +164,7 @@ export default function ListNewsArticles({auth}: PageProps) {
                                                             className="rounded hover:text-secondary hover:scale-110 p-1 group"
                                                             onClick={() => {
                                                             }}
-                                                            href={route('news-article.edit',1)}
+                                                            href={route('articles.edit',1)}
                                                         >
                               <span
                                   className="group-hover:block absolute top-0 right-0 hidden rounded shadow-lg px-1 -mt-6  bg-neutral-700 text-orange-100">
@@ -174,7 +174,7 @@ export default function ListNewsArticles({auth}: PageProps) {
                                                         </Link>
                                                         <Link
                                                             className="rounded hover:text-secondary hover:scale-110 p-1 group relative"
-                                                            href={route('news-article.destroy',1)}
+                                                            href={route('articles.destroy',1)}
                                                             onClick={() => {
                                                             }}
                                                         >
@@ -186,7 +186,7 @@ export default function ListNewsArticles({auth}: PageProps) {
                                                         </Link>
                                                             <Link
                                                                 className="rounded hover:text-secondary hover:scale-110 p-1 group"
-                                                                href={route('news-article.show',1)}
+                                                                href={route('articles.show',1)}
                                                                 onClick={() => {
                                                                 }}
                                                             >

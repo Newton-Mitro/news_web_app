@@ -8,16 +8,13 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('news_articles', function (Blueprint $table) {
+        Schema::create('articles', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('title');
             $table->string('slug')->unique();
             $table->longText('content');
-            $table->text('excerpt')->nullable();
-            $table->string('attachment_url', 1024)->nullable();
-            $table->string('attachment_mime')->nullable();
-            $table->enum('status', ['draft', 'published'])->default('draft');
-            $table->enum('article_type', ['image', 'video'])->default('image');
+            $table->text('summery')->nullable();
+            $table->enum('status', ['Draft', 'Published'])->default('Draft');
             $table->boolean('featured')->default(false);
             $table->foreignId('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreignId('created_by')->references('id')->on('users')->onDelete('cascade');
@@ -28,6 +25,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('news_articles');
+        Schema::dropIfExists('articles');
     }
 };

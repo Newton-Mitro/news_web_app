@@ -2,7 +2,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {Head, Link} from '@inertiajs/react';
 import {PageProps} from '@/types';
 
-export default function CreateNewsArticle({auth}: PageProps) {
+export default function CreateArticle({auth}: PageProps) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -22,7 +22,7 @@ export default function CreateNewsArticle({auth}: PageProps) {
                                     <div className="flex gap-2">
                                         <Link
                                             className="bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabled hover:shadow-md transition-all duration-300 shadow-sm rounded py-1.5 px-1.5 md:px-4 hover:cursor-pointer"
-                                            href={route('news-article.index')}                                            >
+                                            href={route('articles.index')}                                            >
                                             <span className="md:block hidden">All Articles</span>
                                             <span className="md:hidden inline-block"><i
                                                 className="fa-solid fa-file-circle-plus"></i></span>

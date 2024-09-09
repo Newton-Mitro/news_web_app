@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('reactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('news_article_id')->constrained()->onDelete('cascade');
+            $table->foreignUuid('article_id')->constrained()->onDelete('cascade');
             $table->string('type'); // For example: 'like', 'love', 'angry', etc.
             $table->unsignedBigInteger('count')->default(0);
             $table->timestamps();

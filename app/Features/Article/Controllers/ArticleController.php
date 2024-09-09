@@ -1,25 +1,25 @@
 <?php
 
-namespace App\Features\NewsArticle\Controllers;
+namespace App\Features\Article\Controllers;
 
 use App\Core\Controllers\Controller;
-use App\Features\NewsArticle\Models\NewsArticle;
+use App\Features\Article\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
-class NewsArticleController extends Controller
+class ArticleController extends Controller
 {
     public function index(){
-        $posts = NewsArticle::all();
-        return Inertia::render('AdminPanel/NewsArticle/ListNewsArticles', [
+        $posts = Article::all();
+        return Inertia::render('AdminPanel/Article/ListArticles', [
             'posts' => $posts,
         ]);
     }
 
     public function create()
     {
-        return Inertia::render('AdminPanel/NewsArticle/CreateNewsArticle', [
+        return Inertia::render('AdminPanel/Article/CreateArticle', [
 //            'posts' => $posts,
         ]);
     }
@@ -31,30 +31,30 @@ class NewsArticleController extends Controller
             'body' => 'required|string',
         ]);
 
-        $post = new NewsArticle();
+        $post = new Article();
         $post->title = $request->title;
         $post->body = $request->body;
         $post->user_id = Auth::id(); // Assuming posts are associated with users
         $post->save();
 
-        return redirect()->route('posts.index')->with('status', 'NewsArticle created successfully!');
+        return redirect()->route('posts.index')->with('status', 'Article created successfully!');
     }
 
-    public function show(NewsArticle $post)
+    public function show(Article $post)
     {
-        return Inertia::render('AdminPanel/NewsArticle/ViewNewsArticle', [
+        return Inertia::render('AdminPanel/Article/ViewArticle', [
 //            'posts' => $posts,
         ]);
     }
 
-    public function edit(NewsArticle $post)
+    public function edit(Article $post)
     {
-        return Inertia::render('AdminPanel/NewsArticle/EditNewsArticle', [
+        return Inertia::render('AdminPanel/Article/EditArticle', [
 //            'posts' => $posts,
         ]);
     }
 
-    public function update(Request $request, NewsArticle $post)
+    public function update(Request $request, Article $post)
     {
         $request->validate([
             'title' => 'required|string|max:255',
@@ -65,13 +65,13 @@ class NewsArticleController extends Controller
         $post->body = $request->body;
         $post->save();
 
-        return redirect()->route('posts.index')->with('status', 'NewsArticle updated successfully!');
+        return redirect()->route('posts.index')->with('status', 'Article updated successfully!');
     }
 
-    public function destroy(NewsArticle $post)
+    public function destroy(Article $post)
     {
         $post->delete();
 
-        return redirect()->route('posts.index')->with('status', 'NewsArticle deleted successfully!');
+        return redirect()->route('posts.index')->with('status', 'Article deleted successfully!');
     }
 }

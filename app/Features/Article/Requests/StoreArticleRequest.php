@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Features\Post\Requests;
+namespace App\Features\Article\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreNewsArticleRequest extends FormRequest
+class StoreArticleRequest extends FormRequest
 {
     public function authorize(): bool
     {

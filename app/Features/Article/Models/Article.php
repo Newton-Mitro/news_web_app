@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Features\NewsArticle\Models;
+namespace App\Features\Article\Models;
 
 use App\Features\Category\Models\Category;
 use App\Features\Comment\Models\Comment;
@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class NewsArticle extends Model
+class Article extends Model
 {
     use HasFactory;
     use HasUlids;
