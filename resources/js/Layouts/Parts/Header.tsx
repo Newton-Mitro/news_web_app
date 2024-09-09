@@ -3,6 +3,7 @@ import myLogo from "../../../assets/brand/logo.png";
 import XIcon from "../../../assets/svg/x_twitter.png";
 import Marquee from "react-fast-marquee";
 import {Link} from "@inertiajs/react";
+import ThemeSwitcher from "@/Components/ThemeSwitcher";
 
 function Header({scrollFromTop}: PropsWithChildren<{
     scrollFromTop: any,
@@ -52,7 +53,7 @@ function Header({scrollFromTop}: PropsWithChildren<{
                 </div>
                 <div className="flex items-center justify-between">
                     <div className="">
-                        <Link className="hover:text-error" href={""}><i className="fas fa-sun fa-2x" ></i></Link>
+                        <ThemeSwitcher/>
                     </div>
                     <div className="">
                         <Link className="" href={""}>

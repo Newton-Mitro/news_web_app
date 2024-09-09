@@ -92,9 +92,9 @@ export default {
                     borderColor: "#777c79"
                 },
                 dark: {
-                    primary: "#252359",
-                    onPrimary: "#777c79",
-                    primaryVariant: "orange",
+                    primary: "#9c662a",
+                    onPrimary: "#f3f3f3",
+                    primaryVariant: "#734a1c",
                     onPrimaryVariant: "#777c79",
                     secondary: "#4D4D45",
                     onSecondary: "#777c79",
@@ -103,14 +103,14 @@ export default {
                     background: "#29271e",
                     onBackground: "#777c79",
                     surface: "#313534",
-                    onSurface: "#777c79",
+                    onSurface: "#8b8c8b",
                     error: "orange",
                     onError: "#777c79",
                     brand: "#182372",
                     onBrand: "#777c79",
                     disabled: "#777c79",
                     onDisabled: "#131313",
-                    borderColor: "#3b3b3b"
+                    borderColor: "#4a4a4a"
                 },
                 halloween: {
                     primary: "#252359",

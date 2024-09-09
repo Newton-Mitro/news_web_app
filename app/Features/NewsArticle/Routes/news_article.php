@@ -3,4 +3,7 @@
 use App\Features\NewsArticle\Controllers\NewsArticleController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('auth/news-article', [NewsArticleController::class, 'index'])->name('news-article.index');
+
+Route::prefix('auth')->group(function () {
+    Route::resource('news-article', NewsArticleController::class);
+});

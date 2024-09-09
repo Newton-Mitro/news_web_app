@@ -15,7 +15,7 @@ function SidebarComponent({
 }>) {
     return (
         <aside
-            className={`relative z-[10000000] h-full bg-surface
+            className={`relative z-[10000000] h-full bg-surface shadow
          ${sidebarOpen ? "w-80" : "w-14"}
   transition-all duration-300 ease-in-out`}
         >
@@ -32,7 +32,7 @@ function SidebarComponent({
                 )}
             </button>
             <div>
-                <div className="flex items-center justify-center w-full h-16 py-1 border-t border-b">
+                <div className="flex items-center justify-center w-full h-16 py-1 border-b border-borderColor">
                     <img
                         src={whiteLogo}
                         alt=""
@@ -47,7 +47,7 @@ function SidebarComponent({
                     <ul className="flex flex-col justify-center cursor-pointer text-onSurface">
 
 
-                        <li className="flex items-center duration-300 border-b border-purple-100 border-dashed transition-color group bg-surface text-onSurface hover:bg-background hover:bg-blue-gray-900 hover:text-background">
+                        <li className="flex items-center duration-300 border-b border-borderColor border-dashed transition-color group bg-surface text-onSurface hover:bg-background hover:bg-blue-gray-900 hover:text-background">
 
                             <Link
                                 href={route(`dashboard`)}
@@ -64,7 +64,7 @@ function SidebarComponent({
                                 ) : null}
                             </Link>
                         </li>
-                        <li className="flex items-center duration-300 border-b border-purple-100 border-dashed transition-color group bg-surface text-onSurface hover:bg-background hover:bg-blue-gray-900 hover:text-background">
+                        <li className="flex items-center duration-300 border-b border-borderColor border-dashed transition-color group bg-surface text-onSurface hover:bg-background hover:bg-blue-gray-900 hover:text-background">
 
                             <Link
                                 href={route(`news-article.index`)}
@@ -81,7 +81,7 @@ function SidebarComponent({
                                 ) : null}
                             </Link>
                         </li>
-                        <li className="flex items-center duration-300 border-b border-purple-100 border-dashed transition-color group bg-surface text-onSurface hover:bg-background hover:bg-blue-gray-900 hover:text-background">
+                        <li className="flex items-center duration-300 border-b border-borderColor border-dashed transition-color group bg-surface text-onSurface hover:bg-background hover:bg-blue-gray-900 hover:text-background">
 
                             <Link
                                 href={route(`news-article.index`)}
@@ -99,7 +99,7 @@ function SidebarComponent({
                             </Link>
                         </li>
 
-                        <li className="flex items-center duration-300 border-b border-purple-100 border-dashed transition-color group bg-surface text-onSurface hover:bg-background hover:bg-blue-gray-900 hover:text-background">
+                        <li className="flex items-center duration-300 border-b border-borderColor border-dashed transition-color group bg-surface text-onSurface hover:bg-background hover:bg-blue-gray-900 hover:text-background">
 
                             <Link
                                 href={route(`news-article.index`)}
@@ -117,7 +117,7 @@ function SidebarComponent({
                             </Link>
                         </li>
 
-                        <li className="flex items-center duration-300 border-b border-purple-100 border-dashed transition-color group bg-surface text-onSurface hover:bg-background hover:bg-blue-gray-900 hover:text-background">
+                        <li className="flex items-center duration-300 border-b border-borderColor border-dashed transition-color group bg-surface text-onSurface hover:bg-background hover:bg-blue-gray-900 hover:text-background">
 
                             <Link
                                 href={route(`news-article.index`)}
@@ -135,7 +135,7 @@ function SidebarComponent({
                             </Link>
                         </li>
 
-                        <li className="flex items-center duration-300 border-b border-purple-100 border-dashed transition-color group bg-surface text-onSurface hover:bg-background hover:bg-blue-gray-900 hover:text-background">
+                        <li className="flex items-center duration-300 border-b border-borderColor border-dashed transition-color group bg-surface text-onSurface hover:bg-background hover:bg-blue-gray-900 hover:text-background">
 
                             <Link
                                 href={route(`news-article.index`)}

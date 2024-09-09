@@ -5,6 +5,7 @@ import { Link, useRemember } from "@inertiajs/react";
 import { PropsWithChildren, ReactNode, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import uuid from "react-uuid";
+import ThemeSwitcher from "@/Components/ThemeSwitcher";
 
 const adminAndSuperAdminMenus: {
     Id: string;
@@ -70,10 +71,10 @@ export default function Authenticated({
         <>
             <div className="relative w-full h-screen bg-background">
                 <section className={`ml-14 h-full`}>
-                    <header className="w-full h-16 border">
+                    <header className="w-full h-16">
                         {/* <Header /> */}
                         <header className="flex items-center justify-between w-full h-full px-6 bg-surface text-onSurface">
-                            <div className="flex items-center gap-2 cursor-pointer">
+                            <div className="flex items-center gap-4 cursor-pointer">
                                 <Link
                                     href={route("home")}
                                     // href="/"
@@ -92,6 +93,7 @@ export default function Authenticated({
                                 >
                                     <span className="">Switch To Front</span>
                                 </Link>
+                                <ThemeSwitcher/>
                             </div>
                             <div className="flex items-center h-full gap-2">
                                 {/* <ThemeSwitch /> */}
@@ -156,7 +158,7 @@ export default function Authenticated({
                         <Outlet />
                         {children}
                     </section>
-                    <section id="footer" className="w-full h-12 mt-auto border">
+                    <section id="footer" className="w-full h-12 mt-auto">
                         {/* <Footer /> */}
                         <footer className="flex items-center justify-center w-full h-full bg-surface text-onSurface">
                             <p className="text-sm font-light text-center">
@@ -165,7 +167,7 @@ export default function Authenticated({
                         </footer>
                     </section>
                 </section>
-                <section className="fixed top-0 left-0 h-full border">
+                <section className="fixed top-0 left-0 h-full">
                     <SidebarComponent
                         menus={menus}
                         sidebarOpen={sidebarOpen}

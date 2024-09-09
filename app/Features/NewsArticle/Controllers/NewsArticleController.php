@@ -19,7 +19,9 @@ class NewsArticleController extends Controller
 
     public function create()
     {
-        return view('posts.create'); // Create this view
+        return Inertia::render('AdminPanel/NewsArticle/CreateNewsArticle', [
+//            'posts' => $posts,
+        ]);
     }
 
     public function store(Request $request)
@@ -40,12 +42,16 @@ class NewsArticleController extends Controller
 
     public function show(NewsArticle $post)
     {
-        return view('posts.show', compact('post')); // Create this view
+        return Inertia::render('AdminPanel/NewsArticle/ViewNewsArticle', [
+//            'posts' => $posts,
+        ]);
     }
 
     public function edit(NewsArticle $post)
     {
-        return view('posts.edit', compact('post')); // Create this view
+        return Inertia::render('AdminPanel/NewsArticle/EditNewsArticle', [
+//            'posts' => $posts,
+        ]);
     }
 
     public function update(Request $request, NewsArticle $post)
