@@ -10,17 +10,18 @@ use Inertia\Inertia;
 
 class ArticleController extends Controller
 {
-    public function index(){
-        $posts = Article::all();
+    public function index()
+    {
+        $articles = Article::all();
         return Inertia::render('AdminPanel/Article/ListArticles', [
-            'posts' => $posts,
+            'articles' => $articles,
         ]);
     }
 
     public function create()
     {
         return Inertia::render('AdminPanel/Article/CreateArticle', [
-//            'posts' => $posts,
+            //            'articles' => $articles,
         ]);
     }
 
@@ -31,47 +32,47 @@ class ArticleController extends Controller
             'body' => 'required|string',
         ]);
 
-        $post = new Article();
-        $post->title = $request->title;
-        $post->body = $request->body;
-        $post->user_id = Auth::id(); // Assuming posts are associated with users
-        $post->save();
+        $article = new Article();
+        $article->title = $request->title;
+        $article->body = $request->body;
+        $article->user_id = Auth::id(); // Assuming articles are associated with users
+        $article->save();
 
-        return redirect()->route('posts.index')->with('status', 'Article created successfully!');
+        return redirect()->route('articles.index')->with('status', 'Article created successfully!');
     }
 
-    public function show(Article $post)
+    public function show(Article $article)
     {
         return Inertia::render('AdminPanel/Article/ViewArticle', [
-//            'posts' => $posts,
+            'article' => $article,
         ]);
     }
 
-    public function edit(Article $post)
+    public function edit(Article $article)
     {
         return Inertia::render('AdminPanel/Article/EditArticle', [
-//            'posts' => $posts,
+            'article' => $article,
         ]);
     }
 
-    public function update(Request $request, Article $post)
+    public function update(Request $request, Article $article)
     {
         $request->validate([
             'title' => 'required|string|max:255',
             'body' => 'required|string',
         ]);
 
-        $post->title = $request->title;
-        $post->body = $request->body;
-        $post->save();
+        $article->title = $request->title;
+        $article->body = $request->body;
+        $article->save();
 
-        return redirect()->route('posts.index')->with('status', 'Article updated successfully!');
+        return redirect()->route('articles.index')->with('status', 'Article updated successfully!');
     }
 
-    public function destroy(Article $post)
+    public function destroy(Article $article)
     {
-        $post->delete();
+        $article->delete();
 
-        return redirect()->route('posts.index')->with('status', 'Article deleted successfully!');
+        return redirect()->route('articles.index')->with('status', 'Article deleted successfully!');
     }
 }
