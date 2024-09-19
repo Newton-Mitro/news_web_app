@@ -13,7 +13,8 @@ class ArticleController extends Controller
     public function index()
     {
         $recordPerPage = request()->filled('record_per_page') ? request()->query('record_per_page') : 10;
-        $response = Article::with(['category'])->orderBy('created_at', 'desc')->paginate($recordPerPage);
+        $searchText = request()->filled('search_text') ? request()->query('search_text') : '';
+        $response = Article::where('title', 'like', "%{$searchText}%")->with(['category', 'author'])->orderBy('created_at', 'desc')->paginate($recordPerPage);
         return Inertia::render('AdminPanel/Article/ListArticles', [
             'response' => $response,
         ]);

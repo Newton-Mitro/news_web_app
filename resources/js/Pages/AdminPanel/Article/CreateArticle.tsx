@@ -17,10 +17,10 @@ export default function CreateArticle({ auth }: PageProps) {
                 <div className="w-full">
                     <div className="overflow-hidden shadow bg-surface text-onSurface">
                         <div className="w-full p-4 space-y-2">
-                            <h2 className="text-xl">Create News Article</h2>
-                            <div
-                                className={`flex flex-col overflow-auto relative`}
-                            >
+                            <h2 className="text-2xl font-bold lg:text-4xl">
+                                Create News Article
+                            </h2>
+                            <div className={`flex items-end justify-end`}>
                                 {/*Header*/}
                                 <div className="">
                                     <div className="flex gap-2">

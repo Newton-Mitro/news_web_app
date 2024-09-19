@@ -18,38 +18,42 @@ export default function ListArticles({ auth, response }: any) {
                 <div className="w-full">
                     <div className="overflow-hidden shadow bg-surface text-onSurface">
                         <div className="w-full p-4 space-y-2">
-                            <h2 className="text-xl">All Pages</h2>
+                            <h2 className="text-2xl font-bold lg:text-4xl">
+                                All Pages
+                            </h2>
+                            <div className="flex items-end justify-end">
+                                <div className="flex gap-2">
+                                    <Link
+                                        className="bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabled hover:shadow-md transition-all duration-300 shadow-sm rounded py-1.5 px-1.5 md:px-4 hover:cursor-pointer"
+                                        href={route("articles.create")}
+                                    >
+                                        <span className="hidden md:block">
+                                            Create Page
+                                        </span>
+                                        <span className="inline-block md:hidden">
+                                            <i className="fa-solid fa-file-circle-plus"></i>
+                                        </span>
+                                    </Link>
+
+                                    <div className="flex gap-2">
+                                        <button className="bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabled hover:shadow-md transition-all duration-300 shadow-sm rounded py-1.5 px-1.5 md:px-4 hover:cursor-pointer">
+                                            <span className="hidden md:block">
+                                                Export CSV
+                                            </span>
+                                            <span className="inline-block md:hidden">
+                                                {" "}
+                                                <i className="fa-solid fa-file-csv"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                             <div
-                                className={`h-[calc(100vh-215px)] flex flex-col overflow-auto relative`}
+                                className={`h-[calc(100vh-270px)] flex flex-col overflow-auto relative`}
                             >
                                 <div className="flex-1 space-y-2">
                                     {/*Header*/}
                                     <div className="">
-                                        <div className="flex gap-2">
-                                            <Link
-                                                className="bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabled hover:shadow-md transition-all duration-300 shadow-sm rounded py-1.5 px-1.5 md:px-4 hover:cursor-pointer"
-                                                href={route("articles.create")}
-                                            >
-                                                <span className="hidden md:block">
-                                                    Create Page
-                                                </span>
-                                                <span className="inline-block md:hidden">
-                                                    <i className="fa-solid fa-file-circle-plus"></i>
-                                                </span>
-                                            </Link>
-
-                                            <div className="flex gap-2">
-                                                <button className="bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabled hover:shadow-md transition-all duration-300 shadow-sm rounded py-1.5 px-1.5 md:px-4 hover:cursor-pointer">
-                                                    <span className="hidden md:block">
-                                                        Export CSV
-                                                    </span>
-                                                    <span className="inline-block md:hidden">
-                                                        {" "}
-                                                        <i className="fa-solid fa-file-csv"></i>
-                                                    </span>
-                                                </button>
-                                            </div>
-                                        </div>
                                         <div className="flex items-center my-1.5 gap-2 justify-end">
                                             <div className="flex items-center gap-10">
                                                 <div className="flex items-center justify-end ">
@@ -70,7 +74,7 @@ export default function ListArticles({ auth, response }: any) {
                                     </div>
                                     {/*Table*/}
                                     <div
-                                        className={`h-[calc(100vh-345px)] md:h-[calc(100vh-350px)] overflow-auto border border-b border-borderColor`}
+                                        className={`h-[calc(100vh-345px)] md:h-[calc(100vh-360px)] overflow-auto border border-b border-borderColor`}
                                     >
                                         <table className="relative w-full whitespace-no-wrap border-collapse table-auto">
                                             <thead className="sticky top-0 w-full shadow bg-background">

@@ -21,7 +21,7 @@ export default function ViewArticle({ auth, article }: any) {
                             <h2 className="text-2xl font-bold lg:text-4xl">
                                 View News Article
                             </h2>
-                            <div className="">
+                            <div className="flex items-end justify-end">
                                 <div className="flex gap-2">
                                     <Link
                                         className="bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabled hover:shadow-md transition-all duration-300 shadow-sm rounded py-1.5 px-1.5 md:px-4 hover:cursor-pointer"
