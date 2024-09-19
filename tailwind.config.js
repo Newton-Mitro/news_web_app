@@ -85,7 +85,7 @@ export default {
                     onBrand: "#777c79",
                     disabled: "#777c79",
                     onDisabled: "#131313",
-                    borderColor: "#777c79",
+                    borderColor: "#ebebeb",
                 },
                 dark: {
                     primary: "#9c662a",
