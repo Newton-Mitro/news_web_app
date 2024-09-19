@@ -2,9 +2,11 @@
 
 namespace App\Features\Category\Models;
 
-use App\Features\Article\Models\Article;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Features\Article\Models\Article;
+use Database\Factories\CategoryFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Category extends Model
 {
@@ -16,5 +18,10 @@ class Category extends Model
     public function articles()
     {
         return $this->hasMany(Article::class);
+    }
+
+    protected static function newFactory()
+    {
+        return new CategoryFactory;
     }
 }

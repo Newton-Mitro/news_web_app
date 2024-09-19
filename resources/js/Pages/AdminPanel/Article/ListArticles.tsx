@@ -1,8 +1,9 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { PageProps } from "@/types";
 import { Head, Link } from "@inertiajs/react";
 
-export default function ListArticles({ auth }: PageProps) {
+export default function ListArticles({ auth, response }: any) {
+    console.log(response);
+
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -72,149 +73,162 @@ export default function ListArticles({ auth }: PageProps) {
                                         className={`h-[calc(100vh-345px)] md:h-[calc(100vh-350px)] overflow-auto border border-b border-borderColor`}
                                     >
                                         <table className="relative w-full whitespace-no-wrap border-collapse table-auto">
-                                            <thead className="w-full bg-secondary/10">
+                                            <thead className="sticky top-0 w-full shadow bg-background">
                                                 <tr className="sticky hidden w-full h-10 divide-x shadow-sm -top-1 md:table-row bg-accent divide-borderColor">
                                                     <th className="p-2 transition-colors cursor-pointer hover:bg-blue-gray-50">
-                                                        <div
-                                                            color="blue-gray"
-                                                            className="flex items-center justify-between gap-2 font-normal leading-none"
-                                                        >
+                                                        <div className="flex items-center justify-between gap-2 font-bold leading-none">
                                                             Id
                                                         </div>
                                                     </th>
                                                     <th className="p-2 transition-colors cursor-pointer hover:bg-blue-gray-50">
-                                                        <div
-                                                            color="blue-gray"
-                                                            className="flex items-center justify-between gap-2 font-normal leading-none"
-                                                        >
+                                                        <div className="flex items-center justify-between gap-2 font-bold leading-none">
                                                             Slug
                                                         </div>
                                                     </th>
                                                     <th className="p-2 transition-colors cursor-pointer hover:bg-blue-gray-50">
-                                                        <div
-                                                            color="blue-gray"
-                                                            className="flex items-center justify-between gap-2 font-normal leading-none"
-                                                        >
+                                                        <div className="flex items-center justify-between gap-2 font-bold leading-none">
                                                             Title
                                                         </div>
                                                     </th>
 
                                                     <th className="p-2 transition-colors cursor-pointer hover:bg-blue-gray-50">
-                                                        <div
-                                                            color="blue-gray"
-                                                            className="flex items-center justify-between gap-2 font-normal leading-none"
-                                                        >
+                                                        <div className="flex items-center justify-between gap-2 font-bold leading-none">
                                                             Status
                                                         </div>
                                                     </th>
                                                     <th className="p-2 transition-colors cursor-pointer hover:bg-blue-gray-50">
-                                                        <div
-                                                            color="blue-gray"
-                                                            className="flex items-center justify-between gap-2 font-normal leading-none"
-                                                        >
+                                                        <div className="flex items-center justify-between gap-2 font-bold leading-none">
                                                             Actions
                                                         </div>
                                                     </th>
                                                 </tr>
                                             </thead>
-
                                             <tbody className="flex-1 space-y-6 md:flex-none">
-                                                <tr className="flex flex-col flex-wrap w-full border border-b divide-x divide-borderColor border-borderColor even:bg-secondary/50 md:table-row">
-                                                    <td className="px-2">
-                                                        <label className="md:hidden">
-                                                            Id
-                                                        </label>
-                                                        <p className="font-semibold md:font-normal">
-                                                            id
-                                                        </p>
-                                                    </td>
-                                                    <td className="px-2 ">
-                                                        <label className="md:hidden">
-                                                            Slug
-                                                        </label>
-                                                        <p className="font-semibold md:font-normal">
-                                                            slug
-                                                        </p>
-                                                    </td>
-                                                    <td className="px-2 ">
-                                                        <label className="md:hidden">
-                                                            Title
-                                                        </label>
-                                                        <p className="font-semibold md:font-normal">
-                                                            title
-                                                        </p>
-                                                    </td>
+                                                {response?.data &&
+                                                    response?.data.map(
+                                                        (
+                                                            article: any,
+                                                            index: number
+                                                        ) => {
+                                                            return (
+                                                                <tr className="flex flex-col flex-wrap w-full border border-b divide-x divide-borderColor border-borderColor even:bg-background md:table-row">
+                                                                    <td className="px-2">
+                                                                        <label className="md:hidden">
+                                                                            Id
+                                                                        </label>
+                                                                        <p className="font-semibold md:font-normal">
+                                                                            {
+                                                                                article.id
+                                                                            }
+                                                                        </p>
+                                                                    </td>
+                                                                    <td className="px-2 ">
+                                                                        <label className="md:hidden">
+                                                                            Slug
+                                                                        </label>
+                                                                        <p className="font-semibold md:font-normal">
+                                                                            {
+                                                                                article.slug
+                                                                            }
+                                                                        </p>
+                                                                    </td>
+                                                                    <td className="px-2 ">
+                                                                        <label className="md:hidden">
+                                                                            Title
+                                                                        </label>
+                                                                        <p className="font-semibold md:font-normal">
+                                                                            {
+                                                                                article.title
+                                                                            }
+                                                                        </p>
+                                                                    </td>
 
-                                                    <td className="px-2 ">
-                                                        <label className="md:hidden">
-                                                            Status
-                                                        </label>
+                                                                    <td className="px-2 ">
+                                                                        <label className="md:hidden">
+                                                                            Status
+                                                                        </label>
 
-                                                        <div className="flex flex-wrap">
-                                                            <span className="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
-                                                                Published
-                                                            </span>
-                                                        </div>
-                                                    </td>
-                                                    <td className="px-2 ">
-                                                        <label className="md:hidden">
-                                                            Actions
-                                                        </label>
-                                                        <div className="flex gap-1">
-                                                            <Link
-                                                                className="p-1 rounded hover:text-secondary hover:scale-110 group"
-                                                                href={route(
-                                                                    "articles.show",
-                                                                    1
-                                                                )}
-                                                            >
-                                                                <span className="absolute top-0 right-0 hidden px-1 -mt-6 text-orange-100 rounded shadow-lg group-hover:block bg-neutral-700">
-                                                                    View
-                                                                </span>
-                                                                <i className="fa-solid fa-eye"></i>
-                                                            </Link>
-                                                            <Link
-                                                                className="p-1 rounded hover:text-secondary hover:scale-110 group"
-                                                                onClick={() => {}}
-                                                                href={route(
-                                                                    "articles.edit",
-                                                                    1
-                                                                )}
-                                                            >
-                                                                <span className="absolute top-0 right-0 hidden px-1 -mt-6 text-orange-100 rounded shadow-lg group-hover:block bg-neutral-700">
-                                                                    Edit
-                                                                </span>
-                                                                <i className="fa-solid fa-pen-to-square"></i>
-                                                            </Link>
-                                                            <Link
-                                                                className="relative p-1 rounded hover:text-secondary hover:scale-110 group"
-                                                                href={route(
-                                                                    "articles.destroy",
-                                                                    1
-                                                                )}
-                                                                onClick={() => {}}
-                                                            >
-                                                                <span className="absolute top-0 right-0 hidden px-1 -mt-6 text-orange-100 rounded shadow-lg group-hover:block bg-neutral-700">
-                                                                    Delete
-                                                                </span>
-                                                                <i className="fa-solid fa-trash-can"></i>
-                                                            </Link>
-                                                            <Link
-                                                                className="p-1 rounded hover:text-secondary hover:scale-110 group"
-                                                                href={route(
-                                                                    "articles.show",
-                                                                    1
-                                                                )}
-                                                                onClick={() => {}}
-                                                            >
-                                                                <span className="absolute top-0 right-0 hidden px-1 -mt-6 text-orange-100 rounded shadow-lg group-hover:block bg-neutral-700">
-                                                                    Draft
-                                                                </span>
-                                                                <i className="fa-solid fa-cloud-arrow-up"></i>
-                                                            </Link>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                                                                        {article.status ===
+                                                                        "Published" ? (
+                                                                            <div className="flex flex-wrap">
+                                                                                <span className="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
+                                                                                    {
+                                                                                        article.status
+                                                                                    }
+                                                                                </span>
+                                                                            </div>
+                                                                        ) : (
+                                                                            <div className="flex flex-wrap">
+                                                                                <span className="bg-orange-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-orange-900 dark:text-orange-300">
+                                                                                    {
+                                                                                        article.status
+                                                                                    }
+                                                                                </span>
+                                                                            </div>
+                                                                        )}
+                                                                    </td>
+                                                                    <td className="px-2 ">
+                                                                        <label className="md:hidden">
+                                                                            Actions
+                                                                        </label>
+                                                                        <div className="flex gap-1">
+                                                                            <Link
+                                                                                className="p-1 rounded hover:text-secondary hover:scale-110 group"
+                                                                                href={route(
+                                                                                    "articles.show",
+                                                                                    article.id
+                                                                                )}
+                                                                            >
+                                                                                <span className="absolute top-0 right-0 hidden px-1 -mt-6 text-orange-100 rounded shadow-lg group-hover:block bg-neutral-700">
+                                                                                    View
+                                                                                </span>
+                                                                                <i className="fa-solid fa-eye"></i>
+                                                                            </Link>
+                                                                            <Link
+                                                                                className="p-1 rounded hover:text-secondary hover:scale-110 group"
+                                                                                onClick={() => {}}
+                                                                                href={route(
+                                                                                    "articles.edit",
+                                                                                    article.id
+                                                                                )}
+                                                                            >
+                                                                                <span className="absolute top-0 right-0 hidden px-1 -mt-6 text-orange-100 rounded shadow-lg group-hover:block bg-neutral-700">
+                                                                                    Edit
+                                                                                </span>
+                                                                                <i className="fa-solid fa-pen-to-square"></i>
+                                                                            </Link>
+                                                                            <Link
+                                                                                className="p-1 rounded hover:text-secondary hover:scale-110 group"
+                                                                                href={route(
+                                                                                    "articles.destroy",
+                                                                                    article.id
+                                                                                )}
+                                                                                onClick={() => {}}
+                                                                            >
+                                                                                <span className="absolute top-0 right-0 hidden px-1 -mt-6 text-orange-100 rounded shadow-lg group-hover:block bg-neutral-700">
+                                                                                    Delete
+                                                                                </span>
+                                                                                <i className="fa-solid fa-trash-can"></i>
+                                                                            </Link>
+                                                                            <Link
+                                                                                className="p-1 rounded hover:text-secondary hover:scale-110 group"
+                                                                                href={route(
+                                                                                    "articles.show",
+                                                                                    article.id
+                                                                                )}
+                                                                                onClick={() => {}}
+                                                                            >
+                                                                                <span className="absolute top-0 right-0 hidden px-1 -mt-6 text-orange-100 rounded shadow-lg group-hover:block bg-neutral-700">
+                                                                                    Draft
+                                                                                </span>
+                                                                                <i className="fa-solid fa-cloud-arrow-up"></i>
+                                                                            </Link>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            );
+                                                        }
+                                                    )}
                                             </tbody>
                                         </table>
                                     </div>

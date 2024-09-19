@@ -12,9 +12,10 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        $articles = Article::all();
+        $recordPerPage = request()->filled('record_per_page') ? request()->query('record_per_page') : 10;
+        $response = Article::with(['category'])->orderBy('created_at', 'desc')->paginate($recordPerPage);
         return Inertia::render('AdminPanel/Article/ListArticles', [
-            'articles' => $articles,
+            'response' => $response,
         ]);
     }
 
@@ -43,6 +44,7 @@ class ArticleController extends Controller
 
     public function show(Article $article)
     {
+        $article = Article::with(['attachments', 'category', 'author', 'updater'])->findOrFail($article->id);
         return Inertia::render('AdminPanel/Article/ViewArticle', [
             'article' => $article,
         ]);

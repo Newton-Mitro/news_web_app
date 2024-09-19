@@ -19,7 +19,7 @@ export default function CreateArticle({ auth }: PageProps) {
                         <div className="w-full p-4 space-y-2">
                             <h2 className="text-xl">Create News Article</h2>
                             <div
-                                className={`h-[calc(100vh-215px)] flex flex-col overflow-auto relative`}
+                                className={`flex flex-col overflow-auto relative`}
                             >
                                 {/*Header*/}
                                 <div className="">
@@ -36,6 +36,168 @@ export default function CreateArticle({ auth }: PageProps) {
                                             </span>
                                         </Link>
                                     </div>
+                                </div>
+                            </div>
+                            <div className="py-10">
+                                <div className="p-8">
+                                    <h2 className="mb-6 text-2xl font-bold">
+                                        Create New Article
+                                    </h2>
+
+                                    <form
+                                        action="{{ route('articles.store') }}"
+                                        method="POST"
+                                        className="w-full"
+                                    >
+                                        <div className="mb-4">
+                                            <label
+                                                htmlFor="title"
+                                                className="block font-semibold "
+                                            >
+                                                Title
+                                            </label>
+                                            <input
+                                                type="text"
+                                                name="title"
+                                                id="title"
+                                                className="w-full py-1 bg-transparent border rounded-sm shadow-sm md:w-80 border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
+                                                value=""
+                                                required
+                                            />
+                                            <div className="text-sm text-error">
+                                                error message
+                                            </div>
+                                        </div>
+
+                                        <div className="w-full">
+                                            <label
+                                                htmlFor="slug"
+                                                className="block font-semibold "
+                                            >
+                                                Slug
+                                            </label>
+                                            <input
+                                                type="text"
+                                                name="slug"
+                                                id="slug"
+                                                className="w-full py-1 bg-transparent border rounded-sm shadow-sm md:w-80 border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
+                                                value=""
+                                                required
+                                            />
+                                            <div className="text-sm text-error">
+                                                error message
+                                            </div>
+                                        </div>
+
+                                        <div className="mb-4">
+                                            <label
+                                                htmlFor="content"
+                                                className="block font-semibold "
+                                            >
+                                                Content
+                                            </label>
+                                            <textarea
+                                                name="content"
+                                                id="content"
+                                                className="w-full py-1 bg-transparent border rounded-sm shadow-sm md:w-80 border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
+                                                required
+                                            ></textarea>
+                                            <div className="text-sm text-error">
+                                                error message
+                                            </div>
+                                        </div>
+
+                                        <div className="mb-4">
+                                            <label
+                                                htmlFor="summery"
+                                                className="block font-semibold "
+                                            >
+                                                Summary (Optional)
+                                            </label>
+                                            <textarea
+                                                name="summery"
+                                                id="summery"
+                                                className="w-full py-1 bg-transparent border rounded-sm shadow-sm md:w-80 border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
+                                            ></textarea>
+                                            <div className="text-sm text-error">
+                                                error message
+                                            </div>
+                                        </div>
+
+                                        <div className="mb-4">
+                                            <label
+                                                htmlFor="status"
+                                                className="block font-semibold "
+                                            >
+                                                Status
+                                            </label>
+                                            <select
+                                                name="status"
+                                                id="status"
+                                                className="w-full p-2 border border-gray-300 rounded-md"
+                                            >
+                                                <option value="Draft">
+                                                    Draft
+                                                </option>
+                                                <option value="Published">
+                                                    Published
+                                                </option>
+                                            </select>
+                                            <div className="text-sm text-error">
+                                                error message
+                                            </div>
+                                        </div>
+
+                                        <div className="mb-4">
+                                            <label
+                                                htmlFor="featured"
+                                                className="block font-semibold "
+                                            >
+                                                Featured
+                                            </label>
+                                            <input
+                                                type="checkbox"
+                                                name="featured"
+                                                id="featured"
+                                            />
+                                            <div className="text-sm text-error">
+                                                error message
+                                            </div>
+                                        </div>
+
+                                        <div className="mb-4">
+                                            <label
+                                                htmlFor="category_id"
+                                                className="block font-semibold "
+                                            >
+                                                Category
+                                            </label>
+                                            <select
+                                                name="category_id"
+                                                id="category_id"
+                                                className="w-full p-2 border border-gray-300 rounded-md"
+                                            >
+                                                @foreach($categories as
+                                                $category)
+                                                <option value="{{ $category->id }}">
+                                                    Category Name
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                            <div className="text-sm text-error">
+                                                error message
+                                            </div>
+                                        </div>
+
+                                        <div className="mt-6">
+                                            <button
+                                                type="submit"
+                                                className="px-4 py-2 font-semibold text-white bg-blue-500 rounded-md hover:bg-blue-600"
+                                            >
+                                                Create Article
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

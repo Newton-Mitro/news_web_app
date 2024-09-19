@@ -64,6 +64,7 @@ export default {
     },
     plugins: [
         forms,
+        require("@tailwindcss/typography"),
         createThemes(
             {
                 light: {

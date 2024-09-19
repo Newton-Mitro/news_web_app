@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('articles_tags', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('article_id')->constrained()->onDelete('cascade');
+            $table->foreignId('article_id')->constrained()->onDelete('cascade');
             $table->foreignId('tag_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

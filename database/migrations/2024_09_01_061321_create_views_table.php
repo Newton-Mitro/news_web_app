@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('views', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('article_id')->constrained()->onDelete('cascade');
+            $table->foreignId('article_id')->constrained()->onDelete('cascade');
             $table->unsignedBigInteger('view_count')->default(0);
             $table->timestamps();
         });
