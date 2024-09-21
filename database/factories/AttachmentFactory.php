@@ -15,7 +15,7 @@ class AttachmentFactory extends Factory
         return [
             'name' => $this->faker->word . '.' . $this->faker->fileExtension,
             'path' => $this->faker->filePath(),
-            'url' => $this->faker->url,
+            'url' => $this->faker->imageUrl($width = 640, $height = 480),
             'mime' => $this->faker->mimeType,
             'article_id' => Article::inRandomOrder()->first()->id,
         ];

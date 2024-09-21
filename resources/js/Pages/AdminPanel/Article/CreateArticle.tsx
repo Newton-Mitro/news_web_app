@@ -60,7 +60,7 @@ export default function CreateArticle({ auth }: PageProps) {
                                                 type="text"
                                                 name="title"
                                                 id="title"
-                                                className="w-full py-1 bg-transparent border rounded-sm shadow-sm md:w-80 border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
+                                                className="w-full py-1 border rounded-sm shadow-sm bg-background md:w-80 border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
                                                 value=""
                                                 required
                                             />
@@ -80,7 +80,7 @@ export default function CreateArticle({ auth }: PageProps) {
                                                 type="text"
                                                 name="slug"
                                                 id="slug"
-                                                className="w-full py-1 bg-transparent border rounded-sm shadow-sm md:w-80 border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
+                                                className="w-full py-1 border rounded-sm shadow-sm bg-background md:w-80 border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
                                                 value=""
                                                 required
                                             />
@@ -99,7 +99,7 @@ export default function CreateArticle({ auth }: PageProps) {
                                             <textarea
                                                 name="content"
                                                 id="content"
-                                                className="w-full py-1 bg-transparent border rounded-sm shadow-sm md:w-80 border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
+                                                className="w-full py-1 border rounded-sm shadow-sm bg-background md:w-80 border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
                                                 required
                                             ></textarea>
                                             <div className="text-sm text-error">
@@ -117,7 +117,7 @@ export default function CreateArticle({ auth }: PageProps) {
                                             <textarea
                                                 name="summery"
                                                 id="summery"
-                                                className="w-full py-1 bg-transparent border rounded-sm shadow-sm md:w-80 border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
+                                                className="w-full py-1 border rounded-sm shadow-sm bg-background md:w-80 border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
                                             ></textarea>
                                             <div className="text-sm text-error">
                                                 error message
@@ -134,7 +134,7 @@ export default function CreateArticle({ auth }: PageProps) {
                                             <select
                                                 name="status"
                                                 id="status"
-                                                className="w-full p-2 border border-gray-300 rounded-md"
+                                                className="w-full p-2 border rounded-md bg-background border-borderColor"
                                             >
                                                 <option value="Draft">
                                                     Draft
@@ -175,7 +175,7 @@ export default function CreateArticle({ auth }: PageProps) {
                                             <select
                                                 name="category_id"
                                                 id="category_id"
-                                                className="w-full p-2 border border-gray-300 rounded-md"
+                                                className="w-full p-2 border rounded-md border-borderColor bg-background"
                                             >
                                                 @foreach($categories as
                                                 $category)
@@ -192,7 +192,7 @@ export default function CreateArticle({ auth }: PageProps) {
                                         <div className="mt-6">
                                             <button
                                                 type="submit"
-                                                className="px-4 py-2 font-semibold text-white bg-blue-500 rounded-md hover:bg-blue-600"
+                                                className="px-4 py-2 font-semibold rounded-md text-onSecondary bg-secondary hover:bg-secondaryVariant"
                                             >
                                                 Create Article
                                             </button>

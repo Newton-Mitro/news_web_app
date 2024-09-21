@@ -59,7 +59,7 @@ export default function ListArticles({ auth, response }: any) {
                                                 <div className="flex items-center justify-end ">
                                                     <input
                                                         type="text"
-                                                        className="w-full py-1 bg-transparent border rounded-sm shadow-sm md:w-80 border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
+                                                        className="w-full py-1 border rounded-sm bg-background md:w-80 border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
                                                         onChange={(e) => {}}
                                                     />
                                                     <button className="px-2 py-1 border rounded-r text-onSecondary border-borderColor disabled:bg-disabled hover:bg-secondaryVariant bg-secondary">
