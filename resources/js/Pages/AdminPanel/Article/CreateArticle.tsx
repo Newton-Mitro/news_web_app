@@ -65,7 +65,6 @@ export default function CreateArticle({ auth }: PageProps) {
                                                 id="title"
                                                 className="w-full py-1 border rounded-sm shadow-sm bg-background border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
                                                 value=""
-                                                required
                                             />
                                             <div className="text-sm text-error">
                                                 error message
@@ -85,7 +84,6 @@ export default function CreateArticle({ auth }: PageProps) {
                                                 id="slug"
                                                 className="w-full py-1 border rounded-sm shadow-sm bg-background border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
                                                 value=""
-                                                required
                                             />
                                             <div className="text-sm text-error">
                                                 error message

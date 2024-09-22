@@ -24,24 +24,21 @@ const TagSelect: React.FC = () => {
 
     return (
         <div className="flex flex-col">
-            <label
-                htmlFor="tags"
-                className="mb-2 text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="tags" className="mb-2 font-bold">
                 Select Tags
             </label>
-            <div className="flex flex-wrap p-2 border border-gray-300 rounded-md">
+            <div className="flex flex-wrap p-2 border rounded-md border-borderColor bg-background">
                 <input
                     type="text"
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
-                    onKeyDown={handleKeyDown}
+                    // onKeyDown={handleKeyDown}
                     placeholder="Add a tag"
-                    className="px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+                    className="px-2 py-1 border rounded-md bg-surface border-borderColor focus:outline-none focus:ring focus:ring-blue-300"
                 />
                 <button
                     onClick={handleAddTag}
-                    className="px-2 ml-2 text-white bg-blue-500 rounded-md"
+                    className="px-2 ml-2 rounded-md text-onSecondary bg-secondary"
                 >
                     Add
                 </button>
