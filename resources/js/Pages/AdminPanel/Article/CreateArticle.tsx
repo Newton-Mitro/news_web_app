@@ -1,6 +1,9 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { PageProps } from "@/types";
 import { Head, Link } from "@inertiajs/react";
+import ReactQuill from "react-quill";
+import TagSelect from "../../../Components/TagSelect";
+import { formats, modules } from "../../../Utils/quill-util";
 
 export default function CreateArticle({ auth }: PageProps) {
     return (
@@ -60,7 +63,7 @@ export default function CreateArticle({ auth }: PageProps) {
                                                 type="text"
                                                 name="title"
                                                 id="title"
-                                                className="w-full py-1 border rounded-sm shadow-sm bg-background md:w-80 border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
+                                                className="w-full py-1 border rounded-sm shadow-sm bg-background border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
                                                 value=""
                                                 required
                                             />
@@ -80,7 +83,7 @@ export default function CreateArticle({ auth }: PageProps) {
                                                 type="text"
                                                 name="slug"
                                                 id="slug"
-                                                className="w-full py-1 border rounded-sm shadow-sm bg-background md:w-80 border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
+                                                className="w-full py-1 border rounded-sm shadow-sm bg-background border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
                                                 value=""
                                                 required
                                             />
@@ -96,15 +99,24 @@ export default function CreateArticle({ auth }: PageProps) {
                                             >
                                                 Content
                                             </label>
-                                            <textarea
-                                                name="content"
-                                                id="content"
-                                                className="w-full py-1 border rounded-sm shadow-sm bg-background md:w-80 border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
-                                                required
-                                            ></textarea>
+                                            <ReactQuill
+                                                theme="snow"
+                                                id="body"
+                                                modules={modules}
+                                                formats={formats}
+                                                className="bg-background"
+                                                readOnly={false}
+                                                value={""}
+                                                onChange={(value: string) => {}}
+                                            />
+
                                             <div className="text-sm text-error">
                                                 error message
                                             </div>
+                                        </div>
+
+                                        <div className="mb-4">
+                                            <TagSelect />
                                         </div>
 
                                         <div className="mb-4">
@@ -117,7 +129,7 @@ export default function CreateArticle({ auth }: PageProps) {
                                             <textarea
                                                 name="summery"
                                                 id="summery"
-                                                className="w-full py-1 border rounded-sm shadow-sm bg-background md:w-80 border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
+                                                className="w-full py-1 border rounded-sm shadow-sm bg-background border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
                                             ></textarea>
                                             <div className="text-sm text-error">
                                                 error message
