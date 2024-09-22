@@ -104,7 +104,7 @@ export default function ViewArticle({ auth, article }: any) {
                                                 if (index === 0) {
                                                     return (
                                                         <img
-                                                            src="https://via.placeholder.com/400x300"
+                                                            src={attachment.url}
                                                             alt="Wrapped Image"
                                                             className="float-left w-full mb-6 mr-6 lg:w-4/12"
                                                         />

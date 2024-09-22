@@ -1,5 +1,6 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link } from "@inertiajs/react";
+import moment from "moment";
 
 export default function ListArticles({ auth, response }: any) {
     console.log(response);
@@ -86,7 +87,7 @@ export default function ListArticles({ auth, response }: any) {
                                                     </th>
                                                     <th className="p-2 transition-colors cursor-pointer hover:bg-blue-gray-50">
                                                         <div className="flex items-center justify-between gap-2 font-bold leading-none">
-                                                            Slug
+                                                            Category
                                                         </div>
                                                     </th>
                                                     <th className="p-2 transition-colors cursor-pointer hover:bg-blue-gray-50">
@@ -94,7 +95,16 @@ export default function ListArticles({ auth, response }: any) {
                                                             Title
                                                         </div>
                                                     </th>
-
+                                                    <th className="p-2 transition-colors cursor-pointer hover:bg-blue-gray-50">
+                                                        <div className="flex items-center justify-between gap-2 font-bold leading-none">
+                                                            Author
+                                                        </div>
+                                                    </th>
+                                                    <th className="p-2 transition-colors cursor-pointer hover:bg-blue-gray-50">
+                                                        <div className="flex items-center justify-between gap-2 font-bold leading-none">
+                                                            Created At
+                                                        </div>
+                                                    </th>
                                                     <th className="p-2 transition-colors cursor-pointer hover:bg-blue-gray-50">
                                                         <div className="flex items-center justify-between gap-2 font-bold leading-none">
                                                             Status
@@ -126,16 +136,20 @@ export default function ListArticles({ auth, response }: any) {
                                                                             }
                                                                         </p>
                                                                     </td>
-                                                                    <td className="px-2 ">
+
+                                                                    <td className="px-2">
                                                                         <label className="md:hidden">
-                                                                            Slug
+                                                                            Category
                                                                         </label>
                                                                         <p className="font-semibold md:font-normal">
                                                                             {
-                                                                                article.slug
+                                                                                article
+                                                                                    .category
+                                                                                    .en_name
                                                                             }
                                                                         </p>
                                                                     </td>
+
                                                                     <td className="px-2 ">
                                                                         <label className="md:hidden">
                                                                             Title
@@ -144,6 +158,33 @@ export default function ListArticles({ auth, response }: any) {
                                                                             {
                                                                                 article.title
                                                                             }
+                                                                        </p>
+                                                                    </td>
+
+                                                                    <td className="px-2">
+                                                                        <label className="md:hidden">
+                                                                            Author
+                                                                        </label>
+                                                                        <p className="font-semibold md:font-normal">
+                                                                            {
+                                                                                article
+                                                                                    .author
+                                                                                    .name
+                                                                            }
+                                                                        </p>
+                                                                    </td>
+
+                                                                    <td className="px-2">
+                                                                        <label className="md:hidden">
+                                                                            Created
+                                                                            At
+                                                                        </label>
+                                                                        <p className="font-semibold md:font-normal">
+                                                                            {moment(
+                                                                                article.created_at
+                                                                            ).format(
+                                                                                "llll"
+                                                                            )}
                                                                         </p>
                                                                     </td>
 
@@ -171,6 +212,7 @@ export default function ListArticles({ auth, response }: any) {
                                                                             </div>
                                                                         )}
                                                                     </td>
+
                                                                     <td className="px-2 ">
                                                                         <label className="md:hidden">
                                                                             Actions

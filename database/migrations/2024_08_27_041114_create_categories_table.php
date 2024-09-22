@@ -10,8 +10,7 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('en_name')->unique();
-            $table->string('bn_name')->unique();
+            $table->string('name')->unique();
             $table->enum('status', ['Published', 'Draft'])->default('Published');
             $table->timestamps();
         });

@@ -13,8 +13,9 @@ return new class extends Migration
             $table->uuid()->unique();
             $table->string('title');
             $table->string('slug')->unique();
-            $table->longText('content');
+            $table->longText('body');
             $table->text('summery')->nullable();
+            $table->string('video_url')->nullable();
             $table->enum('status', ['Draft', 'Published'])->default('Draft');
             $table->boolean('featured')->default(false);
             $table->foreignId('category_id')->references('id')->on('categories')->onDelete('cascade');

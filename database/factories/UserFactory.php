@@ -7,9 +7,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Features\Auth\Models\User>
- */
 class UserFactory extends Factory
 {
     protected static ?string $password;
@@ -29,7 +26,7 @@ class UserFactory extends Factory
 
     public function unverified(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn(array $attributes) => [
             'email_verified_at' => null,
         ]);
     }
