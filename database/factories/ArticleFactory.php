@@ -22,7 +22,7 @@ class ArticleFactory extends Factory
             'summery' => $this->faker->paragraph(),
             'status' => $this->faker->randomElement(['Draft', 'Published']),
             'featured' => $this->faker->boolean(),
-            'tags' => $this->faker->words(1, true),
+            'tags' => implode(',', $this->faker->words(rand(3, 5))),
             'category_id' => Category::factory(),
             'created_by' => User::factory(),
             'updated_by' => User::factory(),

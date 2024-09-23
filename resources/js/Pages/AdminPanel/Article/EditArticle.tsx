@@ -12,13 +12,13 @@ export default function EditArticle({ auth }: PageProps) {
                 </h2>
             }
         >
-            <Head title="Dashboard" />
+            <Head title="Edit Article" />
             <div className="p-2 lg:p-4">
                 <div className="w-full">
                     <div className="overflow-hidden shadow bg-surface text-onSurface">
                         <div className="w-full p-4 space-y-2">
                             <h2 className="text-2xl font-bold lg:text-4xl">
-                                Edit News Article
+                                Edit Article
                             </h2>
                             {/*Header*/}
                             <div className="flex items-end justify-end">

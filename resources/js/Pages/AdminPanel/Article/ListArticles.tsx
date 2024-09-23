@@ -14,13 +14,13 @@ export default function ListArticles({ auth, response }: any) {
                 </h2>
             }
         >
-            <Head title="Dashboard" />
+            <Head title="Articles" />
             <div className="p-2 lg:p-4">
                 <div className="w-full">
                     <div className="overflow-hidden shadow bg-surface text-onSurface">
-                        <div className="w-full p-4 space-y-2">
+                        <div className="w-full p-4 space-y-2 lg:p-10">
                             <h2 className="text-2xl font-bold lg:text-4xl">
-                                All Pages
+                                Articles
                             </h2>
                             <div className="flex items-end justify-end">
                                 <div className="flex gap-2">
@@ -50,7 +50,7 @@ export default function ListArticles({ auth, response }: any) {
                                 </div>
                             </div>
                             <div
-                                className={`h-[calc(100vh-270px)] flex flex-col overflow-auto relative`}
+                                className={`h-[calc(100vh-250px)] md:h-[calc(100vh-318px)] flex flex-col overflow-auto relative`}
                             >
                                 <div className="flex-1 space-y-2">
                                     {/*Header*/}
@@ -75,7 +75,7 @@ export default function ListArticles({ auth, response }: any) {
                                     </div>
                                     {/*Table*/}
                                     <div
-                                        className={`h-[calc(100vh-345px)] md:h-[calc(100vh-360px)] overflow-auto border border-b border-borderColor`}
+                                        className={`h-[calc(100vh-345px)] md:h-[calc(100vh-408px)] overflow-auto border border-b border-borderColor`}
                                     >
                                         <table className="relative w-full whitespace-no-wrap border-collapse table-auto">
                                             <thead className="sticky top-0 w-full shadow bg-background">
@@ -145,7 +145,7 @@ export default function ListArticles({ auth, response }: any) {
                                                                             {
                                                                                 article
                                                                                     .category
-                                                                                    .en_name
+                                                                                    .name
                                                                             }
                                                                         </p>
                                                                     </td>

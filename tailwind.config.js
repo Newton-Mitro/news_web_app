@@ -83,7 +83,7 @@ export default {
                     error: "#b12e06",
                     onError: "#777c79",
                     brand: "#182372",
-                    onBrand: "#777c79",
+                    onBrand: "#f3f3f3",
                     disabled: "#777c79",
                     onDisabled: "#131313",
                     borderColor: "#ebebeb",

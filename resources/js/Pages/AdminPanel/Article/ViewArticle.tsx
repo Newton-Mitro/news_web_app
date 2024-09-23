@@ -13,13 +13,13 @@ export default function ViewArticle({ auth, article }: any) {
                 </h2>
             }
         >
-            <Head title="Dashboard" />
+            <Head title="View Article" />
             <div className="p-2 lg:p-4">
                 <div className="w-full">
                     <div className="overflow-hidden shadow bg-surface text-onSurface">
-                        <div className="w-full p-8 space-y-2">
+                        <div className="w-full p-4 space-y-2 lg:p-10">
                             <h2 className="text-2xl font-bold lg:text-4xl">
-                                View News Article
+                                View Article
                             </h2>
                             <div className="flex items-end justify-end">
                                 <div className="flex gap-2">
@@ -115,17 +115,28 @@ export default function ViewArticle({ auth, article }: any) {
 
                                         <p>{article.summery}</p>
 
-                                        <div className="">
-                                            {article.content}
-                                        </div>
+                                        <div className="">{article.body}</div>
                                     </div>
 
                                     <footer className="mt-10">
                                         <p className="text-sm">
                                             Category:{" "}
                                             <span className="font-semibold">
-                                                {article.category.en_name}
+                                                {article.category.name}
                                             </span>
+                                        </p>
+                                        <p className="text-sm">
+                                            <div className="flex gap-1 mt-2">
+                                                {article.tags
+                                                    ?.split(",")
+                                                    .map((tag: string) => {
+                                                        return (
+                                                            <span className="px-2 py-0.5 font-semibold text-onSecondary rounded-full bg-secondary">
+                                                                {tag}
+                                                            </span>
+                                                        );
+                                                    })}
+                                            </div>
                                         </p>
                                     </footer>
                                 </article>
