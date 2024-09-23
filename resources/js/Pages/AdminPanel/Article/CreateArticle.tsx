@@ -41,52 +41,50 @@ export default function CreateArticle({ auth }: PageProps) {
                                     </div>
                                 </div>
                             </div>
-                            <div className="py-10">
-                                <div className="p-8">
-                                    <h2 className="mb-6 text-2xl font-bold">
-                                        Create New Article
-                                    </h2>
-
+                            <div className="lg:py-10">
+                                <div className="lg:p-8">
                                     <form
                                         action="{{ route('articles.store') }}"
                                         method="POST"
                                         className="w-full"
                                     >
-                                        <div className="mb-4">
-                                            <label
-                                                htmlFor="title"
-                                                className="block font-semibold "
-                                            >
-                                                Title
-                                            </label>
-                                            <input
-                                                type="text"
-                                                name="title"
-                                                id="title"
-                                                className="w-full py-1 border rounded-sm shadow-sm bg-background border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
-                                                value=""
-                                            />
-                                            <div className="text-sm text-error">
-                                                error message
+                                        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                                            <div className="mb-4">
+                                                <label
+                                                    htmlFor="title"
+                                                    className="block font-semibold "
+                                                >
+                                                    Title
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    name="title"
+                                                    id="title"
+                                                    className="w-full py-1 border rounded-sm shadow-sm bg-background border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
+                                                    value=""
+                                                />
+                                                <div className="text-sm text-error">
+                                                    error message
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div className="w-full">
-                                            <label
-                                                htmlFor="slug"
-                                                className="block font-semibold "
-                                            >
-                                                Slug
-                                            </label>
-                                            <input
-                                                type="text"
-                                                name="slug"
-                                                id="slug"
-                                                className="w-full py-1 border rounded-sm shadow-sm bg-background border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
-                                                value=""
-                                            />
-                                            <div className="text-sm text-error">
-                                                error message
+                                            <div className="w-full">
+                                                <label
+                                                    htmlFor="slug"
+                                                    className="block font-semibold "
+                                                >
+                                                    Slug
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    name="slug"
+                                                    id="slug"
+                                                    className="w-full py-1 border rounded-sm shadow-sm bg-background border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
+                                                    value=""
+                                                />
+                                                <div className="text-sm text-error">
+                                                    error message
+                                                </div>
                                             </div>
                                         </div>
 
@@ -114,10 +112,6 @@ export default function CreateArticle({ auth }: PageProps) {
                                         </div>
 
                                         <div className="mb-4">
-                                            <TagSelect />
-                                        </div>
-
-                                        <div className="mb-4">
                                             <label
                                                 htmlFor="summery"
                                                 className="block font-semibold "
@@ -135,67 +129,73 @@ export default function CreateArticle({ auth }: PageProps) {
                                         </div>
 
                                         <div className="mb-4">
-                                            <label
-                                                htmlFor="status"
-                                                className="block font-semibold "
-                                            >
-                                                Status
-                                            </label>
-                                            <select
-                                                name="status"
-                                                id="status"
-                                                className="w-full p-2 border rounded-md bg-background border-borderColor"
-                                            >
-                                                <option value="Draft">
-                                                    Draft
-                                                </option>
-                                                <option value="Published">
-                                                    Published
-                                                </option>
-                                            </select>
-                                            <div className="text-sm text-error">
-                                                error message
-                                            </div>
+                                            <TagSelect />
                                         </div>
 
-                                        <div className="mb-4">
-                                            <label
-                                                htmlFor="featured"
-                                                className="block font-semibold "
-                                            >
-                                                Featured
-                                            </label>
-                                            <input
-                                                type="checkbox"
-                                                name="featured"
-                                                id="featured"
-                                            />
-                                            <div className="text-sm text-error">
-                                                error message
+                                        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                                            <div className="mb-4">
+                                                <label
+                                                    htmlFor="status"
+                                                    className="block font-semibold "
+                                                >
+                                                    Status
+                                                </label>
+                                                <select
+                                                    name="status"
+                                                    id="status"
+                                                    className="w-full p-2 border rounded-md bg-background border-borderColor"
+                                                >
+                                                    <option value="Draft">
+                                                        Draft
+                                                    </option>
+                                                    <option value="Published">
+                                                        Published
+                                                    </option>
+                                                </select>
+                                                <div className="text-sm text-error">
+                                                    error message
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div className="mb-4">
-                                            <label
-                                                htmlFor="category_id"
-                                                className="block font-semibold "
-                                            >
-                                                Category
-                                            </label>
-                                            <select
-                                                name="category_id"
-                                                id="category_id"
-                                                className="w-full p-2 border rounded-md border-borderColor bg-background"
-                                            >
-                                                @foreach($categories as
-                                                $category)
-                                                <option value="{{ $category->id }}">
-                                                    Category Name
-                                                </option>
-                                                @endforeach
-                                            </select>
-                                            <div className="text-sm text-error">
-                                                error message
+                                            <div className="mb-4">
+                                                <label
+                                                    htmlFor="category_id"
+                                                    className="block font-semibold "
+                                                >
+                                                    Category
+                                                </label>
+                                                <select
+                                                    name="category_id"
+                                                    id="category_id"
+                                                    className="w-full p-2 border rounded-md border-borderColor bg-background"
+                                                >
+                                                    @foreach($categories as
+                                                    $category)
+                                                    <option value="{{ $category->id }}">
+                                                        Category Name
+                                                    </option>
+                                                    @endforeach
+                                                </select>
+                                                <div className="text-sm text-error">
+                                                    error message
+                                                </div>
+                                            </div>
+
+                                            <div className="mb-4">
+                                                <label
+                                                    htmlFor="featured"
+                                                    className="block font-semibold "
+                                                >
+                                                    Featured
+                                                </label>
+                                                <input
+                                                    type="checkbox"
+                                                    name="featured"
+                                                    id="featured"
+                                                />
+                                                <div className="text-sm text-error">
+                                                    error message
+                                                </div>
                                             </div>
                                         </div>
 

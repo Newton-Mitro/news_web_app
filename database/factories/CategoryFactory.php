@@ -13,8 +13,7 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'en_name' => $this->faker->unique()->word(),
-            'bn_name' => $this->faker->unique()->word(),  // You can replace this with actual Bengali words if needed
+            'name' => $this->faker->unique()->word(),
             'status' => $this->faker->randomElement(['Published', 'Draft']),
         ];
     }
