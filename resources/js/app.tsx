@@ -1,5 +1,6 @@
 import "react-photo-view/dist/react-photo-view.css";
 import "react-quill/dist/quill.snow.css";
+import "react-toastify/dist/ReactToastify.css";
 import "../css/app.css";
 import "./bootstrap";
 

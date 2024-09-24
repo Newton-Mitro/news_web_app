@@ -5,6 +5,7 @@ namespace App\Features\Article\Controllers;
 use App\Core\Controllers\Controller;
 use App\Features\Article\Models\Article;
 use App\Features\Article\Requests\StoreArticleRequest;
+use App\Features\Category\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -18,13 +19,17 @@ class ArticleController extends Controller
         $response = Article::where('title', 'like', "%{$searchText}%")->with(['category', 'author'])->orderBy('created_at', 'desc')->paginate($recordPerPage);
         return Inertia::render('AdminPanel/Article/ListArticles', [
             'response' => $response,
+            'flash' => [
+                'success' => session('success'),
+            ],
         ]);
     }
 
     public function create()
     {
+        $categories = Category::all();
         return Inertia::render('AdminPanel/Article/CreateArticle', [
-            //            'articles' => $articles,
+            'categories' => $categories,
         ]);
     }
 
@@ -52,13 +57,21 @@ class ArticleController extends Controller
         $article = Article::with(['attachments', 'category', 'author', 'updater'])->findOrFail($article->id);
         return Inertia::render('AdminPanel/Article/ViewArticle', [
             'article' => $article,
+            'flash' => [
+                'success' => session('success'),
+            ],
         ]);
     }
 
     public function edit(Article $article)
     {
+        $categories = Category::all();
         return Inertia::render('AdminPanel/Article/EditArticle', [
             'article' => $article,
+            'categories' => $categories,
+            'flash' => [
+                'success' => session('success'),
+            ],
         ]);
     }
 
@@ -73,13 +86,27 @@ class ArticleController extends Controller
         $article->body = $request->body;
         $article->save();
 
-        return redirect()->route('articles.index')->with('status', 'Article updated successfully!');
+        return redirect()->back()->with('success', 'Article updated successfully!');
     }
 
-    public function destroy(Article $article)
+    public function destroy(int $id)
     {
-        $article->delete();
+        $foundArticle = Article::findOrFail($id);
+        $foundArticle->delete();
 
-        return redirect()->route('articles.index')->with('status', 'Article deleted successfully!');
+        return redirect()->route('articles.index')->with('success', 'Article deleted successfully!');
+    }
+
+    public function updateStatus(Article $article, int $id)
+    {
+        $foundArticle = Article::findOrFail($id);
+        if ($foundArticle->status === 'Published') {
+            $foundArticle->status = 'Draft';
+        } else {
+            $foundArticle->status = 'Published';
+        }
+        $foundArticle->save();
+
+        return redirect()->back()->with('success', 'Article ' . $foundArticle->status . ' successfully!');
     }
 }

@@ -1,9 +1,33 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, Link } from "@inertiajs/react";
+import { Head, Link, router } from "@inertiajs/react";
 import moment from "moment";
+import { Bounce, toast } from "react-toastify";
 
-export default function ListArticles({ auth, response }: any) {
-    console.log(response);
+export default function ListArticles({ auth, response, flash }: any) {
+    const deleteArticle = (id: number) => {
+        if (confirm("Are you sure you want to delete this article?")) {
+            router.delete(route("articles.destroy", id));
+        }
+    };
+
+    const updateArticleStatus = (id: number, status: string) => {
+        if (confirm(`Are you sure you want to ${status} this article?`)) {
+            router.put(route("articles.updateStatus", id));
+        }
+    };
+
+    flash?.success &&
+        toast(flash?.success, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+        });
 
     return (
         <AuthenticatedLayout
@@ -232,7 +256,6 @@ export default function ListArticles({ auth, response }: any) {
                                                                             </Link>
                                                                             <Link
                                                                                 className="p-1 rounded hover:text-secondary hover:scale-110 group"
-                                                                                onClick={() => {}}
                                                                                 href={route(
                                                                                     "articles.edit",
                                                                                     article.id
@@ -243,32 +266,39 @@ export default function ListArticles({ auth, response }: any) {
                                                                                 </span>
                                                                                 <i className="fa-solid fa-pen-to-square"></i>
                                                                             </Link>
-                                                                            <Link
+                                                                            <button
                                                                                 className="p-1 rounded hover:text-secondary hover:scale-110 group"
-                                                                                href={route(
-                                                                                    "articles.destroy",
-                                                                                    article.id
-                                                                                )}
-                                                                                onClick={() => {}}
+                                                                                onClick={() =>
+                                                                                    deleteArticle(
+                                                                                        article.id
+                                                                                    )
+                                                                                }
                                                                             >
                                                                                 <span className="absolute top-0 right-0 hidden px-1 -mt-6 text-orange-100 rounded shadow-lg group-hover:block bg-neutral-700">
                                                                                     Delete
                                                                                 </span>
                                                                                 <i className="fa-solid fa-trash-can"></i>
-                                                                            </Link>
-                                                                            <Link
+                                                                            </button>
+                                                                            <button
                                                                                 className="p-1 rounded hover:text-secondary hover:scale-110 group"
-                                                                                href={route(
-                                                                                    "articles.show",
-                                                                                    article.id
-                                                                                )}
-                                                                                onClick={() => {}}
+                                                                                onClick={() =>
+                                                                                    updateArticleStatus(
+                                                                                        article.id,
+                                                                                        article.status ===
+                                                                                            "Published"
+                                                                                            ? "draft"
+                                                                                            : "publish"
+                                                                                    )
+                                                                                }
                                                                             >
                                                                                 <span className="absolute top-0 right-0 hidden px-1 -mt-6 text-orange-100 rounded shadow-lg group-hover:block bg-neutral-700">
-                                                                                    Draft
+                                                                                    {article.status ===
+                                                                                    "Published"
+                                                                                        ? "Draft"
+                                                                                        : "Publish"}
                                                                                 </span>
                                                                                 <i className="fa-solid fa-cloud-arrow-up"></i>
-                                                                            </Link>
+                                                                            </button>
                                                                         </div>
                                                                     </td>
                                                                 </tr>

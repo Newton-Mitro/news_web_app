@@ -1,11 +1,10 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { PageProps } from "@/types";
 import { Head, Link } from "@inertiajs/react";
 import ReactQuill from "react-quill";
 import TagSelect from "../../../Components/TagSelect";
 import { formats, modules } from "../../../Utils/quill-util";
 
-export default function CreateArticle({ auth }: PageProps) {
+export default function CreateArticle({ auth, categories }: any) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -32,7 +31,7 @@ export default function CreateArticle({ auth }: PageProps) {
                                             href={route("articles.index")}
                                         >
                                             <span className="hidden md:block">
-                                                All Articles
+                                                Articles
                                             </span>
                                             <span className="inline-block md:hidden">
                                                 <i className="fa-solid fa-file-circle-plus"></i>
@@ -144,6 +143,10 @@ export default function CreateArticle({ auth }: PageProps) {
                                                 id="status"
                                                 className="w-full p-2 border rounded-md bg-background border-borderColor"
                                             >
+                                                <option value="">
+                                                    Select Status
+                                                </option>
+
                                                 <option value="Draft">
                                                     Draft
                                                 </option>
@@ -168,12 +171,25 @@ export default function CreateArticle({ auth }: PageProps) {
                                                 id="category_id"
                                                 className="w-full p-2 border rounded-md border-borderColor bg-background"
                                             >
-                                                @foreach($categories as
-                                                $category)
-                                                <option value="{{ $category->id }}">
+                                                <option value="">
                                                     Category Name
                                                 </option>
-                                                @endforeach
+                                                {categories.map(
+                                                    (category: {
+                                                        name: string;
+                                                        id: number;
+                                                    }) => {
+                                                        return (
+                                                            <option
+                                                                value={
+                                                                    category.id
+                                                                }
+                                                            >
+                                                                {category.name}
+                                                            </option>
+                                                        );
+                                                    }
+                                                )}
                                             </select>
                                             <div className="text-sm text-error">
                                                 error message

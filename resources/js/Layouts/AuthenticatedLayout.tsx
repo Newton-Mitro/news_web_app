@@ -1,11 +1,12 @@
+import ThemeSwitcher from "@/Components/ThemeSwitcher";
 import SidebarComponent from "@/Layouts/Parts/SidebarComponent";
 import { User } from "@/types";
 import "@fortawesome/fontawesome-free/css/all.css";
 import { Link, useRemember } from "@inertiajs/react";
 import { PropsWithChildren, ReactNode, useEffect } from "react";
 import { Outlet } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import uuid from "react-uuid";
-import ThemeSwitcher from "@/Components/ThemeSwitcher";
 
 const adminAndSuperAdminMenus: {
     Id: string;
@@ -38,17 +39,17 @@ const adminAndSuperAdminMenus: {
         Route: "pages.index",
     },
     {
-      Id: uuid(),
-      MenuTitle: 'Users',
-      Icon: 'fa-solid fa-users',
-      Route: '/auth/users',
+        Id: uuid(),
+        MenuTitle: "Users",
+        Icon: "fa-solid fa-users",
+        Route: "/auth/users",
     },
     {
         Id: uuid(),
         MenuTitle: "Settings",
         Icon: "fa-solid fa-gear",
         Route: "auth.settings",
-    }
+    },
 ];
 
 export default function Authenticated({
@@ -69,6 +70,7 @@ export default function Authenticated({
 
     return (
         <>
+            <ToastContainer />
             <div className="relative w-full h-screen bg-background">
                 <section className={`ml-14 h-full`}>
                     <header className="w-full h-16">
@@ -93,7 +95,7 @@ export default function Authenticated({
                                 >
                                     <span className="">Switch To Front</span>
                                 </Link>
-                                <ThemeSwitcher/>
+                                <ThemeSwitcher />
                             </div>
                             <div className="flex items-center h-full gap-2">
                                 {/* <ThemeSwitch /> */}

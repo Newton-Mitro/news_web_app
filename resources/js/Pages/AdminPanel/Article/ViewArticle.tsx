@@ -1,9 +1,33 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, Link } from "@inertiajs/react";
+import { Head, Link, router } from "@inertiajs/react";
 import moment from "moment";
+import { Bounce, toast } from "react-toastify";
 
-export default function ViewArticle({ auth, article }: any) {
-    console.log(article);
+export default function ViewArticle({ auth, article, flash }: any) {
+    const deleteArticle = (id: number) => {
+        if (confirm("Are you sure you want to delete this article?")) {
+            router.delete(route("articles.destroy", id));
+        }
+    };
+
+    const updateArticleStatus = (id: number, status: string) => {
+        if (confirm(`Are you sure you want to ${status} this article?`)) {
+            router.put(route("articles.updateStatus", id));
+        }
+    };
+
+    flash?.success &&
+        toast(flash?.success, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+        });
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -28,7 +52,7 @@ export default function ViewArticle({ auth, article }: any) {
                                         href={route("articles.index")}
                                     >
                                         <span className="hidden md:block">
-                                            All Articles
+                                            Articles
                                         </span>
                                         <span className="inline-block md:hidden">
                                             <i className="fa-solid fa-file-circle-plus"></i>
@@ -37,7 +61,10 @@ export default function ViewArticle({ auth, article }: any) {
 
                                     <Link
                                         className="bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabled hover:shadow-md transition-all duration-300 shadow-sm rounded py-1.5 px-1.5 md:px-4 hover:cursor-pointer"
-                                        href={route("articles.edit", 1)}
+                                        href={route(
+                                            "articles.edit",
+                                            article.id
+                                        )}
                                     >
                                         <span className="hidden md:block">
                                             Edit Article
@@ -47,9 +74,21 @@ export default function ViewArticle({ auth, article }: any) {
                                         </span>
                                     </Link>
 
-                                    <button className="bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabled hover:shadow-md transition-all duration-300 shadow-sm rounded py-1.5 px-1.5 md:px-4 hover:cursor-pointer">
+                                    <button
+                                        className="bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabled hover:shadow-md transition-all duration-300 shadow-sm rounded py-1.5 px-1.5 md:px-4 hover:cursor-pointer"
+                                        onClick={() =>
+                                            updateArticleStatus(
+                                                article.id,
+                                                article.status === "Published"
+                                                    ? "draft"
+                                                    : "publish"
+                                            )
+                                        }
+                                    >
                                         <span className="hidden md:block">
-                                            Publish Article
+                                            {article.status === "Published"
+                                                ? "Draft Article"
+                                                : "Publish Article"}
                                         </span>
                                         <span className="inline-block md:hidden">
                                             {" "}
@@ -57,7 +96,12 @@ export default function ViewArticle({ auth, article }: any) {
                                         </span>
                                     </button>
 
-                                    <button className="bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabled hover:shadow-md transition-all duration-300 shadow-sm rounded py-1.5 px-1.5 md:px-4 hover:cursor-pointer">
+                                    <button
+                                        className="bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabled hover:shadow-md transition-all duration-300 shadow-sm rounded py-1.5 px-1.5 md:px-4 hover:cursor-pointer"
+                                        onClick={() =>
+                                            deleteArticle(article.id)
+                                        }
+                                    >
                                         <span className="hidden md:block">
                                             Delete Article
                                         </span>
