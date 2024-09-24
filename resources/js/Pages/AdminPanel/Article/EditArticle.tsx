@@ -81,7 +81,7 @@ export default function EditArticle({ auth, article, categories }: any) {
                                     method="POST"
                                     className="w-full"
                                 >
-                                    <div className="grid grid-cols-1 gap-6 mb-4 md:grid-cols-3">
+                                    <div className="grid w-full grid-cols-1 gap-6 mb-4 md:grid-cols-2 lg:w-8/12">
                                         <div className="">
                                             <label
                                                 htmlFor="title"
@@ -115,6 +115,73 @@ export default function EditArticle({ auth, article, categories }: any) {
                                                 className="w-full py-1 border rounded-sm bg-background border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
                                                 value={article.slug}
                                             />
+                                            <div className="text-sm text-error">
+                                                error message
+                                            </div>
+                                        </div>
+
+                                        <div className="">
+                                            <label
+                                                htmlFor="status"
+                                                className="block font-semibold "
+                                            >
+                                                Status
+                                            </label>
+                                            <select
+                                                name="status"
+                                                id="status"
+                                                value={article.status}
+                                                className="w-full px-2 py-1 border rounded-md bg-background border-borderColor"
+                                            >
+                                                <option value="">
+                                                    Select Status
+                                                </option>
+
+                                                <option value="Draft">
+                                                    Draft
+                                                </option>
+                                                <option value="Published">
+                                                    Published
+                                                </option>
+                                            </select>
+                                            <div className="text-sm text-error">
+                                                error message
+                                            </div>
+                                        </div>
+
+                                        <div className="">
+                                            <label
+                                                htmlFor="category_id"
+                                                className="block font-semibold "
+                                            >
+                                                Category
+                                            </label>
+                                            <select
+                                                name="category_id"
+                                                id="category_id"
+                                                value={article.category_id}
+                                                className="w-full px-2 py-1 border rounded-md border-borderColor bg-background"
+                                            >
+                                                <option value="">
+                                                    Category Name
+                                                </option>
+                                                {categories.map(
+                                                    (category: {
+                                                        name: string;
+                                                        id: number;
+                                                    }) => {
+                                                        return (
+                                                            <option
+                                                                value={
+                                                                    category.id
+                                                                }
+                                                            >
+                                                                {category.name}
+                                                            </option>
+                                                        );
+                                                    }
+                                                )}
+                                            </select>
                                             <div className="text-sm text-error">
                                                 error message
                                             </div>
@@ -164,75 +231,6 @@ export default function EditArticle({ auth, article, categories }: any) {
 
                                     <div className="mb-4">
                                         <TagSelect />
-                                    </div>
-
-                                    <div className="grid grid-cols-1 gap-6 mb-4 md:grid-cols-2 lg:grid-cols-3">
-                                        <div className="">
-                                            <label
-                                                htmlFor="status"
-                                                className="block font-semibold "
-                                            >
-                                                Status
-                                            </label>
-                                            <select
-                                                name="status"
-                                                id="status"
-                                                value={article.status}
-                                                className="w-full p-2 border rounded-md bg-background border-borderColor"
-                                            >
-                                                <option value="">
-                                                    Select Status
-                                                </option>
-
-                                                <option value="Draft">
-                                                    Draft
-                                                </option>
-                                                <option value="Published">
-                                                    Published
-                                                </option>
-                                            </select>
-                                            <div className="text-sm text-error">
-                                                error message
-                                            </div>
-                                        </div>
-
-                                        <div className="">
-                                            <label
-                                                htmlFor="category_id"
-                                                className="block font-semibold "
-                                            >
-                                                Category
-                                            </label>
-                                            <select
-                                                name="category_id"
-                                                id="category_id"
-                                                value={article.category_id}
-                                                className="w-full p-2 border rounded-md border-borderColor bg-background"
-                                            >
-                                                <option value="">
-                                                    Category Name
-                                                </option>
-                                                {categories.map(
-                                                    (category: {
-                                                        name: string;
-                                                        id: number;
-                                                    }) => {
-                                                        return (
-                                                            <option
-                                                                value={
-                                                                    category.id
-                                                                }
-                                                            >
-                                                                {category.name}
-                                                            </option>
-                                                        );
-                                                    }
-                                                )}
-                                            </select>
-                                            <div className="text-sm text-error">
-                                                error message
-                                            </div>
-                                        </div>
                                     </div>
 
                                     <div className="mb-4">

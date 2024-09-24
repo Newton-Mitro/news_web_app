@@ -1,10 +1,52 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link } from "@inertiajs/react";
+import { useState } from "react";
 import ReactQuill from "react-quill";
 import TagSelect from "../../../Components/TagSelect";
 import { formats, modules } from "../../../Utils/quill-util";
 
 export default function CreateArticle({ auth, categories }: any) {
+    const [image, setImage] = useState<string | null>(null);
+    const [error, setError] = useState<string | null>(null);
+
+    const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+        event.preventDefault();
+        const files = event.dataTransfer.files;
+        handleFiles(files);
+    };
+
+    const handleFiles = (files: FileList) => {
+        if (files.length > 0) {
+            const file = files[0];
+            if (file.type.startsWith("image/")) {
+                setImage(URL.createObjectURL(file));
+                setError(null);
+            } else {
+                setError("Please upload an image file.");
+            }
+        }
+    };
+
+    const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
+        event.preventDefault();
+    };
+
+    const handleBrowseClick = () => {
+        const input = document.createElement("input");
+        input.type = "file";
+        input.accept = "image/*";
+        input.onchange = (e: any) => {
+            if (e.target && e.target.files) {
+                handleFiles(e.target.files);
+            }
+        };
+        input.click();
+    };
+
+    const handleRemoveImage = () => {
+        setImage(null);
+    };
+
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -46,42 +88,111 @@ export default function CreateArticle({ auth, categories }: any) {
                                     method="POST"
                                     className="w-full"
                                 >
-                                    <div className="grid grid-cols-1 gap-6 mb-4 md:grid-cols-3">
-                                        <div className="">
-                                            <label
-                                                htmlFor="title"
-                                                className="block font-semibold "
-                                            >
-                                                Title
-                                            </label>
-                                            <input
-                                                type="text"
-                                                name="title"
-                                                id="title"
-                                                className="w-full py-1 border rounded-sm bg-background border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
-                                                value=""
-                                            />
-                                            <div className="text-sm text-error">
-                                                error message
+                                    <div className="">
+                                        <div className="grid w-full grid-cols-1 gap-6 mb-4 lg:w-8/12 md:grid-cols-2">
+                                            <div className="">
+                                                <label
+                                                    htmlFor="title"
+                                                    className="block font-semibold "
+                                                >
+                                                    Title
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    name="title"
+                                                    id="title"
+                                                    className="w-full py-1 border rounded-sm bg-background border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
+                                                    value=""
+                                                />
+                                                <div className="text-sm text-error">
+                                                    error message
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div className="w-full">
-                                            <label
-                                                htmlFor="slug"
-                                                className="block font-semibold "
-                                            >
-                                                Slug
-                                            </label>
-                                            <input
-                                                type="text"
-                                                name="slug"
-                                                id="slug"
-                                                className="w-full py-1 border rounded-sm bg-background border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
-                                                value=""
-                                            />
-                                            <div className="text-sm text-error">
-                                                error message
+                                            <div className="w-full">
+                                                <label
+                                                    htmlFor="slug"
+                                                    className="block font-semibold "
+                                                >
+                                                    Slug
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    name="slug"
+                                                    id="slug"
+                                                    className="w-full py-1 border rounded-sm bg-background border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
+                                                    value=""
+                                                />
+                                                <div className="text-sm text-error">
+                                                    error message
+                                                </div>
+                                            </div>
+
+                                            <div className="">
+                                                <label
+                                                    htmlFor="status"
+                                                    className="block font-semibold "
+                                                >
+                                                    Status
+                                                </label>
+                                                <select
+                                                    name="status"
+                                                    id="status"
+                                                    className="w-full px-2 py-1 border rounded-md bg-background border-borderColor"
+                                                >
+                                                    <option value="">
+                                                        Select Status
+                                                    </option>
+
+                                                    <option value="Draft">
+                                                        Draft
+                                                    </option>
+                                                    <option value="Published">
+                                                        Published
+                                                    </option>
+                                                </select>
+                                                <div className="text-sm text-error">
+                                                    error message
+                                                </div>
+                                            </div>
+
+                                            <div className="">
+                                                <label
+                                                    htmlFor="category_id"
+                                                    className="block font-semibold "
+                                                >
+                                                    Category
+                                                </label>
+                                                <select
+                                                    name="category_id"
+                                                    id="category_id"
+                                                    className="w-full px-2 py-1 border rounded-md border-borderColor bg-background"
+                                                >
+                                                    <option value="">
+                                                        Category Name
+                                                    </option>
+                                                    {categories.map(
+                                                        (category: {
+                                                            name: string;
+                                                            id: number;
+                                                        }) => {
+                                                            return (
+                                                                <option
+                                                                    value={
+                                                                        category.id
+                                                                    }
+                                                                >
+                                                                    {
+                                                                        category.name
+                                                                    }
+                                                                </option>
+                                                            );
+                                                        }
+                                                    )}
+                                                </select>
+                                                <div className="text-sm text-error">
+                                                    error message
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -127,74 +238,72 @@ export default function CreateArticle({ auth, categories }: any) {
                                     </div>
 
                                     <div className="mb-4">
-                                        <TagSelect />
+                                        <label
+                                            htmlFor="video_url"
+                                            className="block font-semibold "
+                                        >
+                                            Article Video URL
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="video_url"
+                                            id="video_url"
+                                            className="w-full py-1 border rounded-sm bg-background border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
+                                            value=""
+                                        />
+                                        <div className="text-sm text-error">
+                                            error message
+                                        </div>
                                     </div>
 
-                                    <div className="grid grid-cols-1 gap-6 mb-4 md:grid-cols-2 lg:grid-cols-3">
-                                        <div className="">
-                                            <label
-                                                htmlFor="status"
-                                                className="block font-semibold "
-                                            >
-                                                Status
-                                            </label>
-                                            <select
-                                                name="status"
-                                                id="status"
-                                                className="w-full p-2 border rounded-md bg-background border-borderColor"
-                                            >
-                                                <option value="">
-                                                    Select Status
-                                                </option>
-
-                                                <option value="Draft">
-                                                    Draft
-                                                </option>
-                                                <option value="Published">
-                                                    Published
-                                                </option>
-                                            </select>
-                                            <div className="text-sm text-error">
-                                                error message
-                                            </div>
+                                    <div className="flex flex-col mb-4">
+                                        <label
+                                            htmlFor="video_url"
+                                            className="block font-semibold "
+                                        >
+                                            Article Image
+                                        </label>
+                                        <div
+                                            className="flex flex-col items-center justify-center p-10 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-background w-80 hover:bg-primary/30"
+                                            onDrop={handleDrop}
+                                            onDragOver={handleDragOver}
+                                            onClick={handleBrowseClick}
+                                        >
+                                            <p className="">
+                                                Drag and drop an image here or
+                                                click to browse
+                                            </p>
+                                            {image ? (
+                                                <div className="relative mt-4">
+                                                    <img
+                                                        src={image}
+                                                        alt="Preview"
+                                                        className="rounded-lg"
+                                                    />
+                                                    <button
+                                                        onClick={
+                                                            handleRemoveImage
+                                                        }
+                                                        className="absolute top-0 right-0 p-1 text-white bg-red-500 rounded-full"
+                                                    >
+                                                        &times;
+                                                    </button>
+                                                </div>
+                                            ) : (
+                                                <p className="mt-4 text-gray-500">
+                                                    No image uploaded
+                                                </p>
+                                            )}
+                                            {error && (
+                                                <p className="mt-2 text-red-500">
+                                                    {error}
+                                                </p>
+                                            )}
                                         </div>
+                                    </div>
 
-                                        <div className="">
-                                            <label
-                                                htmlFor="category_id"
-                                                className="block font-semibold "
-                                            >
-                                                Category
-                                            </label>
-                                            <select
-                                                name="category_id"
-                                                id="category_id"
-                                                className="w-full p-2 border rounded-md border-borderColor bg-background"
-                                            >
-                                                <option value="">
-                                                    Category Name
-                                                </option>
-                                                {categories.map(
-                                                    (category: {
-                                                        name: string;
-                                                        id: number;
-                                                    }) => {
-                                                        return (
-                                                            <option
-                                                                value={
-                                                                    category.id
-                                                                }
-                                                            >
-                                                                {category.name}
-                                                            </option>
-                                                        );
-                                                    }
-                                                )}
-                                            </select>
-                                            <div className="text-sm text-error">
-                                                error message
-                                            </div>
-                                        </div>
+                                    <div className="mb-4">
+                                        <TagSelect />
                                     </div>
 
                                     <div className="mb-4">

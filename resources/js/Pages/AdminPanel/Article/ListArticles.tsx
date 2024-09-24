@@ -19,7 +19,7 @@ export default function ListArticles({ auth, response, flash }: any) {
     flash?.success &&
         toast(flash?.success, {
             position: "top-right",
-            autoClose: 5000,
+            autoClose: 1000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
