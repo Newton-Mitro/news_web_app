@@ -306,7 +306,7 @@ export default function CreateArticle({ auth, categories }: any) {
                                     </div>
 
                                     <div className="mb-4">
-                                        <TagSelect />
+                                        <TagSelect articleTags={[]} />
                                     </div>
 
                                     <div className="mb-4">

@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 
-const TagSelect: React.FC<any> = ({ articleTags }) => {
+interface TagSelectProps {
+    articleTags: string[];
+}
+
+const TagSelect: React.FC<TagSelectProps> = ({ articleTags }) => {
     const [tags, setTags] = useState<string[]>(articleTags);
     const [inputValue, setInputValue] = useState<string>("");
 
