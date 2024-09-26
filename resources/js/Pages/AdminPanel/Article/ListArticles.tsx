@@ -2,8 +2,11 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, router } from "@inertiajs/react";
 import moment from "moment";
 import { Bounce, toast } from "react-toastify";
+import Pagination from "../../../Components/Pagination";
 
 export default function ListArticles({ auth, response, flash }: any) {
+    console.log(response);
+
     const deleteArticle = (id: number) => {
         if (confirm("Are you sure you want to delete this article?")) {
             router.delete(route("articles.destroy", id));
@@ -28,6 +31,16 @@ export default function ListArticles({ auth, response, flash }: any) {
             theme: "light",
             transition: Bounce,
         });
+
+    const handleRecordChange = (page: number, record_per_page: number) => {
+        const currentUrl = new URL(window.location.href);
+        currentUrl.searchParams.set(
+            "record_per_page",
+            record_per_page.toString()
+        );
+        currentUrl.searchParams.set("page", page.toString());
+        window.location.href = currentUrl.toString();
+    };
 
     return (
         <AuthenticatedLayout
@@ -309,123 +322,23 @@ export default function ListArticles({ auth, response, flash }: any) {
                                         </table>
                                     </div>
                                     {/*Pagination*/}
-                                    <div className="flex items-center justify-between mt-auto">
-                                        <div className="flex items-center gap-2">
-                                            <select
-                                                className="py-0.5 w-20 bg-transparent focus:border-borderColor border border-borderColor shadow-sm focus:ring focus:ring-primary/10"
-                                                name="limit"
-                                                id="limit"
-                                                value={10}
-                                                onChange={(e) => {}}
-                                            >
-                                                <option
-                                                    className="even:bg-surface odd:bg-background"
-                                                    value={10}
-                                                >
-                                                    10
-                                                </option>
-                                                <option
-                                                    className="even:bg-surface odd:bg-background"
-                                                    value={50}
-                                                >
-                                                    50
-                                                </option>
-                                                <option
-                                                    className="even:bg-surface odd:bg-background"
-                                                    value={100}
-                                                >
-                                                    100
-                                                </option>
-                                                <option
-                                                    className="even:bg-surface odd:bg-background"
-                                                    value={500}
-                                                >
-                                                    500
-                                                </option>
-                                                <option
-                                                    className="even:bg-surface odd:bg-background"
-                                                    value={1000}
-                                                >
-                                                    1000
-                                                </option>
-                                            </select>
-                                            <div className="hidden md:block">
-                                                {`showing 1 to 10 out of 100 records`}
-                                            </div>
-                                        </div>
-                                        <nav
-                                            className="flex flex-row items-center justify-between flex-nowrap md:justify-center"
-                                            aria-label="Pagination"
-                                        >
-                                            <button
-                                                type="button"
-                                                className="items-center justify-center hidden w-8 h-8 mr-1 border rounded-full md:flex bg-primary text-onPrimary border-borderColor disabled:bg-disabledColor hover:bg-primaryVariant"
-                                                title="First Page"
-                                                onClick={() => {}}
-                                            >
-                                                <span className="sr-only">
-                                                    First Page
-                                                </span>
-                                                <i className="fa-solid fa-angles-left"></i>
-                                            </button>
-                                            <button
-                                                type="button"
-                                                className="flex items-center justify-center w-8 h-8 mr-1 border rounded-full bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabledColor border-borderColor"
-                                                title="Previous Page"
-                                                onClick={() => {}}
-                                            >
-                                                <span className="sr-only">
-                                                    Previous Page
-                                                </span>
-                                                <i className="fa-solid fa-angle-left"></i>
-                                            </button>
-                                            {/*{paginatePages.map((page) => {*/}
-                                            {/*    if (typeof page === "number") {*/}
-                                            {/*        return (*/}
-                                            {/*            <button*/}
-                                            {/*                key={page}*/}
-                                            {/*                className={`hidden md:flex w-8 h-8 mx-1 justify-center items-center rounded-full border  hover:border-gray-300`}*/}
-                                            {/*                type="button"*/}
-                                            {/*                title={`page - ${page}`}*/}
-                                            {/*                onClick={() => {*/}
-                                            {/*                }}*/}
-                                            {/*            >*/}
-                                            {/*                {page}*/}
-                                            {/*            </button>*/}
-                                            {/*        );*/}
-                                            {/*    } else {*/}
-                                            {/*        return (*/}
-                                            {/*            <div key={page} className="hidden md:flex">*/}
-                                            {/*                {page}*/}
-                                            {/*            </div>*/}
-                                            {/*        );*/}
-                                            {/*    }*/}
-                                            {/*})}*/}
-
-                                            <button
-                                                className="flex items-center justify-center w-8 h-8 mr-1 border rounded-full bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabledColor border-borderColor hover:border-gray-300"
-                                                type="button"
-                                                title="Next Page"
-                                                onClick={() => {}}
-                                            >
-                                                <span className="sr-only">
-                                                    Next Page
-                                                </span>
-                                                <i className="fa-solid fa-angle-right"></i>
-                                            </button>
-                                            <button
-                                                type="button"
-                                                className="items-center justify-center hidden w-8 h-8 mr-1 border rounded-full md:flex bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabledColor border-borderColor hover:border-gray-300"
-                                                title="Last Page"
-                                                onClick={() => {}}
-                                            >
-                                                <span className="sr-only">
-                                                    Last Page
-                                                </span>
-                                                <i className="fa-solid fa-angles-right"></i>
-                                            </button>
-                                        </nav>
-                                    </div>
+                                    <Pagination
+                                        current_page={response.current_page}
+                                        last_page={response.last_page}
+                                        first_page_url={response.first_page_url}
+                                        last_page_url={response.last_page_url}
+                                        links={response.links}
+                                        record_per_page={response.per_page}
+                                        onPageChange={function (
+                                            page: number,
+                                            record_per_page: number
+                                        ): void {
+                                            handleRecordChange(
+                                                page,
+                                                record_per_page
+                                            );
+                                        }}
+                                    />
                                 </div>
                             </div>
                         </div>
