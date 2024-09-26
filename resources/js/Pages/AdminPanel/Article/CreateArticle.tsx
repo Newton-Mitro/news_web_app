@@ -32,6 +32,7 @@ export default function CreateArticle({ auth, categories }: any) {
     };
 
     const handleBrowseClick = () => {
+        if (image) return;
         const input = document.createElement("input");
         input.type = "file";
         input.accept = "image/*";
@@ -269,12 +270,14 @@ export default function CreateArticle({ auth, categories }: any) {
                                             onDragOver={handleDragOver}
                                             onClick={handleBrowseClick}
                                         >
-                                            <p className="">
-                                                Drag and drop an image here or
-                                                click to browse
-                                            </p>
+                                            {image === null && (
+                                                <p className="">
+                                                    Drag and drop an image here
+                                                    or click to browse
+                                                </p>
+                                            )}
                                             {image ? (
-                                                <div className="relative mt-4">
+                                                <div className="relative pt-2">
                                                     <img
                                                         src={image}
                                                         alt="Preview"
@@ -284,7 +287,7 @@ export default function CreateArticle({ auth, categories }: any) {
                                                         onClick={
                                                             handleRemoveImage
                                                         }
-                                                        className="absolute top-0 right-0 p-1 text-white bg-red-500 rounded-full"
+                                                        className="absolute w-8 h-8 text-white rounded-full bg-error -top-2 -right-2"
                                                     >
                                                         &times;
                                                     </button>

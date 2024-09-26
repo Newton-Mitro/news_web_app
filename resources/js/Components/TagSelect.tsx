@@ -43,7 +43,7 @@ const TagSelect: React.FC = () => {
                         className="px-2 py-1 border rounded-r text-onSecondary border-borderColor disabled:bg-disabled hover:bg-secondaryVariant bg-secondary"
                         onClick={handleAddTag}
                     >
-                        <i className="fa-solid fa-magnifying-glass"></i>
+                        <i className="fa-solid fa-tags"></i>
                     </button>
                 </div>
 
@@ -51,15 +51,15 @@ const TagSelect: React.FC = () => {
                     {tags.map((tag, index) => (
                         <span
                             key={index}
-                            className="bg-brand text-onBrand text-sm font-medium px-2.5 py-0.5 rounded-full"
+                            className="bg-secondaryVariant text-onSecondaryVariant text-sm font-medium px-2.5 py-0.5 rounded-full"
                         >
                             {tag}
                             <button
                                 type="button"
                                 onClick={() => handleRemoveTag(tag)}
-                                className="ml-2 text-blue-500 hover:text-blue-700"
+                                className="ml-1 hover:text-error"
                             >
-                                &times;
+                                <i className="fa-solid fa-xmark"></i>
                             </button>
                         </span>
                     ))}

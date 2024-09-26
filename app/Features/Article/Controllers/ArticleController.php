@@ -65,6 +65,7 @@ class ArticleController extends Controller
 
     public function edit(Article $article)
     {
+        $article = Article::with(['attachments'])->findOrFail($article->id);
         $categories = Category::all();
         return Inertia::render('AdminPanel/Article/EditArticle', [
             'article' => $article,
