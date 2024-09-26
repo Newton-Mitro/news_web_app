@@ -1,11 +1,37 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, Link } from "@inertiajs/react";
+import { Head, Link, router } from "@inertiajs/react";
 import { useState } from "react";
 import ReactQuill from "react-quill";
+import { Bounce, toast } from "react-toastify";
 import TagSelect from "../../../Components/TagSelect";
 import { formats, modules } from "../../../Utils/quill-util";
 
-export default function EditArticle({ auth, article, categories }: any) {
+export default function EditArticle({ auth, article, categories, flash }: any) {
+    const deleteArticle = (id: number) => {
+        if (confirm("Are you sure you want to delete this article?")) {
+            router.delete(route("articles.destroy", id));
+        }
+    };
+
+    const updateArticleStatus = (id: number, status: string) => {
+        if (confirm(`Are you sure you want to ${status} this article?`)) {
+            router.put(route("articles.updateStatus", id));
+        }
+    };
+
+    flash?.success &&
+        toast(flash?.success, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+        });
+
     const [image, setImage] = useState<string | null>(
         article.attachments ? article.attachments[0].url : []
     );
@@ -97,9 +123,21 @@ export default function EditArticle({ auth, article, categories }: any) {
                                         </span>
                                     </Link>
 
-                                    <button className="bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabled hover:shadow-md transition-all duration-300 shadow-sm rounded py-1.5 px-1.5 md:px-4 hover:cursor-pointer">
+                                    <button
+                                        className="bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabled hover:shadow-md transition-all duration-300 shadow-sm rounded py-1.5 px-1.5 md:px-4 hover:cursor-pointer"
+                                        onClick={() =>
+                                            updateArticleStatus(
+                                                article.id,
+                                                article.status === "Published"
+                                                    ? "draft"
+                                                    : "publish"
+                                            )
+                                        }
+                                    >
                                         <span className="hidden md:block">
-                                            Publish Article
+                                            {article.status === "Published"
+                                                ? "Draft Article"
+                                                : "Publish Article"}
                                         </span>
                                         <span className="inline-block md:hidden">
                                             {" "}
@@ -107,7 +145,12 @@ export default function EditArticle({ auth, article, categories }: any) {
                                         </span>
                                     </button>
 
-                                    <button className="bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabled hover:shadow-md transition-all duration-300 shadow-sm rounded py-1.5 px-1.5 md:px-4 hover:cursor-pointer">
+                                    <button
+                                        className="bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabled hover:shadow-md transition-all duration-300 shadow-sm rounded py-1.5 px-1.5 md:px-4 hover:cursor-pointer"
+                                        onClick={() =>
+                                            deleteArticle(article.id)
+                                        }
+                                    >
                                         <span className="hidden md:block">
                                             Delete Article
                                         </span>
@@ -174,6 +217,7 @@ export default function EditArticle({ auth, article, categories }: any) {
                                                 <select
                                                     name="status"
                                                     id="status"
+                                                    value={article.status}
                                                     className="w-full px-2 py-1 border rounded-md bg-background border-borderColor"
                                                 >
                                                     <option value="">
@@ -343,7 +387,11 @@ export default function EditArticle({ auth, article, categories }: any) {
                                     </div>
 
                                     <div className="mb-4">
-                                        <TagSelect />
+                                        <TagSelect
+                                            articleTags={article.tags?.split(
+                                                ","
+                                            )}
+                                        />
                                     </div>
 
                                     <div className="mb-4">

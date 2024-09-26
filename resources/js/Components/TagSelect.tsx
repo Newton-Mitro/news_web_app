@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-const TagSelect: React.FC = () => {
-    const [tags, setTags] = useState<string[]>([]);
+const TagSelect: React.FC<any> = ({ articleTags }) => {
+    const [tags, setTags] = useState<string[]>(articleTags);
     const [inputValue, setInputValue] = useState<string>("");
 
     const handleAddTag = () => {
@@ -48,7 +48,7 @@ const TagSelect: React.FC = () => {
                 </div>
 
                 <div className="flex flex-wrap items-center justify-center gap-1">
-                    {tags.map((tag, index) => (
+                    {tags?.map((tag, index) => (
                         <span
                             key={index}
                             className="bg-secondaryVariant text-onSecondaryVariant text-sm font-medium px-2.5 py-0.5 rounded-full"
