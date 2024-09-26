@@ -103,7 +103,7 @@ function Header({
                         </Link>
                     </div>
                     <div className="flex gap-4">
-                        <Link className="font-bold hover:text-error" href={""}>
+                        <Link className="hover:text-error" href={""}>
                             বাংলা
                         </Link>
                     </div>

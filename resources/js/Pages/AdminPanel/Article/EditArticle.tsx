@@ -104,7 +104,7 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                             Articles
                                         </span>
                                         <span className="inline-block md:hidden">
-                                            <i className="fa-solid fa-file-circle-plus"></i>
+                                            <i className="fa-solid fa-rectangle-list"></i>
                                         </span>
                                     </Link>
 
@@ -119,7 +119,7 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                             View Article
                                         </span>
                                         <span className="inline-block md:hidden">
-                                            <i className="fa-solid fa-file-circle-plus"></i>
+                                            <i className="fa-solid fa-eye"></i>
                                         </span>
                                     </Link>
 
@@ -140,8 +140,11 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                                 : "Publish Article"}
                                         </span>
                                         <span className="inline-block md:hidden">
-                                            {" "}
-                                            <i className="fa-solid fa-file-csv"></i>
+                                            {article.status === "Published" ? (
+                                                <i className="fa-solid fa-cloud-arrow-down"></i>
+                                            ) : (
+                                                <i className="fa-solid fa-cloud-arrow-up"></i>
+                                            )}
                                         </span>
                                     </button>
 
@@ -155,8 +158,7 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                             Delete Article
                                         </span>
                                         <span className="inline-block md:hidden">
-                                            {" "}
-                                            <i className="fa-solid fa-file-csv"></i>
+                                            <i className="fa-solid fa-trash-can"></i>
                                         </span>
                                     </button>
                                 </div>
@@ -346,7 +348,7 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                             Article Image
                                         </label>
                                         <div
-                                            className="flex flex-col items-center justify-center p-10 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-background w-80 hover:bg-primary/30"
+                                            className="flex flex-col items-center justify-center w-full p-4 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer lg:p-10 bg-background lg:w-80 hover:bg-primary/30"
                                             onDrop={handleDrop}
                                             onDragOver={handleDragOver}
                                             onClick={handleBrowseClick}

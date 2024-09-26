@@ -69,7 +69,7 @@ export default function ListArticles({ auth, response, flash }: any) {
                                             Create Page
                                         </span>
                                         <span className="inline-block md:hidden">
-                                            <i className="fa-solid fa-file-circle-plus"></i>
+                                            <i className="fa-solid fa-newspaper"></i>
                                         </span>
                                     </Link>
 
@@ -79,7 +79,6 @@ export default function ListArticles({ auth, response, flash }: any) {
                                                 Export CSV
                                             </span>
                                             <span className="inline-block md:hidden">
-                                                {" "}
                                                 <i className="fa-solid fa-file-csv"></i>
                                             </span>
                                         </button>
@@ -310,7 +309,12 @@ export default function ListArticles({ auth, response, flash }: any) {
                                                                                         ? "Draft"
                                                                                         : "Publish"}
                                                                                 </span>
-                                                                                <i className="fa-solid fa-cloud-arrow-up"></i>
+                                                                                {article.status ===
+                                                                                "Published" ? (
+                                                                                    <i className="fa-solid fa-cloud-arrow-down"></i>
+                                                                                ) : (
+                                                                                    <i className="fa-solid fa-cloud-arrow-up"></i>
+                                                                                )}
                                                                             </button>
                                                                         </div>
                                                                     </td>

@@ -77,7 +77,7 @@ export default function CreateArticle({ auth, categories }: any) {
                                                 Articles
                                             </span>
                                             <span className="inline-block md:hidden">
-                                                <i className="fa-solid fa-file-circle-plus"></i>
+                                                <i className="fa-solid fa-rectangle-list"></i>
                                             </span>
                                         </Link>
                                     </div>

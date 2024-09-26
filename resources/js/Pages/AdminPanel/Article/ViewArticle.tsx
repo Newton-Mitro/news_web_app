@@ -55,7 +55,7 @@ export default function ViewArticle({ auth, article, flash }: any) {
                                             Articles
                                         </span>
                                         <span className="inline-block md:hidden">
-                                            <i className="fa-solid fa-file-circle-plus"></i>
+                                            <i className="fa-solid fa-rectangle-list"></i>
                                         </span>
                                     </Link>
 
@@ -70,7 +70,7 @@ export default function ViewArticle({ auth, article, flash }: any) {
                                             Edit Article
                                         </span>
                                         <span className="inline-block md:hidden">
-                                            <i className="fa-solid fa-file-circle-plus"></i>
+                                            <i className="fa-solid fa-pen-to-square"></i>
                                         </span>
                                     </Link>
 
@@ -91,8 +91,11 @@ export default function ViewArticle({ auth, article, flash }: any) {
                                                 : "Publish Article"}
                                         </span>
                                         <span className="inline-block md:hidden">
-                                            {" "}
-                                            <i className="fa-solid fa-file-csv"></i>
+                                            {article.status === "Published" ? (
+                                                <i className="fa-solid fa-cloud-arrow-down"></i>
+                                            ) : (
+                                                <i className="fa-solid fa-cloud-arrow-up"></i>
+                                            )}
                                         </span>
                                     </button>
 
@@ -106,8 +109,7 @@ export default function ViewArticle({ auth, article, flash }: any) {
                                             Delete Article
                                         </span>
                                         <span className="inline-block md:hidden">
-                                            {" "}
-                                            <i className="fa-solid fa-file-csv"></i>
+                                            <i className="fa-solid fa-trash-can"></i>
                                         </span>
                                     </button>
                                 </div>
