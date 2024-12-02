@@ -107,7 +107,9 @@ const Pagination: React.FC<PaginationProps> = ({
                         return (
                             <button
                                 key={link.label}
-                                className={`hidden md:flex w-8 h-8 mx-1 justify-center items-center rounded-full border  hover:border-gray-300`}
+                                className={`hidden ${
+                                    link.active && "bg-primary text-onPrimary"
+                                } md:flex w-8 h-8 mx-1 justify-center items-center rounded-full border  hover:border-gray-300`}
                                 type="button"
                                 title={`page - ${link.label}`}
                                 onClick={() =>

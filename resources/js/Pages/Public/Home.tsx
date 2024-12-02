@@ -50,7 +50,7 @@ export default function Home({
                                 <div className="pt-2">
                                     <Link
                                         href={""}
-                                        className="mb-4 text-xl font-bold hover:text-error"
+                                        className="mb-4 font-bold hover:text-error"
                                     >
                                         {sectionOneMiddle[0]?.title}
                                     </Link>
@@ -108,7 +108,7 @@ export default function Home({
                                 <div className="pt-2">
                                     <Link
                                         href={""}
-                                        className="mb-4 text-xl font-bold hover:text-error"
+                                        className="mb-4 font-bold hover:text-error"
                                     >
                                         বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা
                                     </Link>
@@ -126,12 +126,12 @@ export default function Home({
                                 <img
                                     src="https://cdn.bdnews24.com/bdnews24/media/english/imgAll/2024August/wood-250824-01-1724592621.jpg"
                                     alt="Post Image"
-                                    className="object-cover w-36"
+                                    className="hidden object-cover w-36 md:block"
                                 />
                                 <div className="">
                                     <Link
                                         href={""}
-                                        className="mb-4 text-xl font-bold hover:text-error"
+                                        className="mb-4 font-bold hover:text-error"
                                     >
                                         বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা
                                     </Link>
@@ -147,12 +147,12 @@ export default function Home({
                                 <img
                                     src="https://cdn.bdnews24.com/bdnews24/media/english/imgAll/2024August/wood-250824-01-1724592621.jpg"
                                     alt="Post Image"
-                                    className="object-cover w-36"
+                                    className="hidden object-cover w-36 md:block"
                                 />
                                 <div className="">
                                     <Link
                                         href={""}
-                                        className="mb-4 text-xl font-bold hover:text-error"
+                                        className="mb-4 font-bold hover:text-error"
                                     >
                                         বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা
                                     </Link>
@@ -168,12 +168,12 @@ export default function Home({
                                 <img
                                     src="https://cdn.bdnews24.com/bdnews24/media/english/imgAll/2024August/wood-250824-01-1724592621.jpg"
                                     alt="Post Image"
-                                    className="object-cover w-36"
+                                    className="hidden object-cover w-36 md:block"
                                 />
                                 <div className="">
                                     <Link
                                         href={""}
-                                        className="mb-4 text-xl font-bold hover:text-error"
+                                        className="mb-4 font-bold hover:text-error"
                                     >
                                         বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা
                                     </Link>
@@ -207,12 +207,12 @@ export default function Home({
                                 <img
                                     src="https://cdn.bdnews24.com/bdnews24/media/english/imgAll/2024August/wood-250824-01-1724592621.jpg"
                                     alt="Post Image"
-                                    className="object-cover w-36"
+                                    className="hidden object-cover w-36 md:block"
                                 />
                                 <div className="">
                                     <Link
                                         href={""}
-                                        className="mb-4 text-xl font-bold hover:text-error"
+                                        className="mb-4 font-bold hover:text-error"
                                     >
                                         বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা
                                     </Link>
@@ -228,12 +228,12 @@ export default function Home({
                                 <img
                                     src="https://cdn.bdnews24.com/bdnews24/media/english/imgAll/2024August/wood-250824-01-1724592621.jpg"
                                     alt="Post Image"
-                                    className="object-cover w-36"
+                                    className="hidden object-cover w-36 md:block"
                                 />
                                 <div className="">
                                     <Link
                                         href={""}
-                                        className="mb-4 text-xl font-bold hover:text-error"
+                                        className="mb-4 font-bold hover:text-error"
                                     >
                                         বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা
                                     </Link>
@@ -249,12 +249,12 @@ export default function Home({
                                 <img
                                     src="https://cdn.bdnews24.com/bdnews24/media/english/imgAll/2024August/wood-250824-01-1724592621.jpg"
                                     alt="Post Image"
-                                    className="object-cover w-36"
+                                    className="hidden object-cover w-36 md:block"
                                 />
                                 <div className="">
                                     <Link
                                         href={""}
-                                        className="mb-4 text-xl font-bold hover:text-error"
+                                        className="mb-4 font-bold hover:text-error"
                                     >
                                         বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা
                                     </Link>
@@ -277,7 +277,7 @@ export default function Home({
                                 <div className="pt-2">
                                     <Link
                                         href={""}
-                                        className="mb-4 text-xl font-bold hover:text-error"
+                                        className="mb-4 font-bold hover:text-error"
                                     >
                                         বন্যায় কুমিল্লার ক্ষতি ৩৩৬২ কোটি টাকা
                                     </Link>
