@@ -35,6 +35,7 @@ class ArticleController extends Controller
 
     public function store(StoreArticleRequest $request)
     {
+        $validatedData = $request->validated();
         $post = new Article();
         $post->uuid = $request->uuid;
         $post->title = $request->title;

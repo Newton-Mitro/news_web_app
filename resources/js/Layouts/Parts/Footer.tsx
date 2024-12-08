@@ -1,25 +1,31 @@
-import {Link} from "@inertiajs/react";
+import { Link } from "@inertiajs/react";
+import { PropsWithChildren } from "react";
 import myLogo from "../../../assets/brand/logo.png";
-import {PropsWithChildren} from "react";
 
-function Footer({auth}: PropsWithChildren<{ auth: any }>) {
+function Footer({ auth }: PropsWithChildren<{ auth: any }>) {
     return (
         <footer className="mt-auto text-center bg-surface text-onSurface">
             <div className="container flex flex-col items-center justify-center p-3 py-6 mx-auto">
-                <ul className="flex gap-4 text-primary my-6 text-sm">
-                    <li>নীতি</li>
-                    <li>আমাদের সম্পর্কে</li>
-                    <li>যোগাযোগ</li>
+                <ul className="flex gap-4 my-6 text-sm">
+                    <li>
+                        <Link href={""}>নীতি</Link>
+                    </li>
+                    <li>
+                        <Link href={""}>আমাদের সম্পর্কে</Link>
+                    </li>
+                    <li>
+                        <Link href={""}>যোগাযোগ</Link>
+                    </li>
                 </ul>
                 <Link
-                    className="flex flex-col items-center justify-center " href={""}>
-                    <img className="h-20" src={myLogo} alt="header logo"/>
-                    <p className={`mt-2 font-extrabold`}>
-                        Dhaka Credit News
-                    </p>
+                    className="flex flex-col items-center justify-center "
+                    href={""}
+                >
+                    <img className="h-20" src={myLogo} alt="header logo" />
+                    <p className={`mt-2 font-extrabold`}>Dhaka Credit News</p>
                     <p className="text-sm font-light">
-                        Fr. চার্লস জে. ইয়াং ভবন, 173/1/A পূর্ব তেজতুরি
-                        বাজার, তেজগাঁও ঢাকা 1215
+                        Fr. চার্লস জে. ইয়াং ভবন, 173/1/A পূর্ব তেজতুরি বাজার,
+                        তেজগাঁও ঢাকা 1215
                     </p>
                 </Link>
 

@@ -161,7 +161,12 @@ export default function ListArticles({ auth, response, flash }: any) {
                                                             index: number
                                                         ) => {
                                                             return (
-                                                                <tr className="flex flex-col flex-wrap w-full border border-b divide-x divide-borderColor border-borderColor even:bg-background even:text-onBackground text-onSurface md:table-row">
+                                                                <tr
+                                                                    key={
+                                                                        article.id
+                                                                    }
+                                                                    className="flex flex-col flex-wrap w-full border border-b divide-x divide-borderColor border-borderColor even:bg-background even:text-onBackground text-onSurface md:table-row"
+                                                                >
                                                                     <td className="px-2">
                                                                         <label className="md:hidden">
                                                                             Id

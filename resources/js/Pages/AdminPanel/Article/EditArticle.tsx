@@ -1,12 +1,64 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, router } from "@inertiajs/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import { Bounce, toast } from "react-toastify";
 import TagSelect from "../../../Components/TagSelect";
 import { formats, modules } from "../../../Utils/quill-util";
 
 export default function EditArticle({ auth, article, categories, flash }: any) {
+    const [formData, setFormData] = useState({
+        title: article.title || "",
+        slug: article.slug || "",
+        status: article.status || "Draft",
+        category_id: article.category_id || "",
+        body: article.body || "",
+        summery: article.summery || "",
+        video_url: article.video_url || "",
+        featured: article.featured || false,
+        tags: article.tags?.split(",") || [],
+    });
+
+    const [errors, setErrors] = useState(flash.errors || {});
+    const [message, setMessage] = useState<string | null>(
+        flash?.success || null
+    );
+
+    console.log(message);
+
+    useEffect(() => {
+        // Automatically clear the flash message after a delay
+        if (message) {
+            const timer = setTimeout(() => setMessage(null), 5000);
+            return () => clearTimeout(timer); // Cleanup on component unmount
+        }
+    }, [message]);
+
+    const handleInputChange = (fieldName: string, value: any) => {
+        console.log(value);
+
+        setFormData({
+            ...formData,
+            [fieldName]: value,
+        });
+        setErrors({});
+        // if (errors[name]) {
+        //     setErrors({ ...errors, [name]: null });
+        // }
+    };
+
+    const handleFormSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        router.put(route("articles.update", article.id), formData, {
+            onError: (newErrors) => {
+                setErrors(newErrors);
+            },
+            onSuccess: (message) => {
+                console.log(message);
+            },
+        });
+    };
+
     const deleteArticle = (id: number) => {
         if (confirm("Are you sure you want to delete this article?")) {
             router.delete(route("articles.destroy", id));
@@ -165,8 +217,7 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                             </div>
                             <div className="">
                                 <form
-                                    action="{{ route('articles.store') }}"
-                                    method="POST"
+                                    onSubmit={handleFormSubmit}
                                     className="w-full"
                                 >
                                     <div className="">
@@ -183,7 +234,19 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                                     name="title"
                                                     id="title"
                                                     className="w-full py-1 border rounded-sm bg-background border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
-                                                    value={article.title}
+                                                    value={formData.title}
+                                                    onChange={(e: any) => {
+                                                        const {
+                                                            name,
+                                                            value,
+                                                            type,
+                                                            checked,
+                                                        } = e.target;
+                                                        handleInputChange(
+                                                            name,
+                                                            value
+                                                        );
+                                                    }}
                                                 />
                                                 <div className="text-sm text-error">
                                                     error message
@@ -202,7 +265,19 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                                     name="slug"
                                                     id="slug"
                                                     className="w-full py-1 border rounded-sm bg-background border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
-                                                    value={article.slug}
+                                                    value={formData.slug}
+                                                    onChange={(e: any) => {
+                                                        const {
+                                                            name,
+                                                            value,
+                                                            type,
+                                                            checked,
+                                                        } = e.target;
+                                                        handleInputChange(
+                                                            name,
+                                                            value
+                                                        );
+                                                    }}
                                                 />
                                                 <div className="text-sm text-error">
                                                     error message
@@ -219,8 +294,20 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                                 <select
                                                     name="status"
                                                     id="status"
-                                                    value={article.status}
                                                     className="w-full px-2 py-1 border rounded-md bg-background border-borderColor"
+                                                    value={formData.status}
+                                                    onChange={(e: any) => {
+                                                        const {
+                                                            name,
+                                                            value,
+                                                            type,
+                                                            checked,
+                                                        } = e.target;
+                                                        handleInputChange(
+                                                            name,
+                                                            value
+                                                        );
+                                                    }}
                                                 >
                                                     <option value="">
                                                         Select Status
@@ -248,8 +335,20 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                                 <select
                                                     name="category_id"
                                                     id="category_id"
-                                                    value={article.category_id}
                                                     className="w-full px-2 py-1 border rounded-md border-borderColor bg-background"
+                                                    value={formData.category_id}
+                                                    onChange={(e: any) => {
+                                                        const {
+                                                            name,
+                                                            value,
+                                                            type,
+                                                            checked,
+                                                        } = e.target;
+                                                        handleInputChange(
+                                                            name,
+                                                            value
+                                                        );
+                                                    }}
                                                 >
                                                     <option value="">
                                                         Category Name
@@ -294,8 +393,13 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                             formats={formats}
                                             className="bg-background"
                                             readOnly={false}
-                                            value={article.body}
-                                            onChange={(value: string) => {}}
+                                            value={formData.body}
+                                            onChange={(value: any) => {
+                                                handleInputChange(
+                                                    "body",
+                                                    value
+                                                );
+                                            }}
                                         />
 
                                         <div className="text-sm text-error">
@@ -313,7 +417,16 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                         <textarea
                                             name="summery"
                                             id="summery"
-                                            value={article.summery}
+                                            value={formData.summery}
+                                            onChange={(e: any) => {
+                                                const {
+                                                    name,
+                                                    value,
+                                                    type,
+                                                    checked,
+                                                } = e.target;
+                                                handleInputChange(name, value);
+                                            }}
                                             className="w-full py-1 border rounded-sm bg-background border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
                                         ></textarea>
                                         <div className="text-sm text-error">
@@ -333,7 +446,16 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                             name="video_url"
                                             id="video_url"
                                             className="w-full py-1 border rounded-sm bg-background border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
-                                            value={article.video_url}
+                                            value={formData.video_url}
+                                            onChange={(e: any) => {
+                                                const {
+                                                    name,
+                                                    value,
+                                                    type,
+                                                    checked,
+                                                } = e.target;
+                                                handleInputChange(name, value);
+                                            }}
                                         />
                                         <div className="text-sm text-error">
                                             error message
@@ -348,19 +470,24 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                             Article Image
                                         </label>
                                         <div
-                                            className="flex flex-col items-center justify-center w-full p-4 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer lg:p-10 bg-background lg:w-80 hover:bg-primary/30"
+                                            className="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-background lg:w-80 hover:bg-primary/30"
                                             onDrop={handleDrop}
                                             onDragOver={handleDragOver}
                                             onClick={handleBrowseClick}
                                         >
                                             {image === null && (
-                                                <p className="">
-                                                    Drag and drop an image here
-                                                    or click to browse
-                                                </p>
+                                                <div className="p-4">
+                                                    <p className="">
+                                                        Drag and drop an image
+                                                        here or click to browse
+                                                    </p>
+                                                    <p className="mt-2 text-gray-300">
+                                                        No image uploaded
+                                                    </p>
+                                                </div>
                                             )}
-                                            {image ? (
-                                                <div className="relative pt-2">
+                                            {image && (
+                                                <div className="relative">
                                                     <img
                                                         src={image}
                                                         alt="Preview"
@@ -375,10 +502,6 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                                         &times;
                                                     </button>
                                                 </div>
-                                            ) : (
-                                                <p className="mt-4 text-gray-500">
-                                                    No image uploaded
-                                                </p>
                                             )}
                                             {error && (
                                                 <p className="mt-2 text-red-500">
@@ -402,7 +525,19 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                                 type="checkbox"
                                                 name="featured"
                                                 id="featured"
-                                                value={article.featured}
+                                                value={formData.featured}
+                                                onChange={(e: any) => {
+                                                    const {
+                                                        name,
+                                                        value,
+                                                        type,
+                                                        checked,
+                                                    } = e.target;
+                                                    handleInputChange(
+                                                        name,
+                                                        checked
+                                                    );
+                                                }}
                                             />
                                             <label
                                                 htmlFor="featured"

@@ -44,13 +44,13 @@ function SidebarComponent({
 
                 <div className="flex h-[calc(100vh-122px)] flex-grow flex-col justify-between overflow-auto text-onSurface">
                     <ul className="flex flex-col justify-center cursor-pointer text-onSurface">
-                        <li className="flex items-center duration-300 border-b border-dashed border-borderColor transition-color group bg-surface text-onSurface hover:bg-background hover:bg-blue-gray-900 hover:text-background">
+                        <li className="flex items-center duration-300 border-b border-dashed border-borderColor transition-color group bg-surface hover:bg-background hover:bg-blue-gray-900 hover:text-background">
                             <Link
                                 href={route(`dashboard`)}
-                                className={`flex h-full w-full items-center bg-transparent px-4 py-2 text-onSurface transition-all duration-300
+                                className={`flex h-full w-full items-center bg-transparent px-4 py-2 transition-all duration-300
         ${
             sidebarOpen && "group-hover:scale-105"
-        }  sidebar-menu text-primary group-hover:bg-background group-hover:text-onBackground`}
+        }  sidebar-menu  group-hover:bg-background group-hover:text-onBackground`}
                             >
                                 <span className="text-xl">
                                     <i className="fa-brands fa-buromobelexperte group-active:text-orange-900"></i>
@@ -60,13 +60,13 @@ function SidebarComponent({
                                 ) : null}
                             </Link>
                         </li>
-                        <li className="flex items-center duration-300 border-b border-dashed border-borderColor transition-color group bg-surface text-onSurface hover:bg-background hover:bg-blue-gray-900 hover:text-background">
+                        <li className="flex items-center duration-300 border-b border-dashed border-borderColor transition-color group bg-surface hover:bg-background hover:bg-blue-gray-900 hover:text-background">
                             <Link
                                 href={route(`articles.index`)}
-                                className={`flex h-full w-full items-center bg-transparent px-4 py-2 text-onSurface transition-all duration-300
+                                className={`flex h-full w-full items-center bg-transparent px-4 py-2 transition-all duration-300
         ${
             sidebarOpen && "group-hover:scale-105"
-        }  sidebar-menu text-primary group-hover:bg-background group-hover:text-onBackground`}
+        }  sidebar-menu group-hover:bg-background group-hover:text-onBackground`}
                             >
                                 <span className="text-xl">
                                     <i className="fa-solid fa-file group-active:text-orange-900"></i>
@@ -76,13 +76,13 @@ function SidebarComponent({
                                 ) : null}
                             </Link>
                         </li>
-                        <li className="flex items-center duration-300 border-b border-dashed border-borderColor transition-color group bg-surface text-onSurface hover:bg-background hover:bg-blue-gray-900 hover:text-background">
+                        <li className="flex items-center duration-300 border-b border-dashed border-borderColor transition-color group bg-surface hover:bg-background hover:bg-blue-gray-900 hover:text-background">
                             <Link
                                 href={route(`articles.index`)}
-                                className={`flex h-full w-full items-center bg-transparent px-4 py-2 text-onSurface transition-all duration-300
+                                className={`flex h-full w-full items-center bg-transparent px-4 py-2 transition-all duration-300
         ${
             sidebarOpen && "group-hover:scale-105"
-        }  sidebar-menu text-primary group-hover:bg-background group-hover:text-onBackground`}
+        }  sidebar-menu group-hover:bg-background group-hover:text-onBackground`}
                             >
                                 <span className="text-xl">
                                     <i className="fa-solid fa-layer-group group-active:text-orange-900"></i>
@@ -93,13 +93,13 @@ function SidebarComponent({
                             </Link>
                         </li>
 
-                        <li className="flex items-center duration-300 border-b border-dashed border-borderColor transition-color group bg-surface text-onSurface hover:bg-background hover:bg-blue-gray-900 hover:text-background">
+                        <li className="flex items-center duration-300 border-b border-dashed border-borderColor transition-color group bg-surface hover:bg-background hover:bg-blue-gray-900 hover:text-background">
                             <Link
                                 href={route(`articles.index`)}
-                                className={`flex h-full w-full items-center bg-transparent px-4 py-2 text-onSurface transition-all duration-300
+                                className={`flex h-full w-full items-center bg-transparent px-4 py-2 transition-all duration-300
         ${
             sidebarOpen && "group-hover:scale-105"
-        }  sidebar-menu text-primary group-hover:bg-background group-hover:text-onBackground`}
+        }  sidebar-menu group-hover:bg-background group-hover:text-onBackground`}
                             >
                                 <span className="text-xl">
                                     <i className="fa-solid fa-newspaper group-active:text-orange-900"></i>
@@ -110,13 +110,13 @@ function SidebarComponent({
                             </Link>
                         </li>
 
-                        <li className="flex items-center duration-300 border-b border-dashed border-borderColor transition-color group bg-surface text-onSurface hover:bg-background hover:bg-blue-gray-900 hover:text-background">
+                        <li className="flex items-center duration-300 border-b border-dashed border-borderColor transition-color group bg-surface hover:bg-background hover:bg-blue-gray-900 hover:text-background">
                             <Link
                                 href={route(`articles.index`)}
-                                className={`flex h-full w-full items-center bg-transparent px-4 py-2 text-onSurface transition-all duration-300
+                                className={`flex h-full w-full items-center bg-transparent px-4 py-2 transition-all duration-300
         ${
             sidebarOpen && "group-hover:scale-105"
-        }  sidebar-menu text-primary group-hover:bg-background group-hover:text-onBackground`}
+        }  sidebar-menu group-hover:bg-background group-hover:text-onBackground`}
                             >
                                 <span className="text-xl">
                                     <i className="fa-solid fa-users-gear group-active:text-orange-900"></i>
@@ -127,13 +127,13 @@ function SidebarComponent({
                             </Link>
                         </li>
 
-                        <li className="flex items-center duration-300 border-b border-dashed border-borderColor transition-color group bg-surface text-onSurface hover:bg-background hover:bg-blue-gray-900 hover:text-background">
+                        <li className="flex items-center duration-300 border-b border-dashed border-borderColor transition-color group bg-surface hover:bg-background hover:bg-blue-gray-900 hover:text-background">
                             <Link
                                 href={route(`articles.index`)}
-                                className={`flex h-full w-full items-center bg-transparent px-4 py-2 text-onSurface transition-all duration-300
+                                className={`flex h-full w-full items-center bg-transparent px-4 py-2 transition-all duration-300
         ${
             sidebarOpen && "group-hover:scale-105"
-        }  sidebar-menu text-primary group-hover:bg-background group-hover:text-onBackground`}
+        }  sidebar-menu group-hover:bg-background group-hover:text-onBackground`}
                             >
                                 <span className="text-xl">
                                     <i className="fa-solid fa-gear group-active:text-orange-900"></i>

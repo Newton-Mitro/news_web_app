@@ -54,7 +54,7 @@ const TagSelect: React.FC<TagSelectProps> = ({ articleTags }) => {
                 <div className="flex flex-wrap items-center justify-center gap-1">
                     {tags?.map((tag, index) => (
                         <span
-                            key={index}
+                            key={index + tag}
                             className="bg-secondaryVariant text-onSecondaryVariant text-sm font-medium px-2.5 py-0.5 rounded-full"
                         >
                             {tag}

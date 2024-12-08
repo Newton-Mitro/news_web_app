@@ -85,8 +85,7 @@ export default function CreateArticle({ auth, categories }: any) {
                             </div>
                             <div className="">
                                 <form
-                                    action="{{ route('articles.store') }}"
-                                    method="POST"
+                                    action={route("articles.store")}
                                     className="w-full"
                                 >
                                     <div className="">
@@ -168,6 +167,7 @@ export default function CreateArticle({ auth, categories }: any) {
                                                     name="category_id"
                                                     id="category_id"
                                                     className="w-full px-2 py-1 border rounded-md border-borderColor bg-background"
+                                                    onChange={() => {}}
                                                 >
                                                     <option value="">
                                                         Category Name
