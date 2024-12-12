@@ -156,18 +156,17 @@ export default function Authenticated({
                             </div>
                         </header>
                     </header>
-                    <section className="h-[calc(100vh-112px)] overflow-auto">
+                    <section className="h-[calc(100vh-64px)] overflow-auto">
                         <Outlet />
                         {children}
                     </section>
-                    <section id="footer" className="w-full h-12 mt-auto">
-                        {/* <Footer /> */}
+                    {/* <section id="footer" className="w-full h-12 mt-auto">
                         <footer className="flex items-center justify-center w-full h-full bg-surface text-onSurface">
                             <p className="text-sm font-light text-center">
                                 Developed by DC Quantum Labs
                             </p>
                         </footer>
-                    </section>
+                    </section> */}
                 </section>
                 <section className="fixed top-0 left-0 h-full">
                     <SidebarComponent

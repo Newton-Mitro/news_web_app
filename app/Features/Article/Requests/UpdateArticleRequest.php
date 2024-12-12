@@ -13,17 +13,13 @@ class UpdateArticleRequest extends FormRequest
 
     public function rules(): array
     {
-        // Assuming the article ID is passed in the URL
-        $articleId = $this->route('article'); // Adjust if your route parameter is different
-
         return [
             'title' => 'required|string|max:255',
-            'slug' => 'required|string|unique:posts,slug,' . $articleId,
-            'content' => 'required|string',
+            'body' => 'required|string',
             'summery' => 'nullable|string',
             'video_url' => 'nullable|url',
-            'featured' => 'boolean',
             'category_id' => 'required|exists:categories,id',
+            'attachments.*' => 'file|mimes:jpg,jpeg,png,pdf|max:2048',
         ];
     }
 }

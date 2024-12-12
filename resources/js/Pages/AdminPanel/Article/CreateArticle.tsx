@@ -1,13 +1,87 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, Link } from "@inertiajs/react";
+import { Head, Link, router } from "@inertiajs/react";
 import { useState } from "react";
 import ReactQuill from "react-quill";
+import slugify from "react-slugify";
+import { Bounce, toast } from "react-toastify";
 import TagSelect from "../../../Components/TagSelect";
 import { formats, modules } from "../../../Utils/quill-util";
 
 export default function CreateArticle({ auth, categories }: any) {
-    const [image, setImage] = useState<string | null>(null);
-    const [error, setError] = useState<string | null>(null);
+    const [formData, setFormData] = useState<{
+        title: any;
+        slug: any;
+        status: any;
+        category_id: any;
+        body: any;
+        summery: any;
+        video_url: any;
+        featured: any;
+        tags: any;
+        new_image: any;
+    }>({
+        title: "",
+        slug: "",
+        status: "",
+        category_id: "",
+        body: "",
+        summery: "",
+        video_url: "",
+        featured: false,
+        tags: null,
+        new_image: null,
+    });
+
+    const [errors, setErrors] = useState<any>(null);
+
+    const handleInputChange = (fieldName: string, value: any) => {
+        setFormData({
+            ...formData,
+            [fieldName]: value,
+        });
+    };
+
+    const prepareFormData = () => {
+        const formPayload = new FormData();
+
+        Object.entries(formData).forEach(([key, value]) => {
+            console.log(key, value);
+            formPayload.append(key, value);
+        });
+
+        return formPayload;
+    };
+
+    const handleFormSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+
+        const formPayload = prepareFormData();
+
+        // Debugging: Inspect FormData contents
+        // for (let [key, value] of formPayload.entries()) {
+        //     console.log(`${key}:`, value);
+        // }
+
+        router.post(route("articles.store"), formPayload, {
+            onError: (newErrors) => {
+                console.error("Errors:", newErrors);
+                setErrors(newErrors);
+            },
+            onSuccess: (message) => {
+                toast("Article added successfully.", {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Bounce,
+                });
+            },
+        });
+    };
 
     const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
@@ -19,10 +93,7 @@ export default function CreateArticle({ auth, categories }: any) {
         if (files.length > 0) {
             const file = files[0];
             if (file.type.startsWith("image/")) {
-                setImage(URL.createObjectURL(file));
-                setError(null);
-            } else {
-                setError("Please upload an image file.");
+                handleInputChange("new_image", file);
             }
         }
     };
@@ -32,7 +103,6 @@ export default function CreateArticle({ auth, categories }: any) {
     };
 
     const handleBrowseClick = () => {
-        if (image) return;
         const input = document.createElement("input");
         input.type = "file";
         input.accept = "image/*";
@@ -44,8 +114,15 @@ export default function CreateArticle({ auth, categories }: any) {
         input.click();
     };
 
-    const handleRemoveImage = () => {
-        setImage(null);
+    const handleRemoveImage = (deletedImageId: any) => {
+        console.log(deletedImageId);
+
+        setFormData((previousState) => ({
+            ...previousState,
+            old_image: null,
+            deleted_images: deletedImageId,
+            new_image: null,
+        }));
     };
 
     return (
@@ -85,7 +162,7 @@ export default function CreateArticle({ auth, categories }: any) {
                             </div>
                             <div className="">
                                 <form
-                                    action={route("articles.store")}
+                                    onSubmit={handleFormSubmit}
                                     className="w-full"
                                 >
                                     <div className="">
@@ -102,11 +179,28 @@ export default function CreateArticle({ auth, categories }: any) {
                                                     name="title"
                                                     id="title"
                                                     className="w-full py-1 border rounded-sm bg-background border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
-                                                    value=""
+                                                    value={formData.title}
+                                                    onChange={(e: any) => {
+                                                        const { name, value } =
+                                                            e.target;
+                                                        setFormData(
+                                                            (
+                                                                previousState
+                                                            ) => ({
+                                                                ...previousState,
+                                                                title: value,
+                                                                slug: slugify(
+                                                                    value
+                                                                ),
+                                                            })
+                                                        );
+                                                    }}
                                                 />
-                                                <div className="text-sm text-error">
-                                                    error message
-                                                </div>
+                                                {errors?.title && (
+                                                    <div className="text-sm text-error">
+                                                        {errors?.title}
+                                                    </div>
+                                                )}
                                             </div>
 
                                             <div className="w-full">
@@ -121,11 +215,21 @@ export default function CreateArticle({ auth, categories }: any) {
                                                     name="slug"
                                                     id="slug"
                                                     className="w-full py-1 border rounded-sm bg-background border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
-                                                    value=""
+                                                    value={formData.slug}
+                                                    onChange={(e: any) => {
+                                                        const { name, value } =
+                                                            e.target;
+                                                        handleInputChange(
+                                                            name,
+                                                            value
+                                                        );
+                                                    }}
                                                 />
-                                                <div className="text-sm text-error">
-                                                    error message
-                                                </div>
+                                                {errors?.slug && (
+                                                    <div className="text-sm text-error">
+                                                        {errors?.slug}
+                                                    </div>
+                                                )}
                                             </div>
 
                                             <div className="">
@@ -139,21 +243,37 @@ export default function CreateArticle({ auth, categories }: any) {
                                                     name="status"
                                                     id="status"
                                                     className="w-full px-2 py-1 border rounded-md bg-background border-borderColor"
+                                                    onChange={(e: any) => {
+                                                        const { name, value } =
+                                                            e.target;
+                                                        handleInputChange(
+                                                            name,
+                                                            value
+                                                        );
+                                                    }}
                                                 >
-                                                    <option value="">
+                                                    <option value="" key={1}>
                                                         Select Status
                                                     </option>
 
-                                                    <option value="Draft">
+                                                    <option
+                                                        value="Draft"
+                                                        key={2}
+                                                    >
                                                         Draft
                                                     </option>
-                                                    <option value="Published">
+                                                    <option
+                                                        value="Published"
+                                                        key={3}
+                                                    >
                                                         Published
                                                     </option>
                                                 </select>
-                                                <div className="text-sm text-error">
-                                                    error message
-                                                </div>
+                                                {errors?.status && (
+                                                    <div className="text-sm text-error">
+                                                        {errors?.status}
+                                                    </div>
+                                                )}
                                             </div>
 
                                             <div className="">
@@ -167,7 +287,14 @@ export default function CreateArticle({ auth, categories }: any) {
                                                     name="category_id"
                                                     id="category_id"
                                                     className="w-full px-2 py-1 border rounded-md border-borderColor bg-background"
-                                                    onChange={() => {}}
+                                                    onChange={(e: any) => {
+                                                        const { name, value } =
+                                                            e.target;
+                                                        handleInputChange(
+                                                            name,
+                                                            value
+                                                        );
+                                                    }}
                                                 >
                                                     <option value="">
                                                         Category Name
@@ -182,6 +309,9 @@ export default function CreateArticle({ auth, categories }: any) {
                                                                     value={
                                                                         category.id
                                                                     }
+                                                                    key={
+                                                                        category.id
+                                                                    }
                                                                 >
                                                                     {
                                                                         category.name
@@ -191,9 +321,11 @@ export default function CreateArticle({ auth, categories }: any) {
                                                         }
                                                     )}
                                                 </select>
-                                                <div className="text-sm text-error">
-                                                    error message
-                                                </div>
+                                                {errors?.category_id && (
+                                                    <div className="text-sm text-error">
+                                                        {errors?.category_id}
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
                                     </div>
@@ -212,13 +344,20 @@ export default function CreateArticle({ auth, categories }: any) {
                                             formats={formats}
                                             className="bg-background"
                                             readOnly={false}
-                                            value={""}
-                                            onChange={(value: string) => {}}
+                                            value={formData.body}
+                                            onChange={(value: any) => {
+                                                handleInputChange(
+                                                    "body",
+                                                    value
+                                                );
+                                            }}
                                         />
 
-                                        <div className="text-sm text-error">
-                                            error message
-                                        </div>
+                                        {errors?.body && (
+                                            <div className="text-sm text-error">
+                                                {errors?.body}
+                                            </div>
+                                        )}
                                     </div>
 
                                     <div className="mb-4">
@@ -226,16 +365,24 @@ export default function CreateArticle({ auth, categories }: any) {
                                             htmlFor="summery"
                                             className="block font-semibold "
                                         >
-                                            Summary (Optional)
+                                            Summery (Optional)
                                         </label>
                                         <textarea
                                             name="summery"
                                             id="summery"
+                                            value={formData.summery}
                                             className="w-full py-1 border rounded-sm bg-background border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
+                                            onChange={(e: any) => {
+                                                const { name, value } =
+                                                    e.target;
+                                                handleInputChange(name, value);
+                                            }}
                                         ></textarea>
-                                        <div className="text-sm text-error">
-                                            error message
-                                        </div>
+                                        {errors?.summery && (
+                                            <div className="text-sm text-error">
+                                                {errors?.summery}
+                                            </div>
+                                        )}
                                     </div>
 
                                     <div className="mb-4">
@@ -250,11 +397,18 @@ export default function CreateArticle({ auth, categories }: any) {
                                             name="video_url"
                                             id="video_url"
                                             className="w-full py-1 border rounded-sm bg-background border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
-                                            value=""
+                                            value={formData.video_url}
+                                            onChange={(e: any) => {
+                                                const { name, value } =
+                                                    e.target;
+                                                handleInputChange(name, value);
+                                            }}
                                         />
-                                        <div className="text-sm text-error">
-                                            error message
-                                        </div>
+                                        {errors?.video_url && (
+                                            <div className="text-sm text-error">
+                                                {errors?.video_url}
+                                            </div>
+                                        )}
                                     </div>
 
                                     <div className="flex flex-col mb-4">
@@ -265,21 +419,34 @@ export default function CreateArticle({ auth, categories }: any) {
                                             Article Image
                                         </label>
                                         <div
-                                            className="flex flex-col items-center justify-center p-10 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-background w-80 hover:bg-primary/30"
-                                            onDrop={handleDrop}
-                                            onDragOver={handleDragOver}
-                                            onClick={handleBrowseClick}
+                                            className="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-background lg:w-80 hover:bg-primary/30"
+                                            onDrop={
+                                                formData.new_image === null
+                                                    ? handleDrop
+                                                    : () => {}
+                                            }
+                                            onDragOver={
+                                                formData.new_image === null
+                                                    ? handleDragOver
+                                                    : () => {}
+                                            }
+                                            onClick={
+                                                formData.new_image === null
+                                                    ? handleBrowseClick
+                                                    : () => {}
+                                            }
                                         >
-                                            {image === null && (
-                                                <p className="">
+                                            {formData?.new_image === null ? (
+                                                <p className="p-4">
                                                     Drag and drop an image here
                                                     or click to browse
                                                 </p>
-                                            )}
-                                            {image ? (
-                                                <div className="relative pt-2">
+                                            ) : (
+                                                <div className="relative">
                                                     <img
-                                                        src={image}
+                                                        src={URL.createObjectURL(
+                                                            formData?.new_image
+                                                        )}
                                                         alt="Preview"
                                                         className="rounded-lg"
                                                     />
@@ -287,26 +454,33 @@ export default function CreateArticle({ auth, categories }: any) {
                                                         onClick={
                                                             handleRemoveImage
                                                         }
-                                                        className="absolute w-8 h-8 text-white rounded-full bg-error -top-2 -right-2"
+                                                        className="absolute w-8 h-8 text-white transition-all rounded-full hover:scale-125 bg-error -top-2 -right-2"
                                                     >
                                                         &times;
                                                     </button>
                                                 </div>
-                                            ) : (
-                                                <p className="mt-4 text-gray-500">
-                                                    No image uploaded
-                                                </p>
                                             )}
-                                            {error && (
+
+                                            {errors?.new_image && (
                                                 <p className="mt-2 text-red-500">
-                                                    {error}
+                                                    {errors?.new_image}
                                                 </p>
                                             )}
                                         </div>
                                     </div>
 
                                     <div className="mb-4">
-                                        <TagSelect articleTags={[]} />
+                                        <TagSelect
+                                            articleTags={
+                                                formData.tags?.split(",") || []
+                                            }
+                                            onChange={(value) => {
+                                                handleInputChange(
+                                                    "tags",
+                                                    value
+                                                );
+                                            }}
+                                        />
                                     </div>
 
                                     <div className="mb-4">
@@ -315,6 +489,15 @@ export default function CreateArticle({ auth, categories }: any) {
                                                 type="checkbox"
                                                 name="featured"
                                                 id="featured"
+                                                checked={formData.featured}
+                                                onChange={(e: any) => {
+                                                    const { name, checked } =
+                                                        e.target;
+                                                    handleInputChange(
+                                                        name,
+                                                        checked
+                                                    );
+                                                }}
                                             />
                                             <label
                                                 htmlFor="featured"
@@ -323,9 +506,11 @@ export default function CreateArticle({ auth, categories }: any) {
                                                 Featured
                                             </label>
                                         </div>
-                                        <div className="text-sm text-error">
-                                            error message
-                                        </div>
+                                        {errors?.featured && (
+                                            <div className="text-sm text-error">
+                                                {errors?.featured}
+                                            </div>
+                                        )}
                                     </div>
 
                                     <div className="mt-6">

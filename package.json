@@ -29,11 +29,14 @@
         "react-quill": "^2.0.0",
         "react-router-dom": "^6.26.0",
         "react-share": "^5.1.0",
+        "react-toastify": "^10.0.5",
         "react-uuid": "^2.0.0",
         "tailwindcss": "^3.2.1",
-        "react-toastify": "^10.0.5",
         "tw-colors": "^3.3.1",
         "typescript": "^5.0.2",
         "vite": "^5.0"
+    },
+    "dependencies": {
+        "react-slugify": "^4.0.1"
     }
 }

@@ -3,7 +3,7 @@ import { Head, Link, router } from "@inertiajs/react";
 import moment from "moment";
 import { Bounce, toast } from "react-toastify";
 
-export default function ViewArticle({ auth, article, flash }: any) {
+export default function ViewCategory({ auth, article, flash }: any) {
     const deleteArticle = (id: number) => {
         if (confirm("Are you sure you want to delete this article?")) {
             router.delete(route("articles.destroy", id));

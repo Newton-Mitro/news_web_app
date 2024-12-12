@@ -2,21 +2,24 @@
 
 namespace App\Features\Article\Controllers;
 
-use App\Core\Controllers\Controller;
 use App\Features\Article\Models\Article;
 use App\Features\Article\Requests\StoreArticleRequest;
+use App\Features\Article\Requests\UpdateArticleRequest;
+use App\Features\Attachment\Models\Attachment;
 use App\Features\Category\Models\Category;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
-class ArticleController extends Controller
+class ArticleController
 {
     public function index()
     {
         $recordPerPage = request()->filled('record_per_page') ? request()->query('record_per_page') : 10;
         $searchText = request()->filled('search_text') ? request()->query('search_text') : '';
-        $response = Article::where('title', 'like', "%{$searchText}%")->with(['category', 'author'])->orderBy('created_at', 'desc')->paginate($recordPerPage);
+        $response = Article::where('title', 'like', "%{$searchText}%")
+            ->with(['category', 'author', 'attachments'])->orderBy('created_at', 'desc')
+            ->paginate($recordPerPage);
+
         return Inertia::render('AdminPanel/Article/ListArticles', [
             'response' => $response,
             'flash' => [
@@ -35,27 +38,39 @@ class ArticleController extends Controller
 
     public function store(StoreArticleRequest $request)
     {
-        $validatedData = $request->validated();
-        $post = new Article();
-        $post->uuid = $request->uuid;
-        $post->title = $request->title;
-        $post->slug = $request->slug;
-        $post->body = $request->body;
-        $post->summery = $request->summery;
-        $post->video_url = $request->video_url;
-        $post->status = $request->status;
-        $post->featured = $request->featured;
-        $post->category_id = $request->category_id;
-        $post->created_by = $request->created_by;
-        $post->updated_by = $request->updated_by;
-        $post->save();
+        $userId = auth()->id();
+        $article = new Article();
+        $article->title = $request->title;
+        $article->slug = $request->slug;
+        $article->body = $request->body;
+        $article->summery = $request->summery;
+        $article->tags = $request->tags;
+        $article->video_url = $request->video_url;
+        $article->status = $request->status;
+        $article->featured = filter_var($request->featured, FILTER_VALIDATE_BOOLEAN);
+        $article->category_id = $request->category_id;
+        $article->created_by = $userId;
+        $article->updated_by = $userId;
+        $article->save();
 
-        return redirect()->route('articles.index')->with('status', 'Article created successfully!');
+        // Handle attachments
+        if ($request->hasFile('new_image')) {
+            $file = $request->file('new_image');
+            $path = $file->store('articles', 'public');
+            Attachment::create([
+                'article_id' => $article->id,
+                'name' => $file->getClientOriginalName(),
+                'path' => $path,
+                'url' => asset(Storage::url($path)),
+                'mime' => $file->getClientMimeType(),
+            ]);
+        }
+        return redirect()->route('articles.index')->with('success', 'Article created successfully!');
     }
 
-    public function show(Article $article)
+    public function show(int $id)
     {
-        $article = Article::with(['attachments', 'category', 'author', 'updater'])->findOrFail($article->id);
+        $article = Article::with(['attachments', 'category', 'author', 'updater'])->findOrFail($id);
         return Inertia::render('AdminPanel/Article/ViewArticle', [
             'article' => $article,
             'flash' => [
@@ -64,9 +79,9 @@ class ArticleController extends Controller
         ]);
     }
 
-    public function edit(Article $article)
+    public function edit(int $id)
     {
-        $article = Article::with(['attachments'])->findOrFail($article->id);
+        $article = Article::with(['attachments'])->findOrFail($id);
         $categories = Category::all();
         return Inertia::render('AdminPanel/Article/EditArticle', [
             'article' => $article,
@@ -77,16 +92,45 @@ class ArticleController extends Controller
         ]);
     }
 
-    public function update(Request $request, Article $article)
+    public function update(UpdateArticleRequest $request, int $id)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'body' => 'required|string',
-        ]);
-
+        $article = Article::find($id);
         $article->title = $request->title;
+        $article->slug = $request->slug;
         $article->body = $request->body;
+        $article->summery = $request->summery;
+        $article->tags = $request->tags;
+        $article->video_url = $request->video_url;
+        $article->status = $request->status;
+        $article->featured = filter_var($request->featured, FILTER_VALIDATE_BOOLEAN); // Convert to boolean
+        $article->category_id = $request->category_id;
+        $article->updated_by = auth()->id();
         $article->save();
+
+        // Handle deleted attachments
+        if ($request->has('deleted_images')) {
+            $attachment = Attachment::find($request->input('deleted_images'));
+            if ($attachment) {
+                // Delete the file from storage
+                Storage::delete($attachment->path);
+
+                // Delete the attachment record from the database
+                $attachment->delete();
+            }
+        }
+
+        // Handle new attachments
+        if ($request->hasFile('new_image')) {
+            $file = $request->file('new_image');
+            $path = $file->store('articles', 'public');
+            Attachment::create([
+                'article_id' => $article->id,
+                'name' => $file->getClientOriginalName(),
+                'path' => $path,
+                'url' => asset(Storage::url($path)),
+                'mime' => $file->getClientMimeType(),
+            ]);
+        }
 
         return redirect()->back()->with('success', 'Article updated successfully!');
     }

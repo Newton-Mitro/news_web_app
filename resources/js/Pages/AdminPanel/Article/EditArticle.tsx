@@ -1,13 +1,26 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, router } from "@inertiajs/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ReactQuill from "react-quill";
 import { Bounce, toast } from "react-toastify";
 import TagSelect from "../../../Components/TagSelect";
 import { formats, modules } from "../../../Utils/quill-util";
 
 export default function EditArticle({ auth, article, categories, flash }: any) {
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<{
+        title: any;
+        slug: any;
+        status: any;
+        category_id: any;
+        body: any;
+        summery: any;
+        video_url: any;
+        featured: any;
+        tags: any;
+        new_image: any;
+        old_image: any;
+        deleted_images: any;
+    }>({
         title: article.title || "",
         slug: article.slug || "",
         status: article.status || "Draft",
@@ -16,45 +29,63 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
         summery: article.summery || "",
         video_url: article.video_url || "",
         featured: article.featured || false,
-        tags: article.tags?.split(",") || [],
+        tags: article.tags,
+        new_image: null,
+        old_image:
+            article.attachments.length != 0
+                ? article.attachments[0]?.url
+                : null,
+        deleted_images: null,
     });
 
-    const [errors, setErrors] = useState(flash.errors || {});
-    const [message, setMessage] = useState<string | null>(
-        flash?.success || null
-    );
-
-    console.log(message);
-
-    useEffect(() => {
-        // Automatically clear the flash message after a delay
-        if (message) {
-            const timer = setTimeout(() => setMessage(null), 5000);
-            return () => clearTimeout(timer); // Cleanup on component unmount
-        }
-    }, [message]);
+    const [errors, setErrors] = useState<any>(null);
+    const [message, setMessage] = useState<string | null>(null);
 
     const handleInputChange = (fieldName: string, value: any) => {
-        console.log(value);
-
         setFormData({
             ...formData,
             [fieldName]: value,
         });
-        setErrors({});
-        // if (errors[name]) {
-        //     setErrors({ ...errors, [name]: null });
-        // }
+    };
+
+    const prepareFormData = () => {
+        const formPayload = new FormData();
+
+        Object.entries(formData).forEach(([key, value]) => {
+            console.log(key, value);
+            formPayload.append(key, value);
+        });
+
+        return formPayload;
     };
 
     const handleFormSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        router.put(route("articles.update", article.id), formData, {
+
+        const formPayload = prepareFormData();
+
+        // Debugging: Inspect FormData contents
+        // for (let [key, value] of formPayload.entries()) {
+        //     console.log(`${key}:`, value);
+        // }
+
+        router.post(route("articles.update", article.id), formPayload, {
             onError: (newErrors) => {
+                console.error("Errors:", newErrors);
                 setErrors(newErrors);
             },
             onSuccess: (message) => {
-                console.log(message);
+                toast("Article added successfully.", {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Bounce,
+                });
             },
         });
     };
@@ -71,24 +102,6 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
         }
     };
 
-    flash?.success &&
-        toast(flash?.success, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            transition: Bounce,
-        });
-
-    const [image, setImage] = useState<string | null>(
-        article.attachments ? article.attachments[0].url : []
-    );
-    const [error, setError] = useState<string | null>(null);
-
     const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         const files = event.dataTransfer.files;
@@ -99,10 +112,9 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
         if (files.length > 0) {
             const file = files[0];
             if (file.type.startsWith("image/")) {
-                setImage(URL.createObjectURL(file));
-                setError(null);
+                handleInputChange("new_image", file);
             } else {
-                setError("Please upload an image file.");
+                setMessage("Please upload an image file.");
             }
         }
     };
@@ -112,7 +124,7 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
     };
 
     const handleBrowseClick = () => {
-        if (image) return;
+        if (article.old_image) return;
         const input = document.createElement("input");
         input.type = "file";
         input.accept = "image/*";
@@ -124,8 +136,15 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
         input.click();
     };
 
-    const handleRemoveImage = () => {
-        setImage(null);
+    const handleRemoveImage = (deletedImageId: any) => {
+        console.log(deletedImageId);
+
+        setFormData((previousState) => ({
+            ...previousState,
+            old_image: null,
+            deleted_images: deletedImageId,
+            new_image: null,
+        }));
     };
 
     return (
@@ -248,9 +267,11 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                                         );
                                                     }}
                                                 />
-                                                <div className="text-sm text-error">
-                                                    error message
-                                                </div>
+                                                {errors?.title && (
+                                                    <div className="text-sm text-error">
+                                                        {errors?.title}
+                                                    </div>
+                                                )}
                                             </div>
 
                                             <div className="w-full">
@@ -279,9 +300,11 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                                         );
                                                     }}
                                                 />
-                                                <div className="text-sm text-error">
-                                                    error message
-                                                </div>
+                                                {errors?.slug && (
+                                                    <div className="text-sm text-error">
+                                                        {errors?.slug}
+                                                    </div>
+                                                )}
                                             </div>
 
                                             <div className="">
@@ -309,20 +332,28 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                                         );
                                                     }}
                                                 >
-                                                    <option value="">
+                                                    <option value="" key={1}>
                                                         Select Status
                                                     </option>
 
-                                                    <option value="Draft">
+                                                    <option
+                                                        value="Draft"
+                                                        key={2}
+                                                    >
                                                         Draft
                                                     </option>
-                                                    <option value="Published">
+                                                    <option
+                                                        value="Published"
+                                                        key={3}
+                                                    >
                                                         Published
                                                     </option>
                                                 </select>
-                                                <div className="text-sm text-error">
-                                                    error message
-                                                </div>
+                                                {errors?.status && (
+                                                    <div className="text-sm text-error">
+                                                        {errors?.status}
+                                                    </div>
+                                                )}
                                             </div>
 
                                             <div className="">
@@ -363,6 +394,9 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                                                     value={
                                                                         category.id
                                                                     }
+                                                                    key={
+                                                                        category.id
+                                                                    }
                                                                 >
                                                                     {
                                                                         category.name
@@ -372,9 +406,11 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                                         }
                                                     )}
                                                 </select>
-                                                <div className="text-sm text-error">
-                                                    error message
-                                                </div>
+                                                {errors?.category_id && (
+                                                    <div className="text-sm text-error">
+                                                        {errors?.category_id}
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
                                     </div>
@@ -402,9 +438,11 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                             }}
                                         />
 
-                                        <div className="text-sm text-error">
-                                            error message
-                                        </div>
+                                        {errors?.body && (
+                                            <div className="text-sm text-error">
+                                                {errors?.body}
+                                            </div>
+                                        )}
                                     </div>
 
                                     <div className="mb-4">
@@ -429,9 +467,11 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                             }}
                                             className="w-full py-1 border rounded-sm bg-background border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
                                         ></textarea>
-                                        <div className="text-sm text-error">
-                                            error message
-                                        </div>
+                                        {errors?.summery && (
+                                            <div className="text-sm text-error">
+                                                {errors?.summery}
+                                            </div>
+                                        )}
                                     </div>
 
                                     <div className="mb-4">
@@ -457,9 +497,11 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                                 handleInputChange(name, value);
                                             }}
                                         />
-                                        <div className="text-sm text-error">
-                                            error message
-                                        </div>
+                                        {errors?.video_url && (
+                                            <div className="text-sm text-error">
+                                                {errors?.video_url}
+                                            </div>
+                                        )}
                                     </div>
 
                                     <div className="flex flex-col mb-4">
@@ -471,11 +513,27 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                         </label>
                                         <div
                                             className="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-background lg:w-80 hover:bg-primary/30"
-                                            onDrop={handleDrop}
-                                            onDragOver={handleDragOver}
-                                            onClick={handleBrowseClick}
+                                            onDrop={
+                                                formData.old_image === null &&
+                                                formData.new_image === null
+                                                    ? handleDrop
+                                                    : () => {}
+                                            }
+                                            onDragOver={
+                                                formData.old_image === null &&
+                                                formData.new_image === null
+                                                    ? handleDragOver
+                                                    : () => {}
+                                            }
+                                            onClick={
+                                                formData.old_image === null &&
+                                                formData.new_image === null
+                                                    ? handleBrowseClick
+                                                    : () => {}
+                                            }
                                         >
-                                            {image === null && (
+                                            {formData.old_image === null &&
+                                            formData.new_image === null ? (
                                                 <div className="p-4">
                                                     <p className="">
                                                         Drag and drop an image
@@ -485,37 +543,54 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                                         No image uploaded
                                                     </p>
                                                 </div>
-                                            )}
-                                            {image && (
+                                            ) : (
                                                 <div className="relative">
                                                     <img
-                                                        src={image}
+                                                        src={
+                                                            formData.old_image !==
+                                                            null
+                                                                ? formData.old_image
+                                                                : URL.createObjectURL(
+                                                                      formData.new_image
+                                                                  )
+                                                        }
                                                         alt="Preview"
                                                         className="rounded-lg"
                                                     />
                                                     <button
-                                                        onClick={
-                                                            handleRemoveImage
-                                                        }
-                                                        className="absolute w-8 h-8 text-white rounded-full bg-error -top-2 -right-2"
+                                                        onClick={() => {
+                                                            handleRemoveImage(
+                                                                article
+                                                                    ?.attachments[0]
+                                                                    ?.id
+                                                            );
+                                                        }}
+                                                        className="absolute w-8 h-8 text-white transition-all rounded-full hover:scale-125 bg-error -top-2 -right-2"
                                                     >
                                                         &times;
                                                     </button>
                                                 </div>
                                             )}
-                                            {error && (
-                                                <p className="mt-2 text-red-500">
-                                                    {error}
-                                                </p>
+
+                                            {errors?.new_image && (
+                                                <div className="text-sm text-error">
+                                                    {errors?.new_image}
+                                                </div>
                                             )}
                                         </div>
                                     </div>
 
                                     <div className="mb-4">
                                         <TagSelect
-                                            articleTags={article.tags?.split(
-                                                ","
-                                            )}
+                                            articleTags={
+                                                article.tags?.split(",") || []
+                                            }
+                                            onChange={(value) => {
+                                                handleInputChange(
+                                                    "tags",
+                                                    value
+                                                );
+                                            }}
                                         />
                                     </div>
 
@@ -525,7 +600,7 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                                 type="checkbox"
                                                 name="featured"
                                                 id="featured"
-                                                value={formData.featured}
+                                                checked={formData.featured}
                                                 onChange={(e: any) => {
                                                     const {
                                                         name,
@@ -546,9 +621,11 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                                 Featured
                                             </label>
                                         </div>
-                                        <div className="text-sm text-error">
-                                            error message
-                                        </div>
+                                        {errors?.featured && (
+                                            <div className="text-sm text-error">
+                                                {errors?.featured}
+                                            </div>
+                                        )}
                                     </div>
 
                                     <div className="mt-6">
@@ -556,7 +633,7 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                             type="submit"
                                             className="px-4 py-2 font-semibold rounded-md text-onSecondary bg-secondary hover:bg-secondaryVariant"
                                         >
-                                            Create Article
+                                            Update Article
                                         </button>
                                     </div>
                                 </form>

@@ -15,13 +15,13 @@ class StoreArticleRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:255',
-            'slug' => 'required|string|unique:posts,slug',
+            'slug' => 'required|string|unique:articles,slug',
             'body' => 'required|string',
             'summery' => 'nullable|string',
             'video_url' => 'nullable|url',
             'status' => 'required|in:Draft,Published',
-            'featured' => 'boolean',
             'category_id' => 'required|exists:categories,id',
+            'attachments.*' => 'file|mimes:jpg,jpeg,png,pdf|max:2048',
         ];
     }
 }

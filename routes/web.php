@@ -18,3 +18,4 @@ Route::middleware('auth')->group(function (): void {
 require __DIR__ . '/../app/Features/Auth/Routes/auth.php';
 require __DIR__ . '/../app/Features/PublicPage/Routes/public_page.php';
 require __DIR__ . '/../app/Features/Article/Routes/article.php';
+require __DIR__ . '/../app/Features/Category/Routes/category.php';

@@ -3,7 +3,6 @@
 namespace App\Features\Article\Models;
 
 use App\Features\Attachment\Models\Attachment;
-use App\Features\Tag\Models\Tag;
 use App\Features\Auth\Models\User;
 use App\Features\View\Models\View;
 use Database\Factories\ArticleFactory;
@@ -11,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
 use App\Features\Comment\Models\Comment;
 use App\Features\Category\Models\Category;
 use App\Features\Reaction\Models\Reaction;
-use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Article extends Model
@@ -34,12 +32,6 @@ class Article extends Model
     public function updater()
     {
         return $this->belongsTo(User::class, 'updated_by');
-    }
-
-    // A post can have many tags
-    public function tags()
-    {
-        return $this->belongsToMany(Tag::class);
     }
 
     // A post can have many comments

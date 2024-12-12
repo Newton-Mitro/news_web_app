@@ -15,7 +15,6 @@ class ArticleFactory extends Factory
     public function definition(): array
     {
         return [
-            'uuid' => (string) Str::uuid(),
             'title' => $this->faker->sentence(),
             'slug' => Str::slug($this->faker->sentence()),
             'body' => $this->faker->paragraphs(5, true),

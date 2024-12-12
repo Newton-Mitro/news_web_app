@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface TagSelectProps {
     articleTags: string[];
+    onChange: (value: string) => void;
 }
 
-const TagSelect: React.FC<TagSelectProps> = ({ articleTags }) => {
+const TagSelect: React.FC<TagSelectProps> = ({ articleTags, onChange }) => {
     const [tags, setTags] = useState<string[]>(articleTags);
     const [inputValue, setInputValue] = useState<string>("");
+
+    useEffect(() => {
+        onChange(tags.join(","));
+    }, [tags]);
 
     const handleAddTag = () => {
         const trimmedValue = inputValue.trim();
