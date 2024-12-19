@@ -70,13 +70,11 @@ class CategoryController extends Controller
     public function update(Request $request, int $id)
     {
         $request->validate([
-            'name' => 'required|string|unique:categories,name,' . $id,
-            'status' => 'required|in:Published,Draft',
+            'name' => 'required|string|unique:categories,name',
         ]);
 
         $category = Category::findOrFail($id);
         $category->name = $request->name;
-        $category->status = $request->status;
         $category->save();
 
         return redirect()->back()->with('success', 'Category updated successfully!');
@@ -92,14 +90,14 @@ class CategoryController extends Controller
 
     public function updateStatus(Category $category, int $id)
     {
-        $category = Category::findOrFail($id);
-        if ($category->status === 'Published') {
-            $category->status = 'Draft';
+        $category_2 = Category::findOrFail($id);
+        if ($category_2->status === 'Published') {
+            $category_2->status = 'Draft';
         } else {
-            $category->status = 'Published';
+            $category_2->status = 'Published';
         }
-        $category->save();
+        $category_2->save();
 
-        return redirect()->back()->with('success', 'Category status updated to ' . $category->status . '!');
+        return redirect()->back()->with('success', 'Category status updated to ' . $category_2->status . '!');
     }
 }

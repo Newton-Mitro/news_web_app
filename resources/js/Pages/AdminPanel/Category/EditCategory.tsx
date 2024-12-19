@@ -1,17 +1,13 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, router } from "@inertiajs/react";
 import { useState } from "react";
-import { Bounce, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 export default function EditCategory({ auth, category, flash }: any) {
     const [formData, setFormData] = useState<{
-        title: any;
-        slug: any;
-        status: any;
+        name: any;
     }>({
-        title: category.title || "",
-        slug: category.slug || "",
-        status: category.status || "Draft",
+        name: category.name || "",
     });
 
     const [errors, setErrors] = useState<any>(null);
@@ -23,38 +19,21 @@ export default function EditCategory({ auth, category, flash }: any) {
         });
     };
 
-    const prepareFormData = () => {
-        const formPayload = new FormData();
-
-        Object.entries(formData).forEach(([key, value]) => {
-            console.log(key, value);
-            formPayload.append(key, value);
-        });
-
-        return formPayload;
-    };
-
     const handleFormSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-
-        const formPayload = prepareFormData();
-
-        router.post(route("categories.update", category.id), formPayload, {
+        router.put(route("categories.update", category.id), formData, {
+            onStart: () => console.log("PUT request starting..."),
+            onProgress: (progress) => console.log("Progress:", progress),
             onError: (newErrors) => {
                 console.error("Errors:", newErrors);
                 setErrors(newErrors);
             },
-            onSuccess: (message) => {
-                toast("Category added successfully.", {
+            onSuccess: () => {
+                console.log("Category updated successfully!");
+                setErrors(null);
+                toast("Category updated successfully.", {
                     position: "top-right",
                     autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                    transition: Bounce,
                 });
             },
         });
@@ -62,13 +41,48 @@ export default function EditCategory({ auth, category, flash }: any) {
 
     const deleteCategory = (id: number) => {
         if (confirm("Are you sure you want to delete this category?")) {
-            router.delete(route("categories.destroy", id));
+            router.delete(route("categories.destroy", id), {
+                onStart: () => console.log("PUT request starting..."),
+                onProgress: (progress) => console.log("Progress:", progress),
+                onError: (newErrors) => {
+                    console.error("Errors:", newErrors);
+                    setErrors(newErrors);
+                },
+                onSuccess: () => {
+                    console.log("Category deleted successfully!");
+                    setErrors(null);
+                    toast("Category deleted successfully.", {
+                        position: "top-right",
+                        autoClose: 5000,
+                    });
+                },
+            });
         }
     };
 
     const updateCategoryStatus = (id: number, status: string) => {
         if (confirm(`Are you sure you want to ${status} this category?`)) {
-            router.put(route("categories.updateStatus", id));
+            router.put(
+                route("categories.updateStatus", id),
+                {},
+                {
+                    onStart: () => console.log("PUT request starting..."),
+                    onProgress: (progress) =>
+                        console.log("Progress:", progress),
+                    onError: (newErrors) => {
+                        console.error("Errors:", newErrors);
+                        setErrors(newErrors);
+                    },
+                    onSuccess: () => {
+                        console.log("Category updated successfully!");
+                        setErrors(null);
+                        toast(`Category ${status} successfully.`, {
+                            position: "top-right",
+                            autoClose: 5000,
+                        });
+                    },
+                }
+            );
         }
     };
 
@@ -101,21 +115,6 @@ export default function EditCategory({ auth, category, flash }: any) {
                                         </span>
                                         <span className="inline-block md:hidden">
                                             <i className="fa-solid fa-rectangle-list"></i>
-                                        </span>
-                                    </Link>
-
-                                    <Link
-                                        className="bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabled hover:shadow-md transition-all duration-300 shadow-sm rounded py-1.5 px-1.5 md:px-4 hover:cursor-pointer"
-                                        href={route(
-                                            "categories.show",
-                                            category.id
-                                        )}
-                                    >
-                                        <span className="hidden md:block">
-                                            View Category
-                                        </span>
-                                        <span className="inline-block md:hidden">
-                                            <i className="fa-solid fa-eye"></i>
                                         </span>
                                     </Link>
 
@@ -168,17 +167,17 @@ export default function EditCategory({ auth, category, flash }: any) {
                                         <div className="grid w-full grid-cols-1 gap-6 mb-4 lg:w-8/12 md:grid-cols-2">
                                             <div className="">
                                                 <label
-                                                    htmlFor="title"
+                                                    htmlFor="name"
                                                     className="block font-semibold "
                                                 >
-                                                    Title
+                                                    Category Name
                                                 </label>
                                                 <input
                                                     type="text"
-                                                    name="title"
-                                                    id="title"
+                                                    name="name"
+                                                    id="name"
                                                     className="w-full py-1 border rounded-sm bg-background border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
-                                                    value={formData.title}
+                                                    value={formData.name}
                                                     onChange={(e: any) => {
                                                         const {
                                                             name,
@@ -192,91 +191,9 @@ export default function EditCategory({ auth, category, flash }: any) {
                                                         );
                                                     }}
                                                 />
-                                                {errors?.title && (
+                                                {errors?.name && (
                                                     <div className="text-sm text-error">
-                                                        {errors?.title}
-                                                    </div>
-                                                )}
-                                            </div>
-
-                                            <div className="w-full">
-                                                <label
-                                                    htmlFor="slug"
-                                                    className="block font-semibold "
-                                                >
-                                                    Slug
-                                                </label>
-                                                <input
-                                                    type="text"
-                                                    name="slug"
-                                                    id="slug"
-                                                    className="w-full py-1 border rounded-sm bg-background border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
-                                                    value={formData.slug}
-                                                    onChange={(e: any) => {
-                                                        const {
-                                                            name,
-                                                            value,
-                                                            type,
-                                                            checked,
-                                                        } = e.target;
-                                                        handleInputChange(
-                                                            name,
-                                                            value
-                                                        );
-                                                    }}
-                                                />
-                                                {errors?.slug && (
-                                                    <div className="text-sm text-error">
-                                                        {errors?.slug}
-                                                    </div>
-                                                )}
-                                            </div>
-
-                                            <div className="">
-                                                <label
-                                                    htmlFor="status"
-                                                    className="block font-semibold "
-                                                >
-                                                    Status
-                                                </label>
-                                                <select
-                                                    name="status"
-                                                    id="status"
-                                                    className="w-full px-2 py-1 border rounded-md bg-background border-borderColor"
-                                                    value={formData.status}
-                                                    onChange={(e: any) => {
-                                                        const {
-                                                            name,
-                                                            value,
-                                                            type,
-                                                            checked,
-                                                        } = e.target;
-                                                        handleInputChange(
-                                                            name,
-                                                            value
-                                                        );
-                                                    }}
-                                                >
-                                                    <option value="" key={1}>
-                                                        Select Status
-                                                    </option>
-
-                                                    <option
-                                                        value="Draft"
-                                                        key={2}
-                                                    >
-                                                        Draft
-                                                    </option>
-                                                    <option
-                                                        value="Published"
-                                                        key={3}
-                                                    >
-                                                        Published
-                                                    </option>
-                                                </select>
-                                                {errors?.status && (
-                                                    <div className="text-sm text-error">
-                                                        {errors?.status}
+                                                        {errors?.name}
                                                     </div>
                                                 )}
                                             </div>
@@ -286,7 +203,7 @@ export default function EditCategory({ auth, category, flash }: any) {
                                     <div className="mt-6">
                                         <button
                                             type="submit"
-                                            className="px-4 py-2 font-semibold rounded-md text-onSecondary bg-secondary hover:bg-secondaryVariant"
+                                            className="px-4 py-2 font-semibold rounded-md text-onSecondary bg-primaryVariant hover:bg-secondaryVariant"
                                         >
                                             Update Category
                                         </button>

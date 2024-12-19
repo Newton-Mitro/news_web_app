@@ -2,16 +2,14 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, router } from "@inertiajs/react";
 import { useState } from "react";
 import slugify from "react-slugify";
-import { Bounce, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 export default function CreateCategory({ auth, categories }: any) {
     const [formData, setFormData] = useState<{
-        title: any;
-        slug: any;
+        name: any;
         status: any;
     }>({
-        title: "",
-        slug: "",
+        name: "",
         status: "",
     });
 
@@ -24,38 +22,22 @@ export default function CreateCategory({ auth, categories }: any) {
         });
     };
 
-    const prepareFormData = () => {
-        const formPayload = new FormData();
-
-        Object.entries(formData).forEach(([key, value]) => {
-            console.log(key, value);
-            formPayload.append(key, value);
-        });
-
-        return formPayload;
-    };
-
     const handleFormSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        const formPayload = prepareFormData();
-
-        router.post(route("categories.store"), formPayload, {
+        router.post(route("categories.store"), formData, {
+            onStart: () => console.log("PUT request starting..."),
+            onProgress: (progress) => console.log("Progress:", progress),
             onError: (newErrors) => {
                 console.error("Errors:", newErrors);
                 setErrors(newErrors);
             },
-            onSuccess: (message) => {
-                toast("Article added successfully.", {
+            onSuccess: () => {
+                console.log("Category created successfully!");
+                setErrors(null);
+                toast("Category created successfully.", {
                     position: "top-right",
                     autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                    transition: Bounce,
                 });
             },
         });
@@ -105,17 +87,17 @@ export default function CreateCategory({ auth, categories }: any) {
                                         <div className="grid w-full grid-cols-1 gap-6 mb-4 lg:w-8/12 md:grid-cols-2">
                                             <div className="">
                                                 <label
-                                                    htmlFor="title"
+                                                    htmlFor="name"
                                                     className="block font-semibold "
                                                 >
-                                                    Title
+                                                    Category Name
                                                 </label>
                                                 <input
                                                     type="text"
-                                                    name="title"
-                                                    id="title"
+                                                    name="name"
+                                                    id="name"
                                                     className="w-full py-1 border rounded-sm bg-background border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
-                                                    value={formData.title}
+                                                    value={formData.name}
                                                     onChange={(e: any) => {
                                                         const { name, value } =
                                                             e.target;
@@ -124,7 +106,7 @@ export default function CreateCategory({ auth, categories }: any) {
                                                                 previousState
                                                             ) => ({
                                                                 ...previousState,
-                                                                title: value,
+                                                                name: value,
                                                                 slug: slugify(
                                                                     value
                                                                 ),
@@ -132,38 +114,9 @@ export default function CreateCategory({ auth, categories }: any) {
                                                         );
                                                     }}
                                                 />
-                                                {errors?.title && (
+                                                {errors?.name && (
                                                     <div className="text-sm text-error">
-                                                        {errors?.title}
-                                                    </div>
-                                                )}
-                                            </div>
-
-                                            <div className="w-full">
-                                                <label
-                                                    htmlFor="slug"
-                                                    className="block font-semibold "
-                                                >
-                                                    Slug
-                                                </label>
-                                                <input
-                                                    type="text"
-                                                    name="slug"
-                                                    id="slug"
-                                                    className="w-full py-1 border rounded-sm bg-background border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
-                                                    value={formData.slug}
-                                                    onChange={(e: any) => {
-                                                        const { name, value } =
-                                                            e.target;
-                                                        handleInputChange(
-                                                            name,
-                                                            value
-                                                        );
-                                                    }}
-                                                />
-                                                {errors?.slug && (
-                                                    <div className="text-sm text-error">
-                                                        {errors?.slug}
+                                                        {errors?.name}
                                                     </div>
                                                 )}
                                             </div>
@@ -217,7 +170,7 @@ export default function CreateCategory({ auth, categories }: any) {
                                     <div className="mt-6">
                                         <button
                                             type="submit"
-                                            className="px-4 py-2 font-semibold rounded-md text-onSecondary bg-secondary hover:bg-secondaryVariant"
+                                            className="px-4 py-2 font-semibold rounded-md text-onSecondary bg-primaryVariant hover:bg-secondaryVariant"
                                         >
                                             Create Category
                                         </button>
