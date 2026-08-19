@@ -25,6 +25,11 @@ class Attachment extends Model
         return $this->belongsTo(Article::class);
     }
 
+    public function attachable()
+    {
+        return $this->morphTo();
+    }
+
     protected static function newFactory()
     {
         return new AttachmentFactory;

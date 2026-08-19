@@ -4,12 +4,9 @@ namespace App\Features\Article\Models;
 
 use App\Features\Attachment\Models\Attachment;
 use App\Features\Auth\Models\User;
-use App\Features\View\Models\View;
 use Database\Factories\ArticleFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Features\Comment\Models\Comment;
 use App\Features\Category\Models\Category;
-use App\Features\Reaction\Models\Reaction;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Article extends Model
@@ -34,27 +31,10 @@ class Article extends Model
         return $this->belongsTo(User::class, 'updated_by');
     }
 
-    // A post can have many comments
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
-    }
-
-    // A post has one view record
-    public function view()
-    {
-        return $this->hasOne(View::class);
-    }
-
-    // A post can have many reactions
-    public function reactions()
-    {
-        return $this->hasMany(Reaction::class);
-    }
 
     public function attachments()
     {
-        return $this->hasMany(Attachment::class);
+        return $this->morphMany(Attachment::class, 'attachable');
     }
 
 

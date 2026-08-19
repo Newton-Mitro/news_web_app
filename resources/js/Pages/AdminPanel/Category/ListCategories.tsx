@@ -4,8 +4,6 @@ import { Bounce, toast } from "react-toastify";
 import Pagination from "../../../Components/Pagination";
 
 export default function ListCategories({ auth, response, flash }: any) {
-    console.log(response);
-
     const deleteCategory = (id: number) => {
         if (confirm("Are you sure you want to delete this category?")) {
             router.delete(route("categories.destroy", id));
@@ -35,7 +33,7 @@ export default function ListCategories({ auth, response, flash }: any) {
         const currentUrl = new URL(window.location.href);
         currentUrl.searchParams.set(
             "record_per_page",
-            record_per_page.toString()
+            record_per_page.toString(),
         );
         currentUrl.searchParams.set("page", page.toString());
         window.location.href = currentUrl.toString();
@@ -59,30 +57,22 @@ export default function ListCategories({ auth, response, flash }: any) {
                                 Categories
                             </h2>
                             <div className="flex items-end justify-end">
-                                <div className="flex gap-2">
-                                    <Link
-                                        className="bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabled hover:shadow-md transition-all duration-300 shadow-sm rounded py-1.5 px-1.5 md:px-4 hover:cursor-pointer"
-                                        href={route("categories.create")}
-                                    >
-                                        <span className="hidden md:block">
-                                            Create Category
-                                        </span>
-                                        <span className="inline-block md:hidden">
-                                            <i className="fa-solid fa-newspaper"></i>
-                                        </span>
-                                    </Link>
-
+                                {(auth.user?.id === 1 ||
+                                    auth.user?.id === 2) && (
                                     <div className="flex gap-2">
-                                        <button className="bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabled hover:shadow-md transition-all duration-300 shadow-sm rounded py-1.5 px-1.5 md:px-4 hover:cursor-pointer">
+                                        <Link
+                                            className="bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabled hover:shadow-md transition-all duration-300 shadow-sm rounded py-1.5 px-1.5 md:px-4 hover:cursor-pointer"
+                                            href={route("categories.create")}
+                                        >
                                             <span className="hidden md:block">
-                                                Export CSV
+                                                Create Category
                                             </span>
                                             <span className="inline-block md:hidden">
-                                                <i className="fa-solid fa-file-csv"></i>
+                                                <i className="fa-solid fa-newspaper"></i>
                                             </span>
-                                        </button>
+                                        </Link>
                                     </div>
-                                </div>
+                                )}
                             </div>
                             <div
                                 className={`h-[calc(100vh-250px)] md:h-[calc(100vh-318px)] flex flex-col overflow-auto relative`}
@@ -122,7 +112,22 @@ export default function ListCategories({ auth, response, flash }: any) {
                                                     </th>
                                                     <th className="p-2 transition-colors cursor-pointer hover:bg-blue-gray-50">
                                                         <div className="flex items-center justify-between gap-2 font-bold leading-none">
-                                                            Category
+                                                            Name EN
+                                                        </div>
+                                                    </th>
+                                                    <th className="p-2 transition-colors cursor-pointer hover:bg-blue-gray-50">
+                                                        <div className="flex items-center justify-between gap-2 font-bold leading-none">
+                                                            Name BN
+                                                        </div>
+                                                    </th>
+                                                    <th className="p-2 transition-colors cursor-pointer hover:bg-blue-gray-50">
+                                                        <div className="flex items-center justify-between gap-2 font-bold leading-none">
+                                                            Order
+                                                        </div>
+                                                    </th>
+                                                    <th className="p-2 transition-colors cursor-pointer hover:bg-blue-gray-50">
+                                                        <div className="flex items-center justify-between gap-2 font-bold leading-none">
+                                                            Show in Menu
                                                         </div>
                                                     </th>
                                                     <th className="p-2 transition-colors cursor-pointer hover:bg-blue-gray-50">
@@ -130,6 +135,7 @@ export default function ListCategories({ auth, response, flash }: any) {
                                                             Status
                                                         </div>
                                                     </th>
+
                                                     <th className="p-2 transition-colors cursor-pointer hover:bg-blue-gray-50">
                                                         <div className="flex items-center justify-between gap-2 font-bold leading-none">
                                                             Actions
@@ -142,7 +148,7 @@ export default function ListCategories({ auth, response, flash }: any) {
                                                     response?.data.map(
                                                         (
                                                             category: any,
-                                                            index: number
+                                                            index: number,
                                                         ) => {
                                                             return (
                                                                 <tr
@@ -164,12 +170,50 @@ export default function ListCategories({ auth, response, flash }: any) {
 
                                                                     <td className="px-2">
                                                                         <label className="md:hidden">
-                                                                            Category
+                                                                            Name
+                                                                            EN
                                                                         </label>
                                                                         <p className="font-semibold md:font-normal">
                                                                             {
                                                                                 category.name
                                                                             }
+                                                                        </p>
+                                                                    </td>
+
+                                                                    <td className="px-2">
+                                                                        <label className="md:hidden">
+                                                                            Name
+                                                                            BN
+                                                                        </label>
+                                                                        <p className="font-semibold md:font-normal">
+                                                                            {
+                                                                                category.name_bn
+                                                                            }
+                                                                        </p>
+                                                                    </td>
+
+                                                                    <td className="px-2">
+                                                                        <label className="md:hidden">
+                                                                            Order
+                                                                        </label>
+                                                                        <p className="font-semibold md:font-normal">
+                                                                            {
+                                                                                category.order
+                                                                            }
+                                                                        </p>
+                                                                    </td>
+
+                                                                    <td className="px-2">
+                                                                        <label className="md:hidden">
+                                                                            Show
+                                                                            In
+                                                                            Menu
+                                                                        </label>
+                                                                        <p className="font-semibold md:font-normal">
+                                                                            {category.show_in_menu ==
+                                                                            0
+                                                                                ? "No"
+                                                                                : "Yes"}
                                                                         </p>
                                                                     </td>
 
@@ -197,67 +241,77 @@ export default function ListCategories({ auth, response, flash }: any) {
                                                                             </div>
                                                                         )}
                                                                     </td>
-
                                                                     <td className="px-2 ">
-                                                                        <label className="md:hidden">
-                                                                            Actions
-                                                                        </label>
-                                                                        <div className="flex gap-1">
-                                                                            <Link
-                                                                                className="p-1 rounded hover:text-secondary hover:scale-110 group"
-                                                                                href={route(
-                                                                                    "categories.edit",
-                                                                                    category.id
-                                                                                )}
-                                                                            >
-                                                                                <span className="absolute top-0 right-0 hidden px-1 -mt-6 text-orange-100 rounded shadow-lg group-hover:block bg-neutral-700">
-                                                                                    Edit
-                                                                                </span>
-                                                                                <i className="fa-solid fa-pen-to-square"></i>
-                                                                            </Link>
-                                                                            <button
-                                                                                className="p-1 rounded hover:text-secondary hover:scale-110 group"
-                                                                                onClick={() =>
-                                                                                    deleteCategory(
-                                                                                        category.id
-                                                                                    )
-                                                                                }
-                                                                            >
-                                                                                <span className="absolute top-0 right-0 hidden px-1 -mt-6 text-orange-100 rounded shadow-lg group-hover:block bg-neutral-700">
-                                                                                    Delete
-                                                                                </span>
-                                                                                <i className="fa-solid fa-trash-can"></i>
-                                                                            </button>
-                                                                            <button
-                                                                                className="p-1 rounded hover:text-secondary hover:scale-110 group"
-                                                                                onClick={() =>
-                                                                                    updateCategoryStatus(
+                                                                        <div className="">
+                                                                            <label className="md:hidden">
+                                                                                Actions
+                                                                            </label>
+                                                                            <div className="flex gap-1">
+                                                                                <Link
+                                                                                    className="p-1 rounded hover:text-secondary hover:scale-110 group"
+                                                                                    href={route(
+                                                                                        "categories.edit",
                                                                                         category.id,
-                                                                                        category.status ===
-                                                                                            "Published"
-                                                                                            ? "draft"
-                                                                                            : "publish"
-                                                                                    )
-                                                                                }
-                                                                            >
-                                                                                <span className="absolute top-0 right-0 hidden px-1 -mt-6 text-orange-100 rounded shadow-lg group-hover:block bg-neutral-700">
+                                                                                    )}
+                                                                                >
+                                                                                    <span className="absolute top-0 right-0 hidden px-1 -mt-6 text-orange-100 rounded shadow-lg group-hover:block bg-neutral-700">
+                                                                                        Edit
+                                                                                    </span>
+                                                                                    <i className="fa-solid fa-pen-to-square"></i>
+                                                                                </Link>
+                                                                               
+
+                                                                                 {auth
+                                                                                        .user
+                                                                                        ?.role ===
+                                                                                        "ADMIN" && (
+                                                                                        <button
+                                                                                            type="button"
+                                                                                            className="relative p-1 rounded hover:text-secondary hover:scale-110 group"
+                                                                                            onClick={() =>
+                                                                                               deleteCategory(
+                                                                                            category.id,
+                                                                                        )
+                                                                                            }
+                                                                                        >
+                                                                                            <span className="absolute top-0 right-0 hidden px-1 -mt-6 text-orange-100 rounded shadow-lg group-hover:block bg-neutral-700 whitespace-nowrap">
+                                                                                                Delete
+                                                                                            </span>
+
+                                                                                            <i className="fa-solid fa-trash-can"></i>
+                                                                                        </button>
+                                                                                    )}
+                                                                                <button
+                                                                                    className="p-1 rounded hover:text-secondary hover:scale-110 group"
+                                                                                    onClick={() =>
+                                                                                        updateCategoryStatus(
+                                                                                            category.id,
+                                                                                            category.status ===
+                                                                                                "Published"
+                                                                                                ? "draft"
+                                                                                                : "publish",
+                                                                                        )
+                                                                                    }
+                                                                                >
+                                                                                    <span className="absolute top-0 right-0 hidden px-1 -mt-6 text-orange-100 rounded shadow-lg group-hover:block bg-neutral-700">
+                                                                                        {category.status ===
+                                                                                        "Published"
+                                                                                            ? "Draft"
+                                                                                            : "Publish"}
+                                                                                    </span>
                                                                                     {category.status ===
-                                                                                    "Published"
-                                                                                        ? "Draft"
-                                                                                        : "Publish"}
-                                                                                </span>
-                                                                                {category.status ===
-                                                                                "Published" ? (
-                                                                                    <i className="fa-solid fa-cloud-arrow-down"></i>
-                                                                                ) : (
-                                                                                    <i className="fa-solid fa-cloud-arrow-up"></i>
-                                                                                )}
-                                                                            </button>
+                                                                                    "Published" ? (
+                                                                                        <i className="fa-solid fa-cloud-arrow-down"></i>
+                                                                                    ) : (
+                                                                                        <i className="fa-solid fa-cloud-arrow-up"></i>
+                                                                                    )}
+                                                                                </button>
+                                                                            </div>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
                                                             );
-                                                        }
+                                                        },
                                                     )}
                                             </tbody>
                                         </table>
@@ -272,11 +326,11 @@ export default function ListCategories({ auth, response, flash }: any) {
                                         record_per_page={response.per_page}
                                         onPageChange={function (
                                             page: number,
-                                            record_per_page: number
+                                            record_per_page: number,
                                         ): void {
                                             handleRecordChange(
                                                 page,
-                                                record_per_page
+                                                record_per_page,
                                             );
                                         }}
                                     />

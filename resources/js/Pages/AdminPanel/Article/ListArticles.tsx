@@ -5,8 +5,6 @@ import { Bounce, toast } from "react-toastify";
 import Pagination from "../../../Components/Pagination";
 
 export default function ListArticles({ auth, response, flash }: any) {
-    console.log(response);
-
     const deleteArticle = (id: number) => {
         if (confirm("Are you sure you want to delete this article?")) {
             router.delete(route("articles.destroy", id));
@@ -36,7 +34,7 @@ export default function ListArticles({ auth, response, flash }: any) {
         const currentUrl = new URL(window.location.href);
         currentUrl.searchParams.set(
             "record_per_page",
-            record_per_page.toString()
+            record_per_page.toString(),
         );
         currentUrl.searchParams.set("page", page.toString());
         window.location.href = currentUrl.toString();
@@ -72,17 +70,6 @@ export default function ListArticles({ auth, response, flash }: any) {
                                             <i className="fa-solid fa-newspaper"></i>
                                         </span>
                                     </Link>
-
-                                    <div className="flex gap-2">
-                                        <button className="bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabled hover:shadow-md transition-all duration-300 shadow-sm rounded py-1.5 px-1.5 md:px-4 hover:cursor-pointer">
-                                            <span className="hidden md:block">
-                                                Export CSV
-                                            </span>
-                                            <span className="inline-block md:hidden">
-                                                <i className="fa-solid fa-file-csv"></i>
-                                            </span>
-                                        </button>
-                                    </div>
                                 </div>
                             </div>
                             <div
@@ -128,6 +115,11 @@ export default function ListArticles({ auth, response, flash }: any) {
                                                     </th>
                                                     <th className="p-2 transition-colors cursor-pointer hover:bg-blue-gray-50">
                                                         <div className="flex items-center justify-between gap-2 font-bold leading-none">
+                                                            Type
+                                                        </div>
+                                                    </th>
+                                                    <th className="p-2 transition-colors cursor-pointer hover:bg-blue-gray-50">
+                                                        <div className="flex items-center justify-between gap-2 font-bold leading-none">
                                                             Title
                                                         </div>
                                                     </th>
@@ -158,7 +150,7 @@ export default function ListArticles({ auth, response, flash }: any) {
                                                     response?.data.map(
                                                         (
                                                             article: any,
-                                                            index: number
+                                                            index: number,
                                                         ) => {
                                                             return (
                                                                 <tr
@@ -187,6 +179,17 @@ export default function ListArticles({ auth, response, flash }: any) {
                                                                                 article
                                                                                     .category
                                                                                     .name
+                                                                            }
+                                                                        </p>
+                                                                    </td>
+
+                                                                    <td className="px-2 ">
+                                                                        <label className="md:hidden">
+                                                                            Type
+                                                                        </label>
+                                                                        <p className="font-semibold md:font-normal">
+                                                                            {
+                                                                                article.article_type
                                                                             }
                                                                         </p>
                                                                     </td>
@@ -222,9 +225,9 @@ export default function ListArticles({ auth, response, flash }: any) {
                                                                         </label>
                                                                         <p className="font-semibold md:font-normal">
                                                                             {moment(
-                                                                                article.created_at
+                                                                                article.created_at,
                                                                             ).format(
-                                                                                "llll"
+                                                                                "llll",
                                                                             )}
                                                                         </p>
                                                                     </td>
@@ -263,7 +266,7 @@ export default function ListArticles({ auth, response, flash }: any) {
                                                                                 className="p-1 rounded hover:text-secondary hover:scale-110 group"
                                                                                 href={route(
                                                                                     "articles.show",
-                                                                                    article.id
+                                                                                    article.id,
                                                                                 )}
                                                                             >
                                                                                 <span className="absolute top-0 right-0 hidden px-1 -mt-6 text-orange-100 rounded shadow-lg group-hover:block bg-neutral-700">
@@ -271,61 +274,125 @@ export default function ListArticles({ auth, response, flash }: any) {
                                                                                 </span>
                                                                                 <i className="fa-solid fa-eye"></i>
                                                                             </Link>
-                                                                            <Link
-                                                                                className="p-1 rounded hover:text-secondary hover:scale-110 group"
-                                                                                href={route(
-                                                                                    "articles.edit",
-                                                                                    article.id
-                                                                                )}
-                                                                            >
-                                                                                <span className="absolute top-0 right-0 hidden px-1 -mt-6 text-orange-100 rounded shadow-lg group-hover:block bg-neutral-700">
-                                                                                    Edit
-                                                                                </span>
-                                                                                <i className="fa-solid fa-pen-to-square"></i>
-                                                                            </Link>
-                                                                            <button
-                                                                                className="p-1 rounded hover:text-secondary hover:scale-110 group"
-                                                                                onClick={() =>
-                                                                                    deleteArticle(
-                                                                                        article.id
-                                                                                    )
-                                                                                }
-                                                                            >
-                                                                                <span className="absolute top-0 right-0 hidden px-1 -mt-6 text-orange-100 rounded shadow-lg group-hover:block bg-neutral-700">
-                                                                                    Delete
-                                                                                </span>
-                                                                                <i className="fa-solid fa-trash-can"></i>
-                                                                            </button>
-                                                                            <button
-                                                                                className="p-1 rounded hover:text-secondary hover:scale-110 group"
-                                                                                onClick={() =>
-                                                                                    updateArticleStatus(
+
+                                                                            {/* {[
+                                                                                "ADMIN",
+                                                                                "EDITOR",
+                                                                            ].includes(
+                                                                                auth
+                                                                                    .user
+                                                                                    ?.role,
+                                                                            ) && (
+                                                                                <Link
+                                                                                    className="relative p-1 rounded hover:text-secondary hover:scale-110 group"
+                                                                                    href={route(
+                                                                                        "articles.edit",
                                                                                         article.id,
-                                                                                        article.status ===
-                                                                                            "Published"
-                                                                                            ? "draft"
-                                                                                            : "publish"
-                                                                                    )
-                                                                                }
-                                                                            >
-                                                                                <span className="absolute top-0 right-0 hidden px-1 -mt-6 text-orange-100 rounded shadow-lg group-hover:block bg-neutral-700">
+                                                                                    )}
+                                                                                >
+                                                                                    <span className="absolute top-0 right-0 hidden px-1 -mt-6 text-orange-100 rounded shadow-lg group-hover:block bg-neutral-700">
+                                                                                        Edit
+                                                                                    </span>
+
+                                                                                    <i className="fa-solid fa-pen-to-square"></i>
+                                                                                </Link>
+                                                                            )} */}
+
+                                                                            {([
+                                                                                "ADMIN",
+                                                                                "EDITOR",
+                                                                            ].includes(
+                                                                                auth
+                                                                                    .user
+                                                                                    ?.role,
+                                                                            ) ||
+                                                                                auth
+                                                                                    .user
+                                                                                    ?.id ===
+                                                                                    article.created_by) && (
+                                                                                <Link
+                                                                                    className="relative p-1 rounded hover:text-secondary hover:scale-110 group"
+                                                                                    href={route(
+                                                                                        "articles.edit",
+                                                                                        article.id,
+                                                                                    )}
+                                                                                >
+                                                                                    <span className="absolute top-0 right-0 hidden px-1 -mt-6 text-orange-100 rounded shadow-lg group-hover:block bg-neutral-700">
+                                                                                        Edit
+                                                                                    </span>
+
+                                                                                    <i className="fa-solid fa-pen-to-square"></i>
+                                                                                </Link>
+                                                                            )}
+
+                                                                            {([
+                                                                                "ADMIN",
+                                                                                "EDITOR",
+                                                                            ].includes(
+                                                                                auth
+                                                                                    .user
+                                                                                    ?.role,
+                                                                            ) ||
+                                                                                auth
+                                                                                    .user
+                                                                                    ?.id ===
+                                                                                    article.created_by) && (
+                                                                                <button
+                                                                                    type="button"
+                                                                                    className="relative p-1 rounded hover:text-secondary hover:scale-110 group"
+                                                                                    onClick={() =>
+                                                                                        deleteArticle(
+                                                                                            article.id,
+                                                                                        )
+                                                                                    }
+                                                                                >
+                                                                                    <span className="absolute top-0 right-0 hidden px-1 -mt-6 text-orange-100 rounded shadow-lg group-hover:block bg-neutral-700 whitespace-nowrap">
+                                                                                        Delete
+                                                                                        Category
+                                                                                    </span>
+
+                                                                                    <i className="fa-solid fa-trash-can"></i>
+                                                                                </button>
+                                                                            )}
+                                                                            {(auth
+                                                                                ?.user
+                                                                                ?.role ===
+                                                                                'ADMIN' ||
+                                                                                auth
+                                                                                    ?.user
+                                                                                    ?.role ===
+                                                                                    'EDITOR') && (
+                                                                                <button
+                                                                                    className="p-1 rounded hover:text-secondary hover:scale-110 group"
+                                                                                    onClick={() =>
+                                                                                        updateArticleStatus(
+                                                                                            article.id,
+                                                                                            article.status ===
+                                                                                                "Published"
+                                                                                                ? "draft"
+                                                                                                : "publish",
+                                                                                        )
+                                                                                    }
+                                                                                >
+                                                                                    <span className="absolute top-0 right-0 hidden px-1 -mt-6 text-orange-100 rounded shadow-lg group-hover:block bg-neutral-700">
+                                                                                        {article.status ===
+                                                                                        "Published"
+                                                                                            ? "Draft"
+                                                                                            : "Publish"}
+                                                                                    </span>
                                                                                     {article.status ===
-                                                                                    "Published"
-                                                                                        ? "Draft"
-                                                                                        : "Publish"}
-                                                                                </span>
-                                                                                {article.status ===
-                                                                                "Published" ? (
-                                                                                    <i className="fa-solid fa-cloud-arrow-down"></i>
-                                                                                ) : (
-                                                                                    <i className="fa-solid fa-cloud-arrow-up"></i>
-                                                                                )}
-                                                                            </button>
+                                                                                    "Published" ? (
+                                                                                        <i className="fa-solid fa-cloud-arrow-down"></i>
+                                                                                    ) : (
+                                                                                        <i className="fa-solid fa-cloud-arrow-up"></i>
+                                                                                    )}
+                                                                                </button>
+                                                                            )}
                                                                         </div>
                                                                     </td>
                                                                 </tr>
                                                             );
-                                                        }
+                                                        },
                                                     )}
                                             </tbody>
                                         </table>
@@ -340,11 +407,11 @@ export default function ListArticles({ auth, response, flash }: any) {
                                         record_per_page={response.per_page}
                                         onPageChange={function (
                                             page: number,
-                                            record_per_page: number
+                                            record_per_page: number,
                                         ): void {
                                             handleRecordChange(
                                                 page,
-                                                record_per_page
+                                                record_per_page,
                                             );
                                         }}
                                     />

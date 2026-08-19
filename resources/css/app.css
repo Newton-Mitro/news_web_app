@@ -6,7 +6,7 @@
 
 ::-webkit-scrollbar {
     width: 6px;
-    height: 3px;
+    height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -20,6 +20,35 @@
 
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
+}
+
+@font-face {
+    font-family: "Shurjo Unicode";
+    src: url("../fonts/Shurjo UNICODE Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Shurjo Unicode";
+    src: url("../fonts/Shurjo UNICODE Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Siyam Rupali";
+    src: url("../fonts/Siyamrupali.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Default application font */
+body {
+    font-family: "Shurjo Unicode", "Siyam Rupali", sans-serif;
 }
 
 @media print {

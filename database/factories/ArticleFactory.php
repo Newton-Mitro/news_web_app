@@ -22,9 +22,10 @@ class ArticleFactory extends Factory
             'status' => $this->faker->randomElement(['Draft', 'Published']),
             'featured' => $this->faker->boolean(),
             'tags' => implode(',', $this->faker->words(rand(3, 5))),
-            'category_id' => Category::factory(),
-            'created_by' => User::factory(),
-            'updated_by' => User::factory(),
+            'article_type' => $this->faker->randomElement(['Image', 'Video', 'Text']),
+            'category_id' =>  Category::inRandomOrder()->value('id') ?? Category::factory(),
+            'created_by' => User::inRandomOrder()->value('id') ?? User::factory(),
+            'updated_by' => User::inRandomOrder()->value('id') ?? User::factory(),
         ];
     }
 }

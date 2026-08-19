@@ -19,6 +19,7 @@ class UpdateArticleRequest extends FormRequest
             'summery' => 'nullable|string',
             'video_url' => 'nullable|url',
             'category_id' => 'required|exists:categories,id',
+            'article_type' => 'required|in:Image,Video,Text',
             'attachments.*' => 'file|mimes:jpg,jpeg,png,pdf|max:2048',
         ];
     }

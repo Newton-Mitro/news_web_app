@@ -31,6 +31,8 @@ export default {
             },
         },
         fontFamily: {
+            siyamrupali: ["Siyam Rupali", "Shurjo Unicode", "sans-serif"],
+            shurjo: ["Shurjo Unicode", "Siyam Rupali", "sans-serif"],
             roboto: ["Roboto"],
             lato: ["Lato"],
             sora: ["Sora"],
@@ -72,72 +74,155 @@ export default {
         createThemes(
             {
                 light: {
-                    primary: "#222d67",
-                    onPrimary: "#f3f3f3",
-                    primaryVariant: "#162742",
-                    onPrimaryVariant: "#f3f3f3",
-                    secondary: "#8f407b",
-                    onSecondary: "#fdf1ed",
-                    secondaryVariant: "#2b2b2b",
-                    onSecondaryVariant: "#777c79",
-                    background: "#f5f7f8",
-                    onBackground: "#3f3f3f",
-                    surface: "#ffffff",
-                    onSurface: "#3b3b3b",
-                    error: "#b12e06",
-                    onError: "#777c79",
-                    brand: "#182372",
-                    onBrand: "#f3f3f3",
-                    disabled: "#777c79",
-                    onDisabled: "#131313",
-                    borderColor: "#ebebeb",
+                    // ─────────────────────────────────────
+                    // PRIMARY — Federation Green
+                    // ─────────────────────────────────────
+                    primary: "#146B3A",
+                    onPrimary: "#FFFFFF",
+
+                    primaryVariant: "#0D4F2A",
+                    onPrimaryVariant: "#FFFFFF",
+
+                    // ─────────────────────────────────────
+                    // SECONDARY — Ochre / Earth
+                    // ─────────────────────────────────────
+                    secondary: "#C58A2B",
+                    onSecondary: "#FFFFFF",
+
+                    secondaryVariant: "#8F641E",
+                    onSecondaryVariant: "#FFFFFF",
+
+                    // ─────────────────────────────────────
+                    // BACKGROUND
+                    // ─────────────────────────────────────
+                    background: "#F4F7F2",
+                    onBackground: "#243129",
+
+                    // ─────────────────────────────────────
+                    // SURFACE
+                    // ─────────────────────────────────────
+                    surface: "#FFFFFF",
+                    onSurface: "#243129",
+
+                    // ─────────────────────────────────────
+                    // ERROR
+                    // ─────────────────────────────────────
+                    error: "#B42318",
+                    onError: "#FFFFFF",
+
+                    // ─────────────────────────────────────
+                    // BRAND
+                    // ─────────────────────────────────────
+                    brand: "#0F6B3C",
+                    onBrand: "#FFFFFF",
+
+                    // ─────────────────────────────────────
+                    // DISABLED
+                    // ─────────────────────────────────────
+                    disabled: "#9AA69E",
+                    onDisabled: "#6B746E",
+
+                    // ─────────────────────────────────────
+                    // BORDER
+                    // ─────────────────────────────────────
+                    borderColor: "#DCE5DE",
                 },
+
+                // ═════════════════════════════════════════
+                // DARK THEME
+                // ═════════════════════════════════════════
                 dark: {
-                    primary: "#252b36",
-                    onPrimary: "#c2c2c2",
-                    primaryVariant: "#1d232e",
-                    onPrimaryVariant: "#c2c2c2",
-                    secondary: "#1d232e",
-                    onSecondary: "#c2c2c2",
-                    secondaryVariant: "#2b2b2b",
-                    onSecondaryVariant: "#c2c2c2",
-                    background: "#29271e",
-                    onBackground: "#c2c2c2",
-                    surface: "#313534",
-                    onSurface: "#c2c2c2",
-                    error: "#b12e06",
-                    onError: "#777c79",
-                    brand: "#182372",
-                    onBrand: "#777c79",
-                    disabled: "#777c79",
-                    onDisabled: "#131313",
-                    borderColor: "#4a4a4a",
+                    // ─────────────────────────────────────
+                    // PRIMARY — Bright Federation Green
+                    // ─────────────────────────────────────
+                    primary: "#3FAF6B",
+                    onPrimary: "#07140C",
+
+                    primaryVariant: "#24894D",
+                    onPrimaryVariant: "#FFFFFF",
+
+                    // ─────────────────────────────────────
+                    // SECONDARY — Ochre
+                    // ─────────────────────────────────────
+                    secondary: "#D4A343",
+                    onSecondary: "#111711",
+
+                    secondaryVariant: "#9D752B",
+                    onSecondaryVariant: "#FFFFFF",
+
+                    // ─────────────────────────────────────
+                    // BACKGROUND
+                    // ─────────────────────────────────────
+                    background: "#101A14",
+                    onBackground: "#DCE7DF",
+
+                    // ─────────────────────────────────────
+                    // SURFACE
+                    // ─────────────────────────────────────
+                    surface: "#18241C",
+                    onSurface: "#E3ECE5",
+
+                    // ─────────────────────────────────────
+                    // ERROR
+                    // ─────────────────────────────────────
+                    error: "#F04438",
+                    onError: "#FFFFFF",
+
+                    // ─────────────────────────────────────
+                    // BRAND
+                    // ─────────────────────────────────────
+                    brand: "#3FAF6B",
+                    onBrand: "#07140C",
+
+                    // ─────────────────────────────────────
+                    // DISABLED
+                    // ─────────────────────────────────────
+                    disabled: "#59655D",
+                    onDisabled: "#9AA69E",
+
+                    // ─────────────────────────────────────
+                    // BORDER
+                    // ─────────────────────────────────────
+                    borderColor: "#304037",
                 },
+
+                // ═════════════════════════════════════════
+                // HALLOWEEN / SPECIAL THEME
+                // ═════════════════════════════════════════
                 halloween: {
-                    primary: "#252b36",
-                    onPrimary: "#c2c2c2",
-                    primaryVariant: "#1d232e",
-                    onPrimaryVariant: "#c2c2c2",
-                    secondary: "#1d232e",
-                    onSecondary: "#c2c2c2",
-                    secondaryVariant: "#2b2b2b",
-                    onSecondaryVariant: "#c2c2c2",
-                    background: "#29271e",
-                    onBackground: "#c2c2c2",
-                    surface: "#313534",
-                    onSurface: "#c2c2c2",
-                    error: "#b12e06",
-                    onError: "#777c79",
-                    brand: "#182372",
-                    onBrand: "#777c79",
-                    disabled: "#777c79",
-                    onDisabled: "#131313",
-                    borderColor: "#4a4a4a",
+                    primary: "#3FAF6B",
+                    onPrimary: "#07140C",
+
+                    primaryVariant: "#24894D",
+                    onPrimaryVariant: "#FFFFFF",
+
+                    secondary: "#D4A343",
+                    onSecondary: "#111711",
+
+                    secondaryVariant: "#9D752B",
+                    onSecondaryVariant: "#FFFFFF",
+
+                    background: "#101A14",
+                    onBackground: "#DCE7DF",
+
+                    surface: "#18241C",
+                    onSurface: "#E3ECE5",
+
+                    error: "#F04438",
+                    onError: "#FFFFFF",
+
+                    brand: "#3FAF6B",
+                    onBrand: "#07140C",
+
+                    disabled: "#59655D",
+                    onDisabled: "#9AA69E",
+
+                    borderColor: "#304037",
                 },
             },
             {
                 defaultTheme: "light",
-            }
+            },
         ),
     ],
 };

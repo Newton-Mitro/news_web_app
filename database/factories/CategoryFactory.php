@@ -14,6 +14,7 @@ class CategoryFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->word(),
+            'name_bn' => $this->faker->unique()->word(),
             'status' => $this->faker->randomElement(['Published', 'Draft']),
         ];
     }

@@ -21,6 +21,7 @@ class StoreArticleRequest extends FormRequest
             'video_url' => 'nullable|url',
             'status' => 'required|in:Draft,Published',
             'category_id' => 'required|exists:categories,id',
+            'article_type' => 'required|in:Image,Video,Text',
             'attachments.*' => 'file|mimes:jpg,jpeg,png,pdf|max:2048',
         ];
     }

@@ -3,6 +3,7 @@
 namespace App\Features\Auth\Controllers\Auth;
 
 use App\Core\Controllers\Controller;
+use App\Features\Auth\Models\User;
 use App\Features\Auth\Requests\Auth\LoginRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -29,13 +30,27 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+        // Retrieve the user by email
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user) {
+            return back()->withErrors(['email' => 'Invalid credentials.']);
+        }
+
+        // Check if the user is active
+        if ($user->status !== 'Active') {
+            return back()->withErrors(['email' => 'Your account is inactive. Please contact support.']);
+        }
+
+        // Authenticate the user
         $request->authenticate();
 
+        // Regenerate session to prevent session fixation attacks
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        // return redirect()->intended(route('dashboard', absolute: false));
+        return redirect()->intended(route('public.home', absolute: false));
     }
-
     /**
      * Destroy an authenticated session.
      */

@@ -58,60 +58,82 @@ export default function ViewArticle({ auth, article, flash }: any) {
                                             <i className="fa-solid fa-rectangle-list"></i>
                                         </span>
                                     </Link>
+                                    
 
-                                    <Link
-                                        className="bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabled hover:shadow-md transition-all duration-300 shadow-sm rounded py-1.5 px-1.5 md:px-4 hover:cursor-pointer"
-                                        href={route(
-                                            "articles.edit",
-                                            article.id
-                                        )}
-                                    >
-                                        <span className="hidden md:block">
-                                            Edit Article
-                                        </span>
-                                        <span className="inline-block md:hidden">
-                                            <i className="fa-solid fa-pen-to-square"></i>
-                                        </span>
-                                    </Link>
 
-                                    <button
-                                        className="bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabled hover:shadow-md transition-all duration-300 shadow-sm rounded py-1.5 px-1.5 md:px-4 hover:cursor-pointer"
-                                        onClick={() =>
-                                            updateArticleStatus(
-                                                article.id,
-                                                article.status === "Published"
-                                                    ? "draft"
-                                                    : "publish"
-                                            )
-                                        }
-                                    >
-                                        <span className="hidden md:block">
-                                            {article.status === "Published"
-                                                ? "Draft Article"
-                                                : "Publish Article"}
-                                        </span>
-                                        <span className="inline-block md:hidden">
-                                            {article.status === "Published" ? (
-                                                <i className="fa-solid fa-cloud-arrow-down"></i>
-                                            ) : (
-                                                <i className="fa-solid fa-cloud-arrow-up"></i>
+                                      {(auth
+                                                                                ?.user
+                                                                                ?.role ===
+                                                                                'ADMIN' ||
+                                                                                auth
+                                                                                    ?.user
+                                                                                    ?.role ===
+                                                                                    'EDITOR') && (
+                                        <Link
+                                            className="bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabled hover:shadow-md transition-all duration-300 shadow-sm rounded py-1.5 px-1.5 md:px-4 hover:cursor-pointer"
+                                            href={route(
+                                                "articles.edit",
+                                                article.id
                                             )}
-                                        </span>
-                                    </button>
-
-                                    <button
-                                        className="bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabled hover:shadow-md transition-all duration-300 shadow-sm rounded py-1.5 px-1.5 md:px-4 hover:cursor-pointer"
-                                        onClick={() =>
-                                            deleteArticle(article.id)
-                                        }
-                                    >
-                                        <span className="hidden md:block">
-                                            Delete Article
-                                        </span>
-                                        <span className="inline-block md:hidden">
-                                            <i className="fa-solid fa-trash-can"></i>
-                                        </span>
-                                    </button>
+                                        >
+                                            <span className="hidden md:block">
+                                                Edit Article
+                                            </span>
+                                            <span className="inline-block md:hidden">
+                                                <i className="fa-solid fa-pen-to-square"></i>
+                                            </span>
+                                        </Link>
+                                    )}
+                                    {(auth?.user?.role === "ADMIN" || auth?.user?.id === "EDITOR")&& (
+                                        <button
+                                            className="bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabled hover:shadow-md transition-all duration-300 shadow-sm rounded py-1.5 px-1.5 md:px-4 hover:cursor-pointer"
+                                            onClick={() =>
+                                                updateArticleStatus(
+                                                    article.id,
+                                                    article.status ===
+                                                        "Published"
+                                                        ? "draft"
+                                                        : "publish"
+                                                )
+                                            }
+                                        >
+                                            <span className="hidden md:block">
+                                                {article.status === "Published"
+                                                    ? "Draft Article"
+                                                    : "Publish Article"}
+                                            </span>
+                                            <span className="inline-block md:hidden">
+                                                {article.status ===
+                                                "Published" ? (
+                                                    <i className="fa-solid fa-cloud-arrow-down"></i>
+                                                ) : (
+                                                    <i className="fa-solid fa-cloud-arrow-up"></i>
+                                                )}
+                                            </span>
+                                        </button>
+                                    )}
+                                     {(auth
+                                                                                ?.user
+                                                                                ?.role ===
+                                                                                'ADMIN' ||
+                                                                                auth
+                                                                                    ?.user
+                                                                                    ?.role ===
+                                                                                    'EDITOR') && (
+                                        <button
+                                            className="bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabled hover:shadow-md transition-all duration-300 shadow-sm rounded py-1.5 px-1.5 md:px-4 hover:cursor-pointer"
+                                            onClick={() =>
+                                                deleteArticle(article.id)
+                                            }
+                                        >
+                                            <span className="hidden md:block">
+                                                Delete Article
+                                            </span>
+                                            <span className="inline-block md:hidden">
+                                                <i className="fa-solid fa-trash-can"></i>
+                                            </span>
+                                        </button>
+                                    )}
                                 </div>
                             </div>
                             <div

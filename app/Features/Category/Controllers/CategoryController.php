@@ -35,10 +35,16 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required|string|unique:categories,name',
             'status' => 'required|in:Published,Draft',
+            'name_bn' => 'required|string',
+            'order' => 'required',
+            'show_in_menu' => 'required',
         ]);
 
         $category = new Category();
         $category->name = $request->name;
+        $category->name_bn = $request->name_bn;
+        $category->order = $request->order;
+        $category->show_in_menu = $request->show_in_menu;
         $category->status = $request->status;
         $category->save();
 
@@ -70,11 +76,17 @@ class CategoryController extends Controller
     public function update(Request $request, int $id)
     {
         $request->validate([
-            'name' => 'required|string|unique:categories,name',
+            'name' => 'required|string',
+            'name_bn' => 'required|string',
+            'order' => 'required',
+            'show_in_menu' => 'required',
         ]);
 
         $category = Category::findOrFail($id);
         $category->name = $request->name;
+        $category->name_bn = $request->name_bn;
+        $category->order = $request->order;
+        $category->show_in_menu = $request->show_in_menu;
         $category->save();
 
         return redirect()->back()->with('success', 'Category updated successfully!');

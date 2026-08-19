@@ -16,6 +16,7 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
         summery: any;
         video_url: any;
         featured: any;
+        article_type: any;
         tags: any;
         new_image: any;
         old_image: any;
@@ -23,12 +24,13 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
     }>({
         title: article.title || "",
         slug: article.slug || "",
-        status: article.status || "Draft",
+        status: "Draft",
         category_id: article.category_id || "",
         body: article.body || "",
         summery: article.summery || "",
         video_url: article.video_url || "",
         featured: article.featured || false,
+        article_type: article.article_type || "Image",
         tags: article.tags,
         new_image: null,
         old_image:
@@ -52,7 +54,6 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
         const formPayload = new FormData();
 
         Object.entries(formData).forEach(([key, value]) => {
-            console.log(key, value);
             formPayload.append(key, value);
         });
 
@@ -63,11 +64,6 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
         e.preventDefault();
 
         const formPayload = prepareFormData();
-
-        // Debugging: Inspect FormData contents
-        // for (let [key, value] of formPayload.entries()) {
-        //     console.log(`${key}:`, value);
-        // }
 
         router.post(route("articles.update", article.id), formPayload, {
             onError: (newErrors) => {
@@ -137,8 +133,6 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
     };
 
     const handleRemoveImage = (deletedImageId: any) => {
-        console.log(deletedImageId);
-
         setFormData((previousState) => ({
             ...previousState,
             old_image: null,
@@ -183,7 +177,7 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                         className="bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabled hover:shadow-md transition-all duration-300 shadow-sm rounded py-1.5 px-1.5 md:px-4 hover:cursor-pointer"
                                         href={route(
                                             "articles.show",
-                                            article.id
+                                            article.id,
                                         )}
                                     >
                                         <span className="hidden md:block">
@@ -193,45 +187,61 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                             <i className="fa-solid fa-eye"></i>
                                         </span>
                                     </Link>
-
-                                    <button
-                                        className="bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabled hover:shadow-md transition-all duration-300 shadow-sm rounded py-1.5 px-1.5 md:px-4 hover:cursor-pointer"
-                                        onClick={() =>
-                                            updateArticleStatus(
-                                                article.id,
-                                                article.status === "Published"
-                                                    ? "draft"
-                                                    : "publish"
-                                            )
-                                        }
-                                    >
-                                        <span className="hidden md:block">
-                                            {article.status === "Published"
-                                                ? "Draft Article"
-                                                : "Publish Article"}
-                                        </span>
-                                        <span className="inline-block md:hidden">
-                                            {article.status === "Published" ? (
-                                                <i className="fa-solid fa-cloud-arrow-down"></i>
-                                            ) : (
-                                                <i className="fa-solid fa-cloud-arrow-up"></i>
-                                            )}
-                                        </span>
-                                    </button>
-
-                                    <button
-                                        className="bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabled hover:shadow-md transition-all duration-300 shadow-sm rounded py-1.5 px-1.5 md:px-4 hover:cursor-pointer"
-                                        onClick={() =>
-                                            deleteArticle(article.id)
-                                        }
-                                    >
-                                        <span className="hidden md:block">
-                                            Delete Article
-                                        </span>
-                                        <span className="inline-block md:hidden">
-                                            <i className="fa-solid fa-trash-can"></i>
-                                        </span>
-                                    </button>
+                                    {(auth?.user?.role === "ADMIN" ||
+                                        auth?.user?.role === "EDITOR") && (
+                                        <button
+                                            className="bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabled hover:shadow-md transition-all duration-300 shadow-sm rounded py-1.5 px-1.5 md:px-4 hover:cursor-pointer"
+                                            onClick={() =>
+                                                updateArticleStatus(
+                                                    article.id,
+                                                    article.status ===
+                                                        "Published"
+                                                        ? "draft"
+                                                        : "publish",
+                                                )
+                                            }
+                                        >
+                                            <span className="hidden md:block">
+                                                {article.status === "Published"
+                                                    ? "Draft Article"
+                                                    : "Publish Article"}
+                                            </span>
+                                            <span className="inline-block md:hidden">
+                                                {article.status ===
+                                                "Published" ? (
+                                                    <i className="fa-solid fa-cloud-arrow-down"></i>
+                                                ) : (
+                                                    <i className="fa-solid fa-cloud-arrow-up"></i>
+                                                )}
+                                            </span>
+                                        </button>
+                                    )}
+                                          {([
+                                                                                "ADMIN",
+                                                                                "EDITOR",
+                                                                            ].includes(
+                                                                                auth
+                                                                                    .user
+                                                                                    ?.role,
+                                                                            ) ||
+                                                                                auth
+                                                                                    .user
+                                                                                    ?.id ===
+                                                                                    article.created_by) && (
+                                        <button
+                                            className="bg-primary text-onPrimary hover:bg-primaryVariant disabled:bg-disabled hover:shadow-md transition-all duration-300 shadow-sm rounded py-1.5 px-1.5 md:px-4 hover:cursor-pointer"
+                                            onClick={() =>
+                                                deleteArticle(article.id)
+                                            }
+                                        >
+                                            <span className="hidden md:block">
+                                                Delete Article
+                                            </span>
+                                            <span className="inline-block md:hidden">
+                                                <i className="fa-solid fa-trash-can"></i>
+                                            </span>
+                                        </button>
+                                    )}
                                 </div>
                             </div>
                             <div className="">
@@ -263,7 +273,7 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                                         } = e.target;
                                                         handleInputChange(
                                                             name,
-                                                            value
+                                                            value,
                                                         );
                                                     }}
                                                 />
@@ -296,119 +306,13 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                                         } = e.target;
                                                         handleInputChange(
                                                             name,
-                                                            value
+                                                            value,
                                                         );
                                                     }}
                                                 />
                                                 {errors?.slug && (
                                                     <div className="text-sm text-error">
                                                         {errors?.slug}
-                                                    </div>
-                                                )}
-                                            </div>
-
-                                            <div className="">
-                                                <label
-                                                    htmlFor="status"
-                                                    className="block font-semibold "
-                                                >
-                                                    Status
-                                                </label>
-                                                <select
-                                                    name="status"
-                                                    id="status"
-                                                    className="w-full px-2 py-1 border rounded-md bg-background border-borderColor"
-                                                    value={formData.status}
-                                                    onChange={(e: any) => {
-                                                        const {
-                                                            name,
-                                                            value,
-                                                            type,
-                                                            checked,
-                                                        } = e.target;
-                                                        handleInputChange(
-                                                            name,
-                                                            value
-                                                        );
-                                                    }}
-                                                >
-                                                    <option value="" key={1}>
-                                                        Select Status
-                                                    </option>
-
-                                                    <option
-                                                        value="Draft"
-                                                        key={2}
-                                                    >
-                                                        Draft
-                                                    </option>
-                                                    <option
-                                                        value="Published"
-                                                        key={3}
-                                                    >
-                                                        Published
-                                                    </option>
-                                                </select>
-                                                {errors?.status && (
-                                                    <div className="text-sm text-error">
-                                                        {errors?.status}
-                                                    </div>
-                                                )}
-                                            </div>
-
-                                            <div className="">
-                                                <label
-                                                    htmlFor="category_id"
-                                                    className="block font-semibold "
-                                                >
-                                                    Category
-                                                </label>
-                                                <select
-                                                    name="category_id"
-                                                    id="category_id"
-                                                    className="w-full px-2 py-1 border rounded-md border-borderColor bg-background"
-                                                    value={formData.category_id}
-                                                    onChange={(e: any) => {
-                                                        const {
-                                                            name,
-                                                            value,
-                                                            type,
-                                                            checked,
-                                                        } = e.target;
-                                                        handleInputChange(
-                                                            name,
-                                                            value
-                                                        );
-                                                    }}
-                                                >
-                                                    <option value="">
-                                                        Category Name
-                                                    </option>
-                                                    {categories.map(
-                                                        (category: {
-                                                            name: string;
-                                                            id: number;
-                                                        }) => {
-                                                            return (
-                                                                <option
-                                                                    value={
-                                                                        category.id
-                                                                    }
-                                                                    key={
-                                                                        category.id
-                                                                    }
-                                                                >
-                                                                    {
-                                                                        category.name
-                                                                    }
-                                                                </option>
-                                                            );
-                                                        }
-                                                    )}
-                                                </select>
-                                                {errors?.category_id && (
-                                                    <div className="text-sm text-error">
-                                                        {errors?.category_id}
                                                     </div>
                                                 )}
                                             </div>
@@ -433,7 +337,7 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                             onChange={(value: any) => {
                                                 handleInputChange(
                                                     "body",
-                                                    value
+                                                    value,
                                                 );
                                             }}
                                         />
@@ -474,111 +378,212 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                         )}
                                     </div>
 
-                                    <div className="mb-4">
-                                        <label
-                                            htmlFor="video_url"
-                                            className="block font-semibold "
-                                        >
-                                            Article Video URL
-                                        </label>
-                                        <input
-                                            type="text"
-                                            name="video_url"
-                                            id="video_url"
-                                            className="w-full py-1 border rounded-sm bg-background border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
-                                            value={formData.video_url}
-                                            onChange={(e: any) => {
-                                                const {
-                                                    name,
-                                                    value,
-                                                    type,
-                                                    checked,
-                                                } = e.target;
-                                                handleInputChange(name, value);
-                                            }}
-                                        />
-                                        {errors?.video_url && (
-                                            <div className="text-sm text-error">
-                                                {errors?.video_url}
-                                            </div>
-                                        )}
-                                    </div>
-
-                                    <div className="flex flex-col mb-4">
-                                        <label
-                                            htmlFor="video_url"
-                                            className="block font-semibold "
-                                        >
-                                            Article Image
-                                        </label>
-                                        <div
-                                            className="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-background lg:w-80 hover:bg-primary/30"
-                                            onDrop={
-                                                formData.old_image === null &&
-                                                formData.new_image === null
-                                                    ? handleDrop
-                                                    : () => {}
-                                            }
-                                            onDragOver={
-                                                formData.old_image === null &&
-                                                formData.new_image === null
-                                                    ? handleDragOver
-                                                    : () => {}
-                                            }
-                                            onClick={
-                                                formData.old_image === null &&
-                                                formData.new_image === null
-                                                    ? handleBrowseClick
-                                                    : () => {}
-                                            }
-                                        >
-                                            {formData.old_image === null &&
-                                            formData.new_image === null ? (
-                                                <div className="p-4">
-                                                    <p className="">
-                                                        Drag and drop an image
-                                                        here or click to browse
-                                                    </p>
-                                                    <p className="mt-2 text-gray-300">
-                                                        No image uploaded
-                                                    </p>
-                                                </div>
-                                            ) : (
-                                                <div className="relative">
-                                                    <img
-                                                        src={
-                                                            formData.old_image !==
-                                                            null
-                                                                ? formData.old_image
-                                                                : URL.createObjectURL(
-                                                                      formData.new_image
-                                                                  )
-                                                        }
-                                                        alt="Preview"
-                                                        className="rounded-lg"
-                                                    />
-                                                    <button
-                                                        onClick={() => {
-                                                            handleRemoveImage(
-                                                                article
-                                                                    ?.attachments[0]
-                                                                    ?.id
-                                                            );
-                                                        }}
-                                                        className="absolute w-8 h-8 text-white transition-all rounded-full hover:scale-125 bg-error -top-2 -right-2"
-                                                    >
-                                                        &times;
-                                                    </button>
+                                    <div className="grid grid-cols-1 gap-4 mb-4 md:grid-cols-2 lg:grid-cols-3">
+                                        <div className="">
+                                            <label
+                                                htmlFor="category_id"
+                                                className="block font-semibold "
+                                            >
+                                                Category
+                                            </label>
+                                            <select
+                                                name="category_id"
+                                                id="category_id"
+                                                className="w-full px-2 py-1 border rounded-md border-borderColor bg-background"
+                                                value={formData.category_id}
+                                                onChange={(e: any) => {
+                                                    const {
+                                                        name,
+                                                        value,
+                                                        type,
+                                                        checked,
+                                                    } = e.target;
+                                                    handleInputChange(
+                                                        name,
+                                                        value,
+                                                    );
+                                                }}
+                                            >
+                                                <option value="">
+                                                    Category Name
+                                                </option>
+                                                {categories.map(
+                                                    (category: {
+                                                        name: string;
+                                                        id: number;
+                                                    }) => {
+                                                        return (
+                                                            <option
+                                                                value={
+                                                                    category.id
+                                                                }
+                                                                key={
+                                                                    category.id
+                                                                }
+                                                            >
+                                                                {category.name}
+                                                            </option>
+                                                        );
+                                                    },
+                                                )}
+                                            </select>
+                                            {errors?.category_id && (
+                                                <div className="text-sm text-error">
+                                                    {errors?.category_id}
                                                 </div>
                                             )}
+                                        </div>
 
-                                            {errors?.new_image && (
+                                        <div className="">
+                                            <label
+                                                htmlFor="article_type"
+                                                className="block font-semibold "
+                                            >
+                                                Article Type
+                                            </label>
+                                            <select
+                                                name="article_type"
+                                                id="article_type"
+                                                className="w-full px-2 py-1 border rounded-md bg-background border-borderColor"
+                                                value={formData.article_type}
+                                                onChange={(e: any) => {
+                                                    const { name, value } =
+                                                        e.target;
+                                                    handleInputChange(
+                                                        name,
+                                                        value,
+                                                    );
+                                                }}
+                                            >
+                                                <option value="" key={1}>
+                                                    Select Article Type
+                                                </option>
+
+                                                <option value="Image" key={2}>
+                                                    Image
+                                                </option>
+                                                <option value="Video" key={3}>
+                                                    Video
+                                                </option>
+                                            </select>
+                                            {errors?.article_type && (
                                                 <div className="text-sm text-error">
-                                                    {errors?.new_image}
+                                                    {errors?.article_type}
                                                 </div>
                                             )}
                                         </div>
                                     </div>
+
+                                    {formData.article_type == "Video" ? (
+                                        <div className="mb-4">
+                                            <label
+                                                htmlFor="video_url"
+                                                className="block font-semibold "
+                                            >
+                                                Article Video URL
+                                            </label>
+                                            <input
+                                                type="text"
+                                                name="video_url"
+                                                id="video_url"
+                                                className="w-full py-1 border rounded-sm bg-background border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
+                                                value={formData.video_url}
+                                                onChange={(e: any) => {
+                                                    const { name, value } =
+                                                        e.target;
+                                                    handleInputChange(
+                                                        name,
+                                                        value,
+                                                    );
+                                                }}
+                                            />
+                                            {errors?.video_url && (
+                                                <div className="text-sm text-error">
+                                                    {errors?.video_url}
+                                                </div>
+                                            )}
+                                        </div>
+                                    ) : (
+                                        <div className="flex flex-col mb-4">
+                                            <label
+                                                htmlFor="video_url"
+                                                className="block font-semibold "
+                                            >
+                                                Article Image
+                                            </label>
+                                            <div
+                                                className="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-background lg:w-80 hover:bg-primary/30"
+                                                onDrop={
+                                                    formData.old_image ===
+                                                        null &&
+                                                    formData.new_image === null
+                                                        ? handleDrop
+                                                        : () => {}
+                                                }
+                                                onDragOver={
+                                                    formData.old_image ===
+                                                        null &&
+                                                    formData.new_image === null
+                                                        ? handleDragOver
+                                                        : () => {}
+                                                }
+                                                onClick={
+                                                    formData.old_image ===
+                                                        null &&
+                                                    formData.new_image === null
+                                                        ? handleBrowseClick
+                                                        : () => {}
+                                                }
+                                            >
+                                                {formData.old_image === null &&
+                                                formData.new_image === null ? (
+                                                    <div className="p-4">
+                                                        <p className="">
+                                                            Drag and drop an
+                                                            image here or click
+                                                            to browse
+                                                        </p>
+                                                        <p className="mt-2 text-gray-300">
+                                                            No image uploaded
+                                                        </p>
+                                                    </div>
+                                                ) : (
+                                                    <div className="relative">
+                                                        <img
+                                                            src={
+                                                                formData.old_image !==
+                                                                null
+                                                                    ? formData.old_image
+                                                                    : URL.createObjectURL(
+                                                                          formData.new_image,
+                                                                      )
+                                                            }
+                                                            alt="Preview"
+                                                            className="rounded-lg"
+                                                        />
+                                                        <button
+                                                            onClick={() => {
+                                                                handleRemoveImage(
+                                                                    article
+                                                                        ?.attachments[0]
+                                                                        ?.id,
+                                                                );
+                                                            }}
+                                                            className="absolute w-8 h-8 text-white transition-all rounded-full hover:scale-125 bg-error -top-2 -right-2"
+                                                        >
+                                                            &times;
+                                                        </button>
+                                                    </div>
+                                                )}
+
+                                                {errors?.new_image && (
+                                                    <div className="text-sm text-error">
+                                                        {errors?.new_image}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
+                                    )}
 
                                     <div className="mb-4">
                                         <TagSelect
@@ -588,7 +593,7 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                             onChange={(value) => {
                                                 handleInputChange(
                                                     "tags",
-                                                    value
+                                                    value,
                                                 );
                                             }}
                                         />
@@ -610,7 +615,7 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                                     } = e.target;
                                                     handleInputChange(
                                                         name,
-                                                        checked
+                                                        checked,
                                                     );
                                                 }}
                                             />
@@ -627,15 +632,17 @@ export default function EditArticle({ auth, article, categories, flash }: any) {
                                             </div>
                                         )}
                                     </div>
-
-                                    <div className="mt-6">
-                                        <button
-                                            type="submit"
-                                            className="px-4 py-2 font-semibold rounded-md text-onSecondary bg-secondary hover:bg-secondaryVariant"
-                                        >
-                                            Update Article
-                                        </button>
-                                    </div>
+                                    {(auth?.user?.id === article.created_by ||
+                                        auth?.user?.id === 1) && (
+                                        <div className="mt-6">
+                                            <button
+                                                type="submit"
+                                                className="px-4 py-2 font-semibold rounded-md text-onSecondary bg-secondary hover:bg-secondaryVariant"
+                                            >
+                                                Update Article
+                                            </button>
+                                        </div>
+                                    )}
                                 </form>
                             </div>
                         </div>

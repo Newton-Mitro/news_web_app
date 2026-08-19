@@ -7,9 +7,15 @@ import { toast } from "react-toastify";
 export default function CreateCategory({ auth, categories }: any) {
     const [formData, setFormData] = useState<{
         name: any;
+        name_bn: any;
+        order:any;
+        show_in_menu:any;
         status: any;
     }>({
         name: "",
+        name_bn: "",
+        order: 0,
+        show_in_menu: 0,
         status: "",
     });
 
@@ -33,7 +39,6 @@ export default function CreateCategory({ auth, categories }: any) {
                 setErrors(newErrors);
             },
             onSuccess: () => {
-                console.log("Category created successfully!");
                 setErrors(null);
                 toast("Category created successfully.", {
                     position: "top-right",
@@ -84,7 +89,7 @@ export default function CreateCategory({ auth, categories }: any) {
                                     className="w-full"
                                 >
                                     <div className="">
-                                        <div className="grid w-full grid-cols-1 gap-6 mb-4 lg:w-8/12 md:grid-cols-2">
+                                        <div className="grid w-full grid-cols-1 gap-6 mb-4 md:grid-cols-2 lg:grid-cols-3">
                                             <div className="">
                                                 <label
                                                     htmlFor="name"
@@ -117,6 +122,116 @@ export default function CreateCategory({ auth, categories }: any) {
                                                 {errors?.name && (
                                                     <div className="text-sm text-error">
                                                         {errors?.name}
+                                                    </div>
+                                                )}
+                                            </div>
+
+                                            <div className="">
+                                                <label
+                                                    htmlFor="name"
+                                                    className="block font-semibold "
+                                                >
+                                                    Category Name BN
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    name="name_bn"
+                                                    id="name_bn"
+                                                    className="w-full py-1 border rounded-sm bg-background border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
+                                                    value={formData.name_bn}
+                                                    onChange={(e: any) => {
+                                                        const {
+                                                            name,
+                                                            value,
+                                                            type,
+                                                            checked,
+                                                        } = e.target;
+                                                        handleInputChange(
+                                                            name,
+                                                            value
+                                                        );
+                                                    }}
+                                                />
+                                                {errors?.name_bn && (
+                                                    <div className="text-sm text-error">
+                                                        {errors?.name_bn}
+                                                    </div>
+                                                )}
+                                            </div>
+
+                                            <div className="">
+                                                <label
+                                                    htmlFor="order"
+                                                    className="block font-semibold "
+                                                >
+                                                    Order
+                                                </label>
+                                                <input
+                                                    type="number"
+                                                    name="order"
+                                                    id="order"
+                                                    className="w-full py-1 border rounded-sm bg-background border-borderColor focus:border-borderColor disabled:bg-disabled focus:ring focus:ring-borderColor focus:ring-opacity-20 text-onSurface"
+                                                    value={formData.order}
+                                                    onChange={(e: any) => {
+                                                        const {
+                                                            name,
+                                                            value,
+                                                            type,
+                                                            checked,
+                                                        } = e.target;
+                                                        handleInputChange(
+                                                            name,
+                                                            value
+                                                        );
+                                                    }}
+                                                />
+                                                {errors?.order && (
+                                                    <div className="text-sm text-error">
+                                                        {errors?.order}
+                                                    </div>
+                                                )}
+                                            </div>
+
+                                            <div className="">
+                                                <label
+                                                    htmlFor="show_in_menu"
+                                                    className="block font-semibold "
+                                                >
+                                                    Show in Menu
+                                                </label>
+                                                <select
+                                                    name="show_in_menu"
+                                                    id="show_in_menu"
+                                                    className="w-full px-2 py-1 border rounded-md bg-background border-borderColor"
+                                                    onChange={(e: any) => {
+                                                        const { name, value } =
+                                                            e.target;
+                                                        handleInputChange(
+                                                            name,
+                                                            value
+                                                        );
+                                                    }}
+                                                >
+                                                    <option value="" key={1}>
+                                                        Select Show In Menu
+                                                    </option>
+
+                                                    <option
+                                                        value={1}
+                                                        key={2}
+                                                    >
+                                                        Yes
+                                                    </option>
+                                                    <option
+                                                        value={0}
+                                                        key={3}
+                                                    >
+                                                        No
+                                                    </option>
+                                                </select>
+                                                {errors?.show_in_menu && (
+                                                    <div className="text-sm text-error">
+                                                        {errors?.show_in_menu}
                                                     </div>
                                                 )}
                                             </div>

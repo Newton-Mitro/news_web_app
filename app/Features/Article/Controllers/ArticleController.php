@@ -50,6 +50,7 @@ class ArticleController
         $article->featured = filter_var($request->featured, FILTER_VALIDATE_BOOLEAN);
         $article->category_id = $request->category_id;
         $article->created_by = $userId;
+        $article->article_type = $request->article_type;
         $article->updated_by = $userId;
         $article->save();
 
@@ -57,8 +58,7 @@ class ArticleController
         if ($request->hasFile('new_image')) {
             $file = $request->file('new_image');
             $path = $file->store('articles', 'public');
-            Attachment::create([
-                'article_id' => $article->id,
+            $article->attachments()->create([
                 'name' => $file->getClientOriginalName(),
                 'path' => $path,
                 'url' => asset(Storage::url($path)),
@@ -104,27 +104,34 @@ class ArticleController
         $article->status = $request->status;
         $article->featured = filter_var($request->featured, FILTER_VALIDATE_BOOLEAN); // Convert to boolean
         $article->category_id = $request->category_id;
+        $article->article_type = $request->article_type;
         $article->updated_by = auth()->id();
         $article->save();
 
-        // Handle deleted attachments
-        if ($request->has('deleted_images')) {
-            $attachment = Attachment::find($request->input('deleted_images'));
-            if ($attachment) {
-                // Delete the file from storage
-                Storage::delete($attachment->path);
+        $deletedImageId = (int) $request->input('deleted_images');
 
-                // Delete the attachment record from the database
-                $attachment->delete();
+        // Fetch the attachment by ID
+        $attachment = Attachment::where('id', $deletedImageId)
+            ->where('attachable_type', Article::class) // Ensure it belongs to the Page model
+            ->where('attachable_id', $article->id) // Ensure it belongs to this specific Page
+            ->first();
+
+        if ($attachment) {
+            // Delete the file from storage
+            if ($attachment->path && Storage::disk('public')->exists($attachment->path)) {
+                Storage::disk('public')->delete($attachment->path);
             }
+
+            // Delete the attachment record from the database
+            $attachment->delete();
         }
+
 
         // Handle new attachments
         if ($request->hasFile('new_image')) {
             $file = $request->file('new_image');
             $path = $file->store('articles', 'public');
-            Attachment::create([
-                'article_id' => $article->id,
+            $article->attachments()->create([
                 'name' => $file->getClientOriginalName(),
                 'path' => $path,
                 'url' => asset(Storage::url($path)),

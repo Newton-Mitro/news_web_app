@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('password');
             $table->string('display_name')->nullable();
             $table->string('profile_photo')->nullable();
+            $table->enum('role', ['EDITOR', 'VISITOR', 'ADMIN', 'WRITER'])->default('VISITOR');
+
+            $table->enum('status', ['Active', 'Inactive'])->default('Inactive');
             $table->rememberToken();
             $table->timestamps();
         });

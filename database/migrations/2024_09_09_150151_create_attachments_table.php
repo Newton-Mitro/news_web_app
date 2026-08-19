@@ -14,7 +14,7 @@ return new class extends Migration
             $table->string('path');
             $table->string('url', 1024);
             $table->string('mime');
-            $table->foreignId('article_id')->constrained()->onDelete('cascade');
+            $table->morphs('attachable'); // Creates 'attachable_id' and 'attachable_type' columns
             $table->timestamps();
         });
     }
